@@ -1,0 +1,31 @@
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../public/fonts/roboto/Roboto-Bold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Anonymous Pro';
+    font-style: normal; 
+    font-display: swap;
+    src: url(../public/fonts/anonymous/AnonymousPro-Regular.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Anonymous Pro';
+    font-style: italic; 
+    font-display: swap;
+    src: url(../public/fonts/anonymous/AnonymousPro-Italic.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Anonymous Pro';
+    font-style: 700; 
+    font-display: swap;
+    src: url(../public/fonts/anonymous/AnonymousPro-Bold.ttf) format('truetype');
+  }
+}
