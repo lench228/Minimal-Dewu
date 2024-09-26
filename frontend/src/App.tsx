@@ -1,17 +1,14 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nav from './components/nav/nav';
+import Layout from './components/layout/layout';
 
-import logo from './logo.svg';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="text-2xl">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-3xl font-anonymous">Шрифты скачаны</p>
-        <p className="text-3xl font-roboto">Шрифты скачаны 2</p>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => (
+	<BrowserRouter>
+		<Routes>
+			<Route path="/" element={<Layout />}/>
+      <Route path="cart" element={<div>Cart</div>}/>
+		</Routes>
+	</BrowserRouter>
+);
 
 export default App;
