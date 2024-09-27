@@ -1,15 +1,18 @@
 import { NavLink } from "react-router-dom";
 
 interface iNavIco {
+  children: React.ReactNode;
   src: string;
   alt: string;
   to: string;
 }
 
-const NavIco: React.FC<iNavIco> = ({ src, alt, to }) => {
+const NavIco: React.FC<iNavIco> = ({ src, alt, to, children }) => {
   return (
-    <NavLink to={to}>
-      <img src={src} alt={alt} className="w-10 h-10" />
+    <NavLink to={to} className="cursor-pointer">
+      <button w-full className="w-20 h-20 hover:bg-white-darker-2 rounded-xl">
+        {children}
+      </button>
     </NavLink>
   );
 };
