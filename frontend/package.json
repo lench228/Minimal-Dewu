@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
     "@types/jest": "27.5.2",
     "@types/node": "16.18.111",
     "@types/react": "18.3.9",
