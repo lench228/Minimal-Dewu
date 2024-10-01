@@ -33,7 +33,7 @@ const Input: React.FC<iInput> = ({
         />
         {endIcon && endIcon}
       </div>
-      {error && <ErrorMessage text={error} />}
+      {error && <ErrorMessage text={error} />}  
     </section>
   );
 };
