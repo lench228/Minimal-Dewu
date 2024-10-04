@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "../../assets/icons/link";
 import { UseLocalStorage } from "../../utils/useLocalStorage";
 import Input from "../ui/input/input";
@@ -11,7 +10,7 @@ const HomePage = () => {
   const handleInput = (link: string) => {
     const regex = "https://www.dewu.com/product-detail";
     SetSearch(link);
-    if (link.startsWith(regex)) {
+    if (!link || link.startsWith(regex)) {
       setError("");
     } else {
       setError("Неверная ссылка");
@@ -28,7 +27,7 @@ const HomePage = () => {
           handleInput(e.target.value);
         }}
         value={search}
-        endIcon={!error ? <AddLink></AddLink> : null}
+        endIcon={!error && search ? <AddLink></AddLink> : null}
         error={error}
       ></Input>
     </div>

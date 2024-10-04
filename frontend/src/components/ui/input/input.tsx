@@ -1,4 +1,4 @@
-import { EventHandler } from "react";
+import React, { EventHandler } from "react";
 import ErrorMessage from "./error";
 
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -14,6 +14,7 @@ const Input: React.FC<iInput> = ({
   width,
   value,
   error,
+  type,
   onChange,
 }) => {
   return (
@@ -24,8 +25,8 @@ const Input: React.FC<iInput> = ({
       >
         {startIcon && startIcon}
         <input
-          className={`bg-[#2b2b2b]  font-anonymous text-2xl outline-none text-white-darker-2 opacity-50 w-full `}
-          type={"text"}
+          className={`bg-[#2b2b2b]   font-anonymous text-2xl outline-none text-white-darker-1 w-full `}
+          type={type ? type : "text"}
           style={{ width: width }}
           placeholder={placeholder}
           value={value}
