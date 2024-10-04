@@ -38,7 +38,7 @@ const items= [
 
 export const AuthInfo = (props: any) => {
     return (
-        <div className={`text-white-darker-1 h-[824px]`}>
+        <div className={`text-white-darker-1 w-1/4 h-[824px]`}>
             <h1 className={`font-anonymous text-2xl mb-5`}>
                 Плюшки регистрации
             </h1>
