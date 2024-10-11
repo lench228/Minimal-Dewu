@@ -1,3 +1,3 @@
 export interface iSvg {
-    isActive: boolean
+  isActive: boolean;
 }

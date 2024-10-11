@@ -1,7 +1,9 @@
 import Link from "../../assets/icons/link";
 import { UseLocalStorage } from "../../utils/useLocalStorage";
 import Input from "../ui/input/input";
-import AddLink from "../../assets/icons/search";
+import AddLink from "../../assets/icons/add-link";
+import { getRandomArrayElement } from "../../utils/utils";
+import { addGood } from "../../lib/actions/addGood";
 
 const HomePage = () => {
   const [search, SetSearch] = UseLocalStorage("url", "");
@@ -29,6 +31,7 @@ const HomePage = () => {
         value={search}
         endIcon={!error && search ? <AddLink></AddLink> : null}
         error={error}
+        handleLinkAdd={addGood}
       ></Input>
     </div>
   );

@@ -1,5 +1,5 @@
 import Link from "../../assets/icons/link";
-import AddLink from "../../assets/icons/search";
+import AddLink from "../../assets/icons/add-link";
 import { UseLocalStorage } from "../../utils/useLocalStorage";
 import Input from "../ui/input/input";
 
