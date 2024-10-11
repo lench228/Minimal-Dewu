@@ -4,6 +4,7 @@ import ErrorMessage from "./error";
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  handleLinkAdd?: (link: string) => void;
   error: string;
 }
 
