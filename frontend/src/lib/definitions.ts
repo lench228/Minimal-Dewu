@@ -21,7 +21,9 @@ export interface iUser {
   id: string;
   fullName: string;
   phone: string;
-  address_id: string;
+  address_id: number;
+
+  pas?: string;
 }
 
 export interface iShipping {
@@ -30,11 +32,11 @@ export interface iShipping {
   created: Date;
   due: Date;
   address: iAddress;
-  orderId: string;
+  orderId: number;
 }
 
 export interface iOrder {
-  id: string;
+  id: number;
   user_id: string;
   status: string;
   created: Date;
