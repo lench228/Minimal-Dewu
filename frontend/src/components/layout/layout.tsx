@@ -9,7 +9,7 @@ const Layout: React.FC<{
 }> = ({ isAuthenticated, setIsPopupOpen, isPopupOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-
+  //@todo Сделать нормальный приватный роут
   // Закрытые маршруты
   const closedRoutes = ["/profile", "/order"];
   useEffect(() => {

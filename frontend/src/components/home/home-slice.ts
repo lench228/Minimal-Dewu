@@ -6,24 +6,26 @@ import error from "../ui/input/error";
 interface HomeState {
   url: string;
   error: string;
-  loading: boolean;
+  isLoading: boolean;
+  isGoodPopupOpenSelector: boolean;
 }
 
 // Define the initial state using that type
 const initialState: HomeState = {
   url: "",
   error: "",
-  loading: false,
+  isLoading: false,
+  isGoodPopupOpenSelector: false,
 };
 
 export const HomeSlice = createSlice({
   name: "home",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   selectors: {
-    selectIsLoading: (state) => state.loading,
+    selectIsLoading: (state) => state.isLoading,
     selectUrl: (state) => state.url,
     selectError: (state) => state.error,
+    isGoodPopupOpenSelector: (state) => state.isGoodPopupOpenSelector,
   },
   reducers: {
     addUrlAndValidate: (state, action: PayloadAction<string>) => {
@@ -36,13 +38,11 @@ export const HomeSlice = createSlice({
       }
       state.url = url;
     },
-    setLoading: (state) => {
-      state.loading = !state.loading;
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
 export const { selectIsLoading, selectUrl, selectError } = HomeSlice.selectors;
 export const { addUrlAndValidate, setLoading } = HomeSlice.actions;
-
-export default HomeSlice.reducer;
