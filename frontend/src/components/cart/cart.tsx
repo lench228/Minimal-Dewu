@@ -1,20 +1,17 @@
 import Link from "../../assets/icons/link";
 import AddLink from "../../assets/icons/add-link";
-import { UseLocalStorage } from "../../utils/useLocalStorage";
 import Input from "../ui/input/input";
+import { useDispatch, useSelector } from "react-redux";
+import { addUrlAndValidate, selectError, selectUrl } from "../home/home-slice";
 
 const Cart = () => {
-  const [search, SetSearch] = UseLocalStorage("url", "");
-  const [error, setError] = UseLocalStorage("error", "");
+  const dispatch = useDispatch();
+
+  const url = useSelector(selectUrl);
+  const error = useSelector(selectError);
 
   const handleInput = (link: string) => {
-    const regex = "https://www.dewu.com/product-detail";
-    SetSearch(link);
-    if (link.startsWith(regex)) {
-      setError("");
-    } else {
-      setError("Неверная ссылка");
-    }
+    dispatch(addUrlAndValidate(link));
   };
 
   return (
@@ -26,7 +23,7 @@ const Cart = () => {
         onChange={(e) => {
           handleInput(e.target.value);
         }}
-        value={search}
+        value={url}
         endIcon={!error ? <AddLink></AddLink> : null}
         error={error}
       />
