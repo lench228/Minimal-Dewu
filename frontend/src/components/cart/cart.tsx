@@ -1,5 +1,5 @@
 import Link from "../../assets/icons/link";
-import AddLink from "../good-popup/add-link";
+import AddLink from "../popups/good-popup/add-link";
 import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
 import { addUrlAndValidate, selectError, selectUrl } from "../home/home-slice";

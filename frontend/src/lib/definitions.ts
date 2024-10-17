@@ -1,13 +1,17 @@
 export interface iGood {
   id: number;
   name: string;
-
   priceRU: number;
   priceCNY: number;
 
+  stats: iStats;
+
+  src: string;
+}
+
+export interface iStats {
   size?: string;
   color?: string;
-  src: string;
 }
 
 export interface iAddress {

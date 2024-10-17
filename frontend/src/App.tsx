@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
 import HomePage from "./components/home/home";
 import Cart from "./components/cart/cart";
-import { AuthPopup } from "./components/auth/auth-popup";
+import { AuthPopup } from "./components/popups/auth/auth-popup";
 import React from "react";
 import { Profile } from "./components/profile/profile";
+import { Popup } from "./components/popups/popup";
 
 const App: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
@@ -13,16 +14,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout
-              isAuthenticated={isAuthenticated}
-              setIsPopupOpen={setIsPopupOpen}
-              isPopupOpen={isPopupOpen}
-            />
-          }
-        >
+        <Route path="/" element={<Layout isAuthenticated={isAuthenticated} />}>
           <Route index element={<HomePage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />} />
@@ -34,7 +26,6 @@ const App: React.FC = () => {
           />
         </Route>
       </Routes>
-      {isPopupOpen && <AuthPopup setIsPopupOpen={setIsPopupOpen} />}
     </BrowserRouter>
   );
 };

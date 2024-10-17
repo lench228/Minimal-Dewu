@@ -29,7 +29,7 @@
   }
   @font-face {
     font-family: "Anonymous Pro";
-    font-style: 700;
+    font-weight: 700;
     font-display: swap;
     src: url(./assets/fonts/anonymous/AnonymousPro-Bold.ttf) format("truetype");
   }

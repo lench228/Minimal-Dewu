@@ -4,28 +4,27 @@ import {
   selectError,
   selectIsLoading,
   selectUrl,
+  setActivePopup,
+  setGood,
+  setIsPopupOpen,
   setLoading,
 } from "./home-slice";
 import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
-import AddLink from "../good-popup/add-link";
+import AddLink from "../popups/good-popup/add-link";
 import { findGood } from "../../lib/actions/findGood";
 import { FormEvent, useState } from "react";
 import Loading from "../../assets/icons/loading";
 import { iGood } from "../../lib/definitions";
+import { Popup } from "../popups/popup";
+import { GoodPopup } from "../popups/good-popup/good-popup";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const url = useSelector(selectUrl);
   const error = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [good, setGood] = useState<iGood>();
 
-  const openPopup = (res: iGood) => {
-    setIsPopupOpen(true);
-    setGood(res);
-  };
   const handleInput = (link: string) => {
     dispatch(addUrlAndValidate(link));
   };
@@ -36,7 +35,9 @@ const HomePage = () => {
     setTimeout(() => {
       findGood(url)
         .then((res) => {
-          openPopup(res);
+          dispatch(setGood(res));
+          dispatch(setActivePopup("good"));
+          dispatch(setIsPopupOpen(true));
         })
         .finally(() => {
           dispatch(setLoading(false));
@@ -61,17 +62,6 @@ const HomePage = () => {
         error={error}
         handleLinkAdd={() => findGood(url)}
       />
-      {isPopupOpen && good && (
-        <div
-          className={
-            "bg-black-light bg-opacity-70 w-full   " +
-            "   h-full fixed  " +
-            " top-0 left-0 flex gap-5 items-center justify-center"
-          }
-        >
-          <p>{good.name}</p>
-        </div>
-      )}
     </form>
   );
 };

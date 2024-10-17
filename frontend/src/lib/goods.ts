@@ -4,37 +4,44 @@ export const Goods: iGood[] = [
   {
     id: 0,
     name: "cap",
-    color: "orange",
-    size: "",
+    stats: {
+      color: "orange",
+    },
     priceRU: 0,
     priceCNY: 120,
-    src: "../assets/mock-images/cap.webp",
+    src: "/mock-images/cap.webp",
   },
   {
     id: 1,
     name: "humster",
-    color: "orange",
-    size: "",
+    stats: {
+      color: "orange",
+    },
     priceRU: 1200,
     priceCNY: 0,
-    src: "../assets/mock-images/humster.webp",
+    src: "/mock-images/humster.webp",
   },
   {
     id: 2,
     name: "adidas штанцы",
-    color: "orange",
-    size: "",
+    stats: {
+      size: "US 12",
+      color: "orange",
+    },
     priceRU: 0,
     priceCNY: 999,
-    src: "../assets/mock-images/krytie-shtani.webp",
+    src: "/mock-images/krytie-shtani.webp",
   },
   {
     id: 3,
-    name: "cap",
-    color: "orange",
-    size: "",
+    name: "new balance 1906R",
+
+    stats: {
+      color: "orange",
+      size: "US 30",
+    },
     priceRU: 0,
     priceCNY: 1200,
-    src: "../assets/mock-images/nb-1906R.webp",
+    src: "/mock-images/nb-1906R.webp",
   },
 ];

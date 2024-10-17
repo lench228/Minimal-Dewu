@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectIsLoading } from "../home/home-slice";
+import { selectIsLoading } from "../../home/home-slice";
 
 const AddLink = () => {
   const isLoading = useSelector(selectIsLoading);
