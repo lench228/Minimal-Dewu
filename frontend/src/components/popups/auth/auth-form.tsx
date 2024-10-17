@@ -1,11 +1,11 @@
 // @flow
 import * as React from "react";
-import { Switch } from "../ui/switch";
-import Input from "../ui/input/input";
-import { Email } from "../../assets/icons/email";
-import { ShowPas } from "../../assets/icons/show-pas";
-import { Pas } from "../../assets/icons/pas";
-import { Button } from "../ui/button";
+import { Switch } from "../../ui/switch";
+import Input from "../../ui/input/input";
+import { Email } from "../../../assets/icons/email";
+import { ShowPas } from "../../../assets/icons/show-pas";
+import { Pas } from "../../../assets/icons/pas";
+import { Button } from "../../ui/button";
 import { NavLink, useSearchParams } from "react-router-dom";
 
 type Props = {};
