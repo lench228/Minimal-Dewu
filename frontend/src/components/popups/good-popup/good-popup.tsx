@@ -2,6 +2,9 @@
 import * as React from "react";
 import { iGood, iStats } from "../../../lib/definitions";
 import { Button } from "../../ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGood } from "../../home/home-slice";
+import { addGood, selectGoods } from "../../cart/cart-slice";
 
 type Props = {
   good: iGood | null;
@@ -10,7 +13,13 @@ type Props = {
 export const GoodPopup = ({ ...props }: Props) => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (props.good) {
+      dispatch(addGood(props.good));
+    }
   };
+
+  const dispatch = useDispatch();
+  const selectedGoods = useSelector(selectGoods);
 
   return props.good ? (
     <form

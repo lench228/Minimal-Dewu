@@ -11,7 +11,7 @@ import {
 } from "./home-slice";
 import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
-import AddLink from "../popups/good-popup/add-link";
+import AddGood from "../popups/good-popup/add-good";
 import { findGood } from "../../lib/actions/findGood";
 import { FormEvent, useState } from "react";
 import Loading from "../../assets/icons/loading";
@@ -58,7 +58,7 @@ const HomePage = () => {
           handleInput(e.target.value);
         }}
         value={url}
-        endIcon={!error && url ? <AddLink /> : null}
+        endIcon={!error && url ? <AddGood /> : null}
         error={error}
         handleLinkAdd={() => findGood(url)}
       />

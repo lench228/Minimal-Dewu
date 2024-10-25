@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "../../home/home-slice";
 
-const AddLink = () => {
+const AddGood = () => {
   const isLoading = useSelector(selectIsLoading);
 
   return (
@@ -24,4 +24,4 @@ const AddLink = () => {
   );
 };
 
-export default AddLink;
+export default AddGood;

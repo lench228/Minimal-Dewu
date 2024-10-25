@@ -1,7 +1,7 @@
 // @flow
 import * as React from "react";
 import { useSearchParams } from "react-router-dom";
-import search from "../popups/good-popup/add-link";
+import search from "../popups/good-popup/add-good";
 
 type Props = {
   active: boolean;
