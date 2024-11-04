@@ -7,9 +7,7 @@ import { AuthPopup } from "../popups/auth/auth-popup";
 import {
   selectActivePopup,
   selectGood,
-  selectIsPopupOpen,
   setActivePopup,
-  setIsPopupOpen,
 } from "../home/home-slice";
 import { GoodPopup } from "../popups/good-popup/good-popup";
 
@@ -19,7 +17,6 @@ const Layout: React.FC<{
   const dispatch = useDispatch();
   const activePopup = useSelector(selectActivePopup);
   const good = useSelector(selectGood);
-  const isPopupOpen = useSelector(selectIsPopupOpen);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -33,7 +30,6 @@ const Layout: React.FC<{
       if (!searchParams.has("open")) {
         dispatch(setActivePopup("login"));
         setSearchParams({ open: "login", type: "email" });
-        dispatch(setIsPopupOpen(true));
       }
     }
   }, [location.pathname, isAuthenticated, searchParams, setSearchParams]);
@@ -44,7 +40,7 @@ const Layout: React.FC<{
       <main className="w-full">
         <Outlet />
       </main>
-      {isPopupOpen && (
+      {activePopup && (
         <Popup>
           {activePopup === "login" ? (
             <AuthPopup />

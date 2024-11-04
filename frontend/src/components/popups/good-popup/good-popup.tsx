@@ -3,23 +3,27 @@ import * as React from "react";
 import { iGood, iStats } from "../../../lib/definitions";
 import { Button } from "../../ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGood } from "../../home/home-slice";
+import { selectGood, setActivePopup } from "../../home/home-slice";
 import { addGood, selectGoods } from "../../cart/cart-slice";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   good: iGood | null;
 };
 
 export const GoodPopup = ({ ...props }: Props) => {
+  const nav = useNavigate();
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (props.good) {
       dispatch(addGood(props.good));
     }
+    dispatch(setActivePopup(""));
+    nav("/cart");
   };
 
   const dispatch = useDispatch();
-  const selectedGoods = useSelector(selectGoods);
 
   return props.good ? (
     <form
@@ -61,7 +65,6 @@ export const GoodPopup = ({ ...props }: Props) => {
           </svg>
           <ul className={"flex justify-center gap-3 text-2xl font-bold"}>
             {Object.entries(props.good.stats).map(([key, value]) => {
-              console.log(key, value);
               return (
                 <li key={key} className={""}>
                   <span>

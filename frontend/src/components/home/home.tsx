@@ -6,20 +6,23 @@ import {
   selectUrl,
   setActivePopup,
   setGood,
-  setIsPopupOpen,
   setLoading,
 } from "./home-slice";
 import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
 import AddGood from "../popups/good-popup/add-good";
 import { findGood } from "../../lib/actions/findGood";
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Loading from "../../assets/icons/loading";
 import { iGood } from "../../lib/definitions";
 import { Popup } from "../popups/popup";
 import { GoodPopup } from "../popups/good-popup/good-popup";
 
-const HomePage = () => {
+interface iHomePage {
+  inputWidth?: string;
+}
+
+const HomePage: React.FC<iHomePage> = ({ inputWidth = "760px" }) => {
   const dispatch = useDispatch();
   const url = useSelector(selectUrl);
   const error = useSelector(selectError);
@@ -37,7 +40,6 @@ const HomePage = () => {
         .then((res) => {
           dispatch(setGood(res));
           dispatch(setActivePopup("good"));
-          dispatch(setIsPopupOpen(true));
         })
         .finally(() => {
           dispatch(setLoading(false));
@@ -53,7 +55,7 @@ const HomePage = () => {
       <Input
         startIcon={!isLoading ? <Link /> : <Loading />}
         placeholder="вставьте ссылку сюда"
-        width={"760px"}
+        width={inputWidth}
         onChange={(e) => {
           handleInput(e.target.value);
         }}

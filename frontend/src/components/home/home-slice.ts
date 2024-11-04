@@ -15,7 +15,7 @@ interface HomeState {
 
 // Define the initial state using that type
 const initialState: HomeState = {
-  url: "",
+  url: "https://www.dewu.com/product-detail.html?sourceName=pc&spuId=10023658&propertyValueId=377025767&skuId=661620314",
   error: "",
   isLoading: false,
   activePopup: "",
@@ -32,7 +32,6 @@ export const HomeSlice = createSlice({
     selectError: (state) => state.error,
     selectActivePopup: (state) => state.activePopup,
     selectGood: (state) => state.good,
-    selectIsPopupOpen: (state) => state.isPopupOpen,
   },
   reducers: {
     addUrlAndValidate: (state, action: PayloadAction<string>) => {
@@ -54,9 +53,6 @@ export const HomeSlice = createSlice({
     setGood: (state, action: PayloadAction<iGood>) => {
       state.good = action.payload;
     },
-    setIsPopupOpen: (state, action: PayloadAction<boolean>) => {
-      state.isPopupOpen = action.payload;
-    },
   },
 });
 
@@ -66,12 +62,6 @@ export const {
   selectError,
   selectActivePopup,
   selectGood,
-  selectIsPopupOpen,
 } = HomeSlice.selectors;
-export const {
-  addUrlAndValidate,
-  setLoading,
-  setActivePopup,
-  setGood,
-  setIsPopupOpen,
-} = HomeSlice.actions;
+export const { addUrlAndValidate, setLoading, setActivePopup, setGood } =
+  HomeSlice.actions;

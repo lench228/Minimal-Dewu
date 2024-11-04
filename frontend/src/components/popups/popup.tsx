@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setIsPopupOpen } from "../home/home-slice";
+import { setActivePopup } from "../home/home-slice";
 
 type Props = {};
 export const Popup: React.FC<{
@@ -15,7 +15,7 @@ export const Popup: React.FC<{
   const handleClickOutside = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     console.log(e.target, e.currentTarget);
     if (e.target === e.currentTarget) {
-      dispatch(setIsPopupOpen(false));
+      dispatch(setActivePopup(""));
       nav("/");
     }
   };
