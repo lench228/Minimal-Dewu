@@ -5,7 +5,8 @@ import DeleteButton from "../../assets/icons/deleteButton";
 import counter from "../counter/counter";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCounterById, selectCounters } from "../counter/counter.slice";
-import { removeGood } from "./cart-slice";
+import { removeAllGood } from "./cart-slice";
+import CartTotal from "./cart-total";
 
 interface CartItemProps {
   good: iGood;
@@ -27,15 +28,21 @@ const arrow = (
 );
 
 const CartItem: React.FC<CartItemProps> = ({ good }) => {
-  const counter = useSelector(selectCounterById(good.name));
+  const counter = useSelector(selectCounterById(good.id));
   const dispatch = useDispatch();
   return (
     <li
-      key={good.id}
       className={"flex gap-2 border-b-[1px] p-2 border-white-darker-1"}
+      key={good.id}
     >
       <div>
-        <img src={good.src} width={163} height={126} className={"rounded-xl"} />
+        <img
+          src={good.src}
+          width={163}
+          height={126}
+          className={"rounded-xl"}
+          alt={good.name}
+        />
         <footer className={"flex items-center gap-1 justify-center mt-2"}>
           {counter && good.priceCNY * counter.count}¥{arrow}
           {counter && good.priceRU * counter.count}₽
@@ -52,10 +59,10 @@ const CartItem: React.FC<CartItemProps> = ({ good }) => {
           ))}
         </ul>
         <div className={"flex justify-between pt-2"}>
-          <Counter name={good.name}></Counter>
+          <Counter id={good.id}></Counter>
           <DeleteButton
             onClick={() => {
-              dispatch(removeGood(good.id));
+              dispatch(removeAllGood(good.id));
             }}
           ></DeleteButton>
         </div>

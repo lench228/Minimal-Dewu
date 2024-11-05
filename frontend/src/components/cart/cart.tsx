@@ -1,24 +1,18 @@
-import Link from "../../assets/icons/link";
-import AddGood from "../popups/good-popup/add-good";
-import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addUrlAndValidate,
-  selectError,
-  selectGood,
-  selectUrl,
-} from "../home/home-slice";
-import HomePage from "../home/home";
+
+import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
 import CartItem from "./cart-item";
+import CartTotal from "./cart-total";
+import React from "react";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const goods = useSelector(selectGoods);
   return (
-    <div className="w-full flex gap-10 items-center justify-center h-full">
-      <HomePage inputWidth={"600px"}></HomePage>
-      <aside
+    <section className="w-full flex gap-10 items-center justify-center h-full">
+      <Home inputWidth={"600px"}></Home>
+      <section
         className={
           "border-black-light-2 border-2 rounded-xl w-2/5 text-white-darker-1 px-10 py-2 justify-center"
         }
@@ -31,8 +25,11 @@ const Cart = () => {
             <CartItem key={good.id} good={good} />
           ))}
         </ul>
-      </aside>
-    </div>
+        <footer>
+          <CartTotal></CartTotal>
+        </footer>
+      </section>
+    </section>
   );
 };
 

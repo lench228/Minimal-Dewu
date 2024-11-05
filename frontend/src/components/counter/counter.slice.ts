@@ -1,9 +1,10 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartSlice } from "../cart/cart-slice";
+import { addGood, CartSlice } from "../cart/cart-slice";
 import { RootState } from "../../store";
+import { useDispatch } from "react-redux";
 
 interface Counter {
-  id: string;
+  id: number;
   count: number;
 }
 
@@ -19,16 +20,16 @@ export const CounterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    addCounter: (state, action: PayloadAction<string>) => {
+    addCounter: (state, action: PayloadAction<number>) => {
       state.counters.push({ id: action.payload, count: 1 });
     },
-    add: (state, action: PayloadAction<string>) => {
+    add: (state, action: PayloadAction<number>) => {
       const counter = state.counters.find((c) => c.id === action.payload);
       if (counter) {
         counter.count += 1;
       }
     },
-    sub: (state, action: PayloadAction<string>) => {
+    sub: (state, action: PayloadAction<number>) => {
       const counter = state.counters.find((c) => c.id === action.payload);
       if (counter && counter.count > 1) {
         counter.count -= 1;
@@ -39,7 +40,7 @@ export const CounterSlice = createSlice({
 
 export const selectCounters = (state: RootState) => state.counter.counters;
 
-export const selectCounterById = (id: string) =>
+export const selectCounterById = (id: number) =>
   createSelector(selectCounters, (counters) =>
     counters.find((counter) => counter.id === id),
   );

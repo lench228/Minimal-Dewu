@@ -17,7 +17,7 @@ export const GoodPopup = ({ ...props }: Props) => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (props.good) {
-      dispatch(addGood(props.good));
+      dispatch(addGood({ ...props.good, count: 1 }));
     }
     dispatch(setActivePopup(""));
     nav("/cart");

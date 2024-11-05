@@ -9,6 +9,10 @@ export interface iGood {
   src: string;
 }
 
+export interface iCartGood extends iGood {
+  count: number;
+}
+
 export interface iStats {
   size?: string;
   color?: string;
