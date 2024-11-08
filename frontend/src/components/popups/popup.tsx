@@ -16,7 +16,6 @@ export const Popup: React.FC<{
     console.log(e.target, e.currentTarget);
     if (e.target === e.currentTarget) {
       dispatch(setActivePopup(""));
-      nav("/");
     }
   };
   return (

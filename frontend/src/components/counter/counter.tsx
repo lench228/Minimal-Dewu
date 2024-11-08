@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add, addCounter, selectCounterById, sub } from "./counter.slice";
+import {
+  add,
+  addCounter,
+  selectCounterById,
+  selectCounters,
+  sub,
+} from "./counter.slice";
 import { addGood, removeSingleGood, selectGoods } from "../cart/cart-slice";
 
 interface iCounter {
@@ -11,9 +17,7 @@ const Counter: React.FC<iCounter> = ({ id }) => {
   const dispatch = useDispatch();
   const goods = useSelector(selectGoods);
   const counter = useSelector(selectCounterById(id));
-  useEffect(() => {
-    dispatch(addCounter(id));
-  }, [dispatch, id]);
+
   return (
     <div className="flex items-center">
       <button

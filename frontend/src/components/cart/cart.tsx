@@ -5,6 +5,7 @@ import { selectGoods } from "./cart-slice";
 import CartItem from "./cart-item";
 import CartTotal from "./cart-total";
 import React from "react";
+import { Button } from "../ui/button";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -20,15 +21,27 @@ const Cart = () => {
         <h2 className={"text-4xl font-anonymous font-bold text-center"}>
           Корзина
         </h2>
-        <ul className="">
-          {goods.map((good) => (
-            <CartItem key={good.id} good={good} />
-          ))}
-        </ul>
-        <footer>
-          <CartTotal></CartTotal>
-        </footer>
+        {goods.length ? (
+          <main>
+            <ul className="">
+              {goods.map((good) => (
+                <CartItem key={good.id} good={good} />
+              ))}
+            </ul>
+            <footer className={"flex flex-col items-center gap-4"}>
+              <CartTotal></CartTotal>
+              <Button onClick={() => {}}>
+                <p>Оформить</p>
+              </Button>
+            </footer>
+          </main>
+        ) : (
+          <main className=" border-black-light-2 border-2 rounded-xl flex gap-4 items-center justify-center p-2">
+            Пусто
+          </main>
+        )}
       </section>
+      )
     </section>
   );
 };

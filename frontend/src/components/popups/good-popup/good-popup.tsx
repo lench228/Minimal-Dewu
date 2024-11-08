@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectGood, setActivePopup } from "../../home/home-slice";
 import { addGood, selectGoods } from "../../cart/cart-slice";
 import { useNavigate } from "react-router-dom";
+import { addCounter } from "../../counter/counter.slice";
 
 type Props = {
   good: iGood | null;
@@ -18,6 +19,7 @@ export const GoodPopup = ({ ...props }: Props) => {
     e.preventDefault();
     if (props.good) {
       dispatch(addGood({ ...props.good, count: 1 }));
+      dispatch(addCounter(props.good.id));
     }
     dispatch(setActivePopup(""));
     nav("/cart");

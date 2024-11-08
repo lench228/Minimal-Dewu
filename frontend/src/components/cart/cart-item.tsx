@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { iGood } from "../../lib/definitions";
 import Counter from "../counter/counter";
 import DeleteButton from "../../assets/icons/deleteButton";
 import counter from "../counter/counter";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCounterById, selectCounters } from "../counter/counter.slice";
+import {
+  add,
+  addCounter,
+  selectCounterById,
+  selectCounters,
+} from "../counter/counter.slice";
 import { removeAllGood } from "./cart-slice";
 import CartTotal from "./cart-total";
 
@@ -29,7 +34,9 @@ const arrow = (
 
 const CartItem: React.FC<CartItemProps> = ({ good }) => {
   const counter = useSelector(selectCounterById(good.id));
+
   const dispatch = useDispatch();
+
   return (
     <li
       className={"flex gap-2 border-b-[1px] p-2 border-white-darker-1"}

@@ -8,13 +8,23 @@ const CartTotal = () => {
   const total = useSelector(selectTotal);
 
   return (
-    <section>
-      <p>
-        Товары, <span>{count}</span>шт.
-      </p>
-      <p>
-        Итого <span>{total}</span>
-      </p>
+    <section
+      className={
+        "flex flex-col font-anonymous text-xl  rounded-xl border-[1px] w-3/4 border-black-light-2  px-5 py-2 m-auto mt-7"
+      }
+    >
+      <div className={"font-normal"}>
+        <p className={"flex justify-between px-2"}>
+          <span>Товары, {count}шт.</span>
+          <span>{total} ₽</span>
+        </p>
+      </div>
+      <div className={"text-3xl font-bold"}>
+        <p className={"flex justify-between"}>
+          <span>Итого</span>
+          <span>{total} ₽</span>
+        </p>
+      </div>
     </section>
   );
 };
