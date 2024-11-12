@@ -63,6 +63,7 @@ const HomePage: React.FC<iHomePage> = ({ inputWidth = "760px" }) => {
         endIcon={!error && url ? <AddGood /> : null}
         error={error}
         handleLinkAdd={() => findGood(url)}
+        name="linkAdd"
       />
     </form>
   );

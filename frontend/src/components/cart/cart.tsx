@@ -4,18 +4,32 @@ import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
 import CartItem from "./cart-item";
 import CartTotal from "./cart-total";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
+import OrderForm from "../order/order-form";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
+  const [isReadyToOrder, setIsReadyToOrder] = useState(false);
   const dispatch = useDispatch();
   const goods = useSelector(selectGoods);
+
+  const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
   return (
     <section className="w-full flex gap-10 items-center justify-center h-full">
-      <Home inputWidth={"600px"}></Home>
-      <section
+      {!isReadyToOrder ? (
+        <Home inputWidth={"600px"}></Home>
+      ) : (
+        <OrderForm></OrderForm>
+      )}
+      <form
+        onSubmit={(e) => onOrderSubmit(e)}
         className={
-          "border-black-light-2 border-2 rounded-xl w-2/5 text-white-darker-1 px-10 py-2 justify-center"
+          "border-black-light-2 border-2 rounded-xl w-2/5 text-white-darker-1 px-10 py-2 justify-center bg-black-light"
         }
       >
         <h2 className={"text-4xl font-anonymous font-bold text-center"}>
@@ -30,9 +44,28 @@ const Cart = () => {
             </ul>
             <footer className={"flex flex-col items-center gap-4"}>
               <CartTotal></CartTotal>
-              <Button onClick={() => {}}>
-                <p>Оформить</p>
-              </Button>
+              {!isReadyToOrder ? (
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsReadyToOrder(true);
+                  }}
+                >
+                  <p>Оформить</p>
+                </Button>
+              ) : (
+                <>
+                  <Button>
+                    <p>Заказать</p>
+                  </Button>
+                  <a
+                    className={"font-anonymous underline font-normal italic"}
+                    onClick={() => setIsReadyToOrder(false)}
+                  >
+                    добавить товары
+                  </a>
+                </>
+              )}
             </footer>
           </main>
         ) : (
@@ -40,7 +73,7 @@ const Cart = () => {
             Пусто
           </main>
         )}
-      </section>
+      </form>
       )
     </section>
   );

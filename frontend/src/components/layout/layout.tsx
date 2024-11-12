@@ -22,7 +22,7 @@ const Layout: React.FC<{
   const location = useLocation();
   //@todo Сделать нормальный приватный роут
   // Закрытые маршруты
-  const closedRoutes = ["/profile", "/order"];
+  const closedRoutes = ["/profile", "/order.tsx"];
   useEffect(() => {
     const isProtectedRoute = closedRoutes.includes(location.pathname);
 

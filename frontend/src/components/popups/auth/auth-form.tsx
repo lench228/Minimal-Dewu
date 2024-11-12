@@ -40,6 +40,7 @@ export const AuthForm = (props: any) => {
           value={email}
           error={""}
           onChange={(e) => setEmail(e.target.value)}
+          name={"Email"}
         />
         <Input
           startIcon={<Pas />}
@@ -48,6 +49,7 @@ export const AuthForm = (props: any) => {
           width={600}
           type={isHidePas ? "password" : "text"}
           placeholder={"Введите надежный пароль"}
+          name={"Email"}
         />
       </div>
       <div className={"flex flex-col gap-4 w-5/6 items-center"}>
