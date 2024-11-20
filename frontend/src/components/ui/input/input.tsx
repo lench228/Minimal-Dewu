@@ -1,5 +1,6 @@
 import React, { EventHandler } from "react";
 import ErrorMessage from "./error";
+import clsx from "clsx";
 
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.ReactNode;
@@ -21,22 +22,26 @@ const Input: React.FC<iInput> = ({
   onChange,
   name,
   label,
+  required,
+  pattern,
 }) => {
   return (
-    <section className="flex gap-1 flex-col font-anonymous">
+    <section className={clsx("flex gap-1 flex-col font-anonymous w-full")}>
       <div
-        style={{ width: width, height: "44px" }}
-        className={` flex items-center gap-3 p-3 rounded-xl border-2 border-solid  border-white-darker-1 w-${width}`}
+        className={clsx(
+          `flex items-center gap-3 p-3 rounded-xl border-2 border-solid  border-white-darker-1 h-[44px] w-full`,
+        )}
       >
         {startIcon && startIcon}
         <input
-          className={`bg-[transparent]    text-2xl outline-none text-white-darker-1 w-full `}
+          className={`bg-[transparent] w-full text-2xl outline-none text-white-darker-1`}
           type={type ? type : "text"}
-          style={{ width: width }}
           placeholder={placeholder}
           value={value}
           onChange={onChange}
           name={name}
+          required={required}
+          pattern={pattern}
         />
         {endIcon && endIcon}
       </div>

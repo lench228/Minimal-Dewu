@@ -4,7 +4,7 @@ import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
 import CartItem from "./cart-item";
 import CartTotal from "./cart-total";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import OrderForm from "../order/order-form";
 import { Link } from "react-router-dom";
@@ -14,20 +14,26 @@ const Cart = () => {
   const dispatch = useDispatch();
   const goods = useSelector(selectGoods);
 
-  const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const orderFormRef = useRef<HTMLFormElement | null>(null);
+
+  const handleOrderSubmit = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
-    console.log(e.target);
+    if (orderFormRef.current) {
+      orderFormRef.current.NoValidate = true;
+      orderFormRef.current.requestSubmit();
+    }
   };
 
   return (
-    <section className="w-full flex gap-10 items-center justify-center h-full">
+    <section className="flex items-center justify-center h-full gap-8 p-10">
       {!isReadyToOrder ? (
-        <Home inputWidth={"600px"}></Home>
+        <Home formWidth={"w-1/3"}></Home>
       ) : (
-        <OrderForm></OrderForm>
+        <OrderForm ref={orderFormRef}></OrderForm>
       )}
       <form
-        onSubmit={(e) => onOrderSubmit(e)}
         className={
           "border-black-light-2 border-2 rounded-xl w-2/5 text-white-darker-1 px-10 py-2 justify-center bg-black-light"
         }
@@ -55,7 +61,11 @@ const Cart = () => {
                 </Button>
               ) : (
                 <>
-                  <Button>
+                  <Button
+                    onClick={(e) => {
+                      handleOrderSubmit(e);
+                    }}
+                  >
                     <p>Заказать</p>
                   </Button>
                   <a

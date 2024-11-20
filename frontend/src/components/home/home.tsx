@@ -17,12 +17,13 @@ import Loading from "../../assets/icons/loading";
 import { iGood } from "../../lib/definitions";
 import { Popup } from "../popups/popup";
 import { GoodPopup } from "../popups/good-popup/good-popup";
+import clsx from "clsx";
 
 interface iHomePage {
-  inputWidth?: string;
+  formWidth?: string;
 }
 
-const HomePage: React.FC<iHomePage> = ({ inputWidth = "760px" }) => {
+const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
   const dispatch = useDispatch();
   const url = useSelector(selectUrl);
   const error = useSelector(selectError);
@@ -49,13 +50,15 @@ const HomePage: React.FC<iHomePage> = ({ inputWidth = "760px" }) => {
 
   return (
     <form
-      className="flex flex-col items-center justify-center h-full"
+      className={clsx(
+        "flex flex-col items-center justify-center h-full m-auto",
+        formWidth,
+      )}
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <Input
         startIcon={!isLoading ? <Link /> : <Loading />}
         placeholder="вставьте ссылку сюда"
-        width={inputWidth}
         onChange={(e) => {
           handleInput(e.target.value);
         }}

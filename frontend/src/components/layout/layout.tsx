@@ -37,7 +37,7 @@ const Layout: React.FC<{
   return (
     <div className="h-full flex bg-[#2b2b2b]">
       <NavBar />
-      <main className="w-full">
+      <main className="w-full ">
         <Outlet />
       </main>
       {activePopup && (

@@ -50,7 +50,7 @@ export const selectCounters = (state: RootState) => state.counter.counters;
 
 export const selectCounterById = (id: number) =>
   createSelector(selectCounters, (counters) =>
-    counters.find((counter) => counter.id === id),
+    counters.find((counter: Counter) => counter.id === id),
   );
 
 export const { addCounter, add, sub } = CounterSlice.actions;

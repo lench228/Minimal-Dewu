@@ -21,6 +21,7 @@ const Counter: React.FC<iCounter> = ({ id }) => {
   return (
     <div className="flex items-center">
       <button
+        type="button"
         disabled={counter && counter.count === 1}
         onClick={() => {
           dispatch(sub(id));
@@ -30,10 +31,14 @@ const Counter: React.FC<iCounter> = ({ id }) => {
       >
         -
       </button>
-      <button className="px-3 py-1 border-[1px] border-white-darker-2">
+      <button
+        type="button"
+        className="px-3 py-1 border-[1px] border-white-darker-2"
+      >
         {counter ? <p>{counter.count}</p> : <p>"Ошибка"</p>}
       </button>
       <button
+        type="button"
         onClick={() => {
           dispatch(add(id));
           const good = goods.find((good) => good.id === id);
