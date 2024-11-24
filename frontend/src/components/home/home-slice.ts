@@ -13,7 +13,6 @@ interface HomeState {
   good: iGood | null;
 }
 
-// Define the initial state using that type
 const initialState: HomeState = {
   url: "https://www.dewu.com/product-detail.html?sourceName=pc&spuId=10023658&propertyValueId=377025767&skuId=661620314",
   error: "",

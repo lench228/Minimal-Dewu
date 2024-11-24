@@ -1,3 +1,5 @@
+import { ShippingTypes } from "../components/shippings/ship.slice";
+
 export interface iGood {
   id: number;
   name: string;
@@ -21,6 +23,7 @@ export interface iStats {
 export interface iAddress {
   id: number;
   city: string;
+  street: string;
   house: number;
   flat: number;
 }
@@ -36,11 +39,16 @@ export interface iUser {
 
 export interface iShipping {
   id: number;
-  state: string;
-  created: Date;
-  due: Date;
+  created: string;
+  due: string;
   address: iAddress;
-  orderId: number;
+  goods?: { good: iGood; count: number }[];
+}
+
+export interface iShippingApi {
+  current: iShipping[];
+  ended: iShipping[];
+  canceled: iShipping[];
 }
 
 export interface iOrder {

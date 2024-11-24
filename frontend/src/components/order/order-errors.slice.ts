@@ -17,13 +17,20 @@ export const OrderErrorsSlice = createSlice({
     selectErrors: (store) => store.errors,
   },
   reducers: {
-    findErrors: (state, action: PayloadAction<HTMLInputElement>) => {
-      const input = action.payload;
-      if (input.name) {
-        if (!input.checkValidity()) {
-          state.errors[input.name] = input.validationMessage;
+    findErrors: (
+      state,
+      action: PayloadAction<{
+        name: string;
+        isValid: boolean;
+        validationMessage: string;
+      }>,
+    ) => {
+      const { name, isValid, validationMessage } = action.payload;
+      if (name) {
+        if (!isValid) {
+          state.errors[name] = validationMessage;
         } else {
-          delete state.errors[input.name];
+          delete state.errors[name];
         }
       }
     },

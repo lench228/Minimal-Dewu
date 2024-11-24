@@ -18,7 +18,13 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
       const inputs = Array.from(formElements) as HTMLInputElement[];
 
       inputs.forEach((input) => {
-        dispatch(findErrors(input));
+        dispatch(
+          findErrors({
+            name: input.name,
+            isValid: input.checkValidity(),
+            validationMessage: input.validationMessage,
+          }),
+        );
       });
     }
     return errors;
@@ -28,7 +34,6 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
     e.preventDefault();
     if (validateFields()) {
       console.log("Форма успешно отправлена");
-      // Логика отправки формы
     } else {
       console.log("Есть ошибки:", errors);
     }
@@ -36,8 +41,13 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const field = e.target as HTMLInputElement;
-    const error = dispatch(findErrors(field));
-    return error;
+    return dispatch(
+      findErrors({
+        name: field.name,
+        isValid: field.checkValidity(),
+        validationMessage: field.validationMessage,
+      }),
+    );
   };
 
   return (
@@ -122,7 +132,9 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
         </div>
       </fieldset>
 
-      <button type="submit">Отправить</button>
+      <button type="submit" className={"hidden"}>
+        Отправить
+      </button>
     </form>
   );
 });

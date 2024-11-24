@@ -6,6 +6,7 @@ import { AuthPopup } from "./components/popups/auth/auth-popup";
 import React from "react";
 import { Profile } from "./components/profile/profile";
 import { Popup } from "./components/popups/popup";
+import Ship from "./components/shippings/ship";
 
 const App: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
@@ -18,7 +19,7 @@ const App: React.FC = () => {
           <Route index element={<HomePage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />} />
-
+          <Route path="/orders" element={<Ship />} />
           <Route
             path="*"
             element={
