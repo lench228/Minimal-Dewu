@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Services.Abstractions;
 using Services.Abstractions.Internal;
+using Services.Helpers.ResponseBuilder;
 using Services.Models.Products;
 using Services.Models.Products.Internal;
 
@@ -13,8 +14,7 @@ internal class DewuService(
     IPlaywrightUtilsFactory playwrightUtilsFactory,
     ILogger<DewuService> logger) : IDewuService
 {
-    // TODO: сделать ResponseFactory 
-    public async Task<ProductResponseDto?> GetProductInfoByUrlAsync(string url)
+    public async Task<IApiResponse> GetProductInfoByUrlAsync(string url)
     {
         using var playwrightUtils = await playwrightUtilsFactory.CreateAsync();
         logger.LogInformation("Trying to get product info without proxy: {Url}", url);
@@ -24,7 +24,7 @@ internal class DewuService(
             // TODO: тут нужно будет отправлять запрос на восстановление основы в Channel + ставить в глобал хранилище, что основа в бане
             var proxies = await proxyUtils.GetAvailableProxiesAsync();
             if (proxies.Count == 0)
-                return null;
+                return ResponseBuilder.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
             
             foreach (var proxy in proxies)
             {
@@ -37,13 +37,12 @@ internal class DewuService(
             }
         }
 
-        if (productModel?.Code != 200)
-        {
-            logger.LogError("Couldn't get product info by url: {Url}", url);
-            throw new NotImplementedException("Возвращать response");
-        }
-
-        return new ProductResponseDto(productModel);
+        if (productModel?.Code == 200)
+            return ResponseBuilder.Json<ProductResponseDto>(o => o.Success()
+                .Model(new ProductResponseDto(productModel)));
+        
+        logger.LogError("Couldn't get product info by url: {Url}", url);
+        return ResponseBuilder.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
     }
 
     private async Task<ProductModel?> TryGetProductModel(
