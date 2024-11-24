@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Services.Abstractions;
 
 namespace Web.Controllers;
 
 [ApiController]
 [Route("api/dewu")]
-public class DewuController : ControllerBase
+public class DewuController(IDewuService dewuService) : ControllerBase
 {
-    // [HttpGet]
-    // public async Task<IActionResult> GetProductInfo([FromQuery] string productUrl)
-    // {
-    //     var jsonString = await dewuUtils.GetProductInfoByUrlAsync(productUrl);
-    //     return Ok(jsonString);
-    // }
+    [HttpGet]
+    public async Task<IActionResult> GetProductInfo([FromQuery, Url] string productUrl)
+    {
+        var response = await dewuService.GetProductInfoByUrlAsync(productUrl);
+        return response.ToActionResult();
+    }
 }

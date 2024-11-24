@@ -52,6 +52,19 @@ namespace Infrastructure.EfCore.MIgrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GlobalVars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false, defaultValue: 1),
+                    Disabled = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GlobalVars", x => x.Id);
+                    table.CheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Proxies",
                 columns: table => new
                 {
@@ -257,6 +270,9 @@ namespace Infrastructure.EfCore.MIgrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "GlobalVars");
 
             migrationBuilder.DropTable(
                 name: "Proxies");

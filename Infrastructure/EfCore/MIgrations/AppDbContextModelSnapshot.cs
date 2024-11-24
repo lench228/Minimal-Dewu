@@ -22,6 +22,24 @@ namespace Infrastructure.EfCore.MIgrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.GlobalVars", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GlobalVars", t =>
+                        {
+                            t.HasCheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1");
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.Proxy", b =>
                 {
                     b.Property<int>("Id")

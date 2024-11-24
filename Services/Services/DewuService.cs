@@ -1,27 +1,45 @@
-﻿using Domain.Abstractions;
+﻿using System.Threading.Channels;
+using Domain.Abstractions;
+using Infrastructure.EfCore;
+using Infrastructure.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Services.Abstractions;
 using Services.Abstractions.Internal;
 using Services.Helpers.ResponseBuilder;
+using Services.Models.Captcha;
 using Services.Models.Products;
 using Services.Models.Products.Internal;
 
 namespace Services.Services;
 
 internal class DewuService(
+    AppDbContext db,
     IProxyUtils proxyUtils,
     IPlaywrightUtilsFactory playwrightUtilsFactory,
-    ILogger<DewuService> logger) : IDewuService
+    ILogger<DewuService> logger,
+    Channel<CaptchaRequest> channel) : IDewuService
 {
     public async Task<IApiResponse> GetProductInfoByUrlAsync(string url)
     {
+        var gv = await db.GetGlobalVarsAsync(true);
         using var playwrightUtils = await playwrightUtilsFactory.CreateAsync();
-        logger.LogInformation("Trying to get product info without proxy: {Url}", url);
-        var productModel = await TryGetProductModel(playwrightUtils, url);
+
+        ProductModel? productModel = null;
+        if (!gv.Disabled)
+        {
+            logger.LogInformation("Trying to get product info without proxy: {Url}", url);
+            productModel = await TryGetProductModel(playwrightUtils, url);
+            if (productModel?.Code != 200)
+            {
+                gv.Disabled = true;
+                await db.SaveChangesAsync();
+                await channel.Writer.WriteAsync(new CaptchaRequest(url));
+            }
+        }
+        
         if (productModel?.Code != 200)
         {
-            // TODO: тут нужно будет отправлять запрос на восстановление основы в Channel + ставить в глобал хранилище, что основа в бане
             var proxies = await proxyUtils.GetAvailableProxiesAsync();
             if (proxies.Count == 0)
                 return ResponseBuilder.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
@@ -33,7 +51,7 @@ internal class DewuService(
                 if (productModel?.Code == 200)
                     break;
                 await proxyUtils.DisableProxy(proxy);
-                // TODO: тут нужно будет отправлять запрос на восстановление прокси в Channel
+                await channel.Writer.WriteAsync(new CaptchaRequest(url, proxy));
             }
         }
 

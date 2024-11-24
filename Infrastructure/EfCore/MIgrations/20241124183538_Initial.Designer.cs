@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.EfCore.MIgrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241117182259_Initial")]
+    [Migration("20241124183538_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -24,6 +24,24 @@ namespace Infrastructure.EfCore.MIgrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Domain.Entities.GlobalVars", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GlobalVars", t =>
+                        {
+                            t.HasCheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1");
+                        });
+                });
 
             modelBuilder.Entity("Domain.Entities.Proxy", b =>
                 {

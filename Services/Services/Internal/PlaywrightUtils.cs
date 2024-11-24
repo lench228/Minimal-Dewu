@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Domain.Abstractions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Services.Abstractions.Internal;
 using Services.Extensions.Internal;
@@ -48,7 +49,43 @@ internal class PlaywrightUtils : IPlaywrightUtils
 
         return JsonSerializer.Deserialize<ProductModel>(json, JsonSerializerOptions)!;
     }
-    
+
+    public async Task SolveCaptchaAsync(string url, IProxy? proxy)
+    {
+        await using var browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = false,
+            SlowMo = 500
+        });
+        
+        var p = proxy is not null
+            ? new Proxy
+            {
+                Server = proxy.Url,
+                Username = proxy.Username,
+                Password = proxy.Password
+            }
+            : null;
+        
+        var page = await browser.NewPageAsync(new BrowserNewPageOptions
+        {
+            Proxy = p
+        });
+        
+        await page.GotoAsync(url);
+
+        await page.Locator("#t5TokenImg").ScreenshotAsync(new LocatorScreenshotOptions
+        {
+            Timeout = 60000,
+            Path = "token.png"
+        });
+        await page.Locator("#moveBg").ScreenshotAsync(new LocatorScreenshotOptions
+        {
+            Timeout = 60000,
+            Path = "images.png"
+        });
+    }
+
     private static async Task<string> GetDetailsResponseJsonAsync(IBrowser browser, string url, Proxy? proxy = null)
     {
         IPage? page = null;
@@ -58,9 +95,18 @@ internal class PlaywrightUtils : IPlaywrightUtils
             {
                 Proxy = proxy
             });
-            var detailsResponse = await page.WaitForNetworkResponseAsync(DetailsRequestUrl,
-                p => p.GotoAsync(url),
-                o => o.Timeout = 5000);
+            IResponse? detailsResponse;
+            try
+            {
+                detailsResponse = await page.WaitForNetworkResponseAsync(DetailsRequestUrl,
+                    p => p.GotoAsync(url),
+                    o => o.Timeout = 60000);
+            }
+            catch (TimeoutException)
+            {
+                throw new PlaywrightException("Details response timed out, maybe it's worth it to increase the timeout");
+            }
+            
             if (detailsResponse is null)
                 throw new PlaywrightException("Couldn't get details response");
             var jsonString = (await detailsResponse.JsonAsync()).ToString();

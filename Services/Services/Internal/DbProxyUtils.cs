@@ -33,7 +33,7 @@ internal class DbProxyUtils(AppDbContext db) : IProxyUtils
     public async Task<IList<IProxy>> GetAvailableProxiesAsync()
     {
         var dbProxies = await GetAvailableDbProxiesAsync();
-        return (IList<IProxy>)dbProxies;
+        return dbProxies.Cast<IProxy>().ToList();
     }
 
     public Task DisableProxy(IProxy proxy)
