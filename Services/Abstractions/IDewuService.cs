@@ -1,8 +1,8 @@
-﻿using Services.Models.Products;
+﻿using Services.Helpers.ResponseBuilder;
 
 namespace Services.Abstractions;
 
 public interface IDewuService
 {
-    Task<ProductResponseDto?> GetProductInfoByUrlAsync(string url);
+    Task<IApiResponse> GetProductInfoByUrlAsync(string url);
 }

@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
         var conn = config.GetConnectionString("DefaultConnection");
         services.AddDbContext<AppDbContext>(o => o.UseNpgsql(conn));
         
-        if (config["APPLY_MIGRATIONS"]?.ToLower() != "true")
+        if (bool.Parse(config["APPLY_MIGRATIONS"]!))
             return services;
 
         var options = new DbContextOptionsBuilder<AppDbContext>()
