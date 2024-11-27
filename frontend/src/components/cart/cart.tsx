@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
-import CartItem from "./cart-item";
+import CartItem from "./cart-item/cart-item";
 import CartTotal from "./cart-total";
 import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
@@ -84,7 +84,6 @@ const Cart = () => {
           </main>
         )}
       </form>
-      )
     </section>
   );
 };

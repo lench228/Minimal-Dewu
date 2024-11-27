@@ -42,6 +42,7 @@ export interface iShipping {
   created: string;
   due: string;
   address: iAddress;
+  total: number;
   goods?: { good: iGood; count: number }[];
 }
 

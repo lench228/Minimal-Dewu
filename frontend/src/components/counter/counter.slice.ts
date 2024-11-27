@@ -21,7 +21,6 @@ export const CounterSlice = createSlice({
   initialState,
   reducers: {
     addCounter: (state, action: PayloadAction<number>) => {
-      console.log(1);
       const findCounter = state.counters.find(
         (counter) => counter.id === action.payload,
       );

@@ -15,6 +15,38 @@ const shippings = {
         house: 1,
         flat: 2,
       },
+      total: 1000,
+      goods: [
+        { good: Goods[2], count: 1 },
+        { good: Goods[1], count: 9 },
+      ],
+    },
+    {
+      id: 9,
+      created: "2024-11-20T00:00:00.000Z",
+      due: "2024-11-30T00:00:00.000Z",
+      address: {
+        id: 0,
+        city: "New York",
+        street: "5th Avenue",
+        house: 1,
+        flat: 2,
+      },
+      total: 1000,
+      goods: [{ good: Goods[2], count: 1 }],
+    },
+    {
+      id: 5,
+      created: "2024-11-20T00:00:00.000Z",
+      due: "2024-11-30T00:00:00.000Z",
+      address: {
+        id: 0,
+        city: "New York",
+        street: "5th Avenue",
+        house: 1,
+        flat: 2,
+      },
+      total: 1000,
       goods: [
         { good: Goods[2], count: 1 },
         { good: Goods[1], count: 3 },
@@ -26,6 +58,7 @@ const shippings = {
       id: 2,
       created: "2024-10-10T00:00:00.000Z",
       due: "2024-10-15T00:00:00.000Z",
+      total: 1000,
       address: {
         id: 0,
         city: "New York",
@@ -39,24 +72,7 @@ const shippings = {
       ],
     },
   ],
-  canceled: [
-    {
-      id: 3,
-      created: "2024-09-05T00:00:00.000Z",
-      due: "2024-09-10T00:00:00.000Z",
-      address: {
-        id: 0,
-        city: "New York",
-        street: "5th Avenue",
-        house: 1,
-        flat: 2,
-      },
-      goods: [
-        { good: Goods[2], count: 1 },
-        { good: Goods[1], count: 3 },
-      ],
-    },
-  ],
+  canceled: [],
 };
 
 export const getShipping = async () =>

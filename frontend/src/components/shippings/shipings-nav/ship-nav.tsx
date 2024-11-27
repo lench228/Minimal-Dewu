@@ -15,15 +15,15 @@ const ShipNav: React.FC<iShipNav> = () => {
   return (
     <div className={"flex justify-between px-20 py-16 w-full text-2xl "}>
       <ShipNavPart
-        text={TypesTexts.current}
+        type={"current"}
         count={useSelector(selectCurrent).length}
       ></ShipNavPart>
       <ShipNavPart
-        text={TypesTexts.ended}
+        type={"ended"}
         count={useSelector(selectEnded).length}
       ></ShipNavPart>
       <ShipNavPart
-        text={TypesTexts.canceled}
+        type={"canceled"}
         count={useSelector(selectCanceled).length}
       ></ShipNavPart>
     </div>
