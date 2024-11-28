@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Angle from "../../assets/icons/angle";
 import Cart from "../cart/cart";
 import ShipGood from "./ship-good";
+import ShipFooter from "./ship-footer";
 interface iShipItem extends iShipping {}
 
 const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
@@ -27,22 +28,28 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
           <p>{dayjs(props.due).format("DD.MM.YY")}</p>
         </div>
         <span>{props.total}</span>
-        <Angle onClick={() => handleArrowClick()}></Angle>
+        <Angle onClick={() => handleArrowClick()} isOpen={isOpen}></Angle>
       </header>
       {isOpen && (
-        <ul>
-          {props.goods &&
-            props.goods.map((item) => {
-              console.log(item);
-              return (
-                <ShipGood
-                  key={item.good.id + "order"}
-                  good={item.good}
-                  count={item.count}
-                />
-              );
-            })}
-        </ul>
+        <div>
+          <ul className={"border-white-darker-2 border-b-[1px] py-10"}>
+            {props.goods &&
+              props.goods.map((item) => {
+                return (
+                  <ShipGood
+                    key={item.good.id + "order"}
+                    good={item.good}
+                    count={item.count}
+                  />
+                );
+              })}
+          </ul>
+          <ShipFooter
+            userData={props.userData}
+            total={props.total}
+            address={props.address}
+          ></ShipFooter>
+        </div>
       )}
     </li>
   );

@@ -1,11 +1,14 @@
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, useState } from "react";
 
-const Angle: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
-  ...props
-}) => {
+interface AngleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  isOpen: boolean;
+}
+
+const Angle: React.FC<AngleProps> = ({ onClick, isOpen }) => {
   return (
-    <button onClick={props.onClick}>
+    <button onClick={onClick}>
       <svg
+        transform={isOpen ? "rotate(-180)" : "rotate(0)"}
         width="44"
         height="44"
         viewBox="0 0 44 44"

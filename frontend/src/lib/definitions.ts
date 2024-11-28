@@ -43,6 +43,7 @@ export interface iShipping {
   due: string;
   address: iAddress;
   total: number;
+  userData: { fullName: string; phone: string };
   goods?: { good: iGood; count: number }[];
 }
 

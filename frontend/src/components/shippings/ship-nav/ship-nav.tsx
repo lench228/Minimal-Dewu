@@ -1,6 +1,6 @@
 import React from "react";
 import ShipNavPart from "./ship-nav-part";
-import { TypesTexts } from "../ship";
+
 import {
   selectCanceled,
   selectCurrent,

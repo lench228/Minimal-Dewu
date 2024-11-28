@@ -1,8 +1,8 @@
 import { getRandomArrayElement } from "../../utils/utils";
 import { Goods } from "../goods";
-import { iGood, iShippingApi } from "../definitions";
+import { iGood, iShipping, iShippingApi } from "../definitions";
 
-const shippings = {
+const shippings: iShippingApi = {
   current: [
     {
       id: 1,
@@ -14,6 +14,10 @@ const shippings = {
         street: "5th Avenue",
         house: 1,
         flat: 2,
+      },
+      userData: {
+        fullName: "Пример Примеров",
+        phone: "8122940954",
       },
       total: 1000,
       goods: [
@@ -32,6 +36,10 @@ const shippings = {
         house: 1,
         flat: 2,
       },
+      userData: {
+        fullName: "Пример Примеров",
+        phone: "8122940954",
+      },
       total: 1000,
       goods: [{ good: Goods[2], count: 1 }],
     },
@@ -45,6 +53,10 @@ const shippings = {
         street: "5th Avenue",
         house: 1,
         flat: 2,
+      },
+      userData: {
+        fullName: "Пример Примеров",
+        phone: "8122940954",
       },
       total: 1000,
       goods: [
@@ -65,6 +77,10 @@ const shippings = {
         street: "5th Avenue",
         house: 1,
         flat: 2,
+      },
+      userData: {
+        fullName: "Пример Примеров",
+        phone: "8122940954",
       },
       goods: [
         { good: Goods[2], count: 1 },

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import ShipNav from "./shipings-nav/ship-nav";
+import ShipNav from "./ship-nav/ship-nav";
 import { getShipping } from "../../lib/actions/getShipping";
 import {
   selectActive,
@@ -39,11 +39,11 @@ const Ship = () => {
   }, []);
 
   return (
-    <section className="flex items-center justify-center flex-col border-[1px] border-black-light-2 mx-16 my-16 pb-10 bg-black-light text-white font-anonymous rounded-xl">
+    <section className="flex overflow-y-hidden h-full items-center justify-center flex-col border-[1px] border-black-light-2 mx-16 my-16 pb-10 bg-black-light text-white font-anonymous rounded-xl">
       <ShipNav></ShipNav>
       <ul
         className={
-          "bg-black-light w-full px-20 flex items-center flex-col gap-6"
+          "bg-black-light overflow-y-scroll h-5/6 w-full px-20 flex items-center flex-col gap-6 border-b-[1px] border-white-darker-2 p-10"
         }
       >
         {items.map((item) => {
