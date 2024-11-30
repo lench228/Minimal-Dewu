@@ -7,16 +7,18 @@ import { AuthPopup } from "../popups/auth/auth-popup";
 import {
   selectActivePopup,
   selectGood,
+  selectIsLoading,
   setActivePopup,
 } from "../home/home-slice";
 import { GoodPopup } from "../popups/good-popup/good-popup";
+import { selectAuth } from "./auth.slice";
 
-const Layout: React.FC<{
-  isAuthenticated: boolean;
-}> = ({ isAuthenticated }) => {
+const Layout: React.FC = () => {
   const dispatch = useDispatch();
   const activePopup = useSelector(selectActivePopup);
   const good = useSelector(selectGood);
+
+  const isAuthenticated = useSelector(selectAuth);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();

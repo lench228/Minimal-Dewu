@@ -6,5 +6,5 @@ const getGoods = () => {
   return getRandomArrayElement(Goods);
 };
 
-export const findGood = async (link: string) =>
+export const getGood = async (link: string) =>
   await new Promise<iGood>((resolve) => resolve(getGoods()));

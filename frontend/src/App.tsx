@@ -10,12 +10,11 @@ import Ship from "./components/shippings/ship";
 
 const App: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
-  const isAuthenticated = false;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout isAuthenticated={isAuthenticated} />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />} />

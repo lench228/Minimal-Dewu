@@ -11,7 +11,7 @@ import {
 import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
 import AddGood from "../popups/good-popup/add-good";
-import { findGood } from "../../lib/actions/findGood";
+import { getGood } from "../../lib/actions/getGood";
 import React, { FormEvent, useState } from "react";
 import Loading from "../../assets/icons/loading";
 import { iGood } from "../../lib/definitions";
@@ -37,7 +37,7 @@ const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
     e.preventDefault();
     dispatch(setLoading(true));
     setTimeout(() => {
-      findGood(url)
+      getGood(url)
         .then((res) => {
           dispatch(setGood(res));
           dispatch(setActivePopup("good"));
@@ -65,7 +65,7 @@ const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
         value={url}
         endIcon={!error && url ? <AddGood /> : null}
         error={error}
-        handleLinkAdd={() => findGood(url)}
+        handleLinkAdd={() => getGood(url)}
         name="linkAdd"
       />
     </form>

@@ -7,12 +7,18 @@ import { ShowPas } from "../../../assets/icons/show-pas";
 import { Pas } from "../../../assets/icons/pas";
 import { Button } from "../../ui/button";
 import { NavLink, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAddress, setAuth, setUser } from "../../layout/auth.slice";
+import { setActivePopup } from "../../home/home-slice";
+import { authUser } from "../../../lib/actions/auth";
+import { addressFetch } from "../../../lib/actions/getAddress";
 
 type Props = {};
 export const AuthForm = (props: any) => {
   const [email, setEmail] = React.useState("");
   const [isHidePas, setHidePas] = React.useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
 
   function handleClick() {
     const newParams = new URLSearchParams(searchParams);
@@ -20,13 +26,28 @@ export const AuthForm = (props: any) => {
       "open",
       searchParams.get("open") === "login" ? "register" : "login",
     );
-    console.log(newParams.get("open"));
     setSearchParams(newParams);
   }
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      dispatch(setAuth(true));
+      dispatch(setActivePopup(""));
+      const user = await authUser("");
+      dispatch(setUser(user));
+      const address = await addressFetch("");
+      dispatch(setAddress(address));
+      setSearchParams({});
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <form
       className={`rounded-xl p-10 flex gap-20 flex-col w-1/2 justify-center items-center bg-black-light border-2 border-black-light-2`}
+      onSubmit={(e) => handleFormSubmit(e)}
     >
       <h1 className={`text-3xl text-white-darker-1 font-anonymous`}>
         Добро пожаловать
@@ -53,7 +74,7 @@ export const AuthForm = (props: any) => {
         />
       </div>
       <div className={"flex flex-col gap-4 w-5/6 items-center"}>
-        <Button>
+        <Button type="submit">
           {searchParams.get("open") === "login" ? "Войти" : "Регистрация"}
         </Button>
         <p

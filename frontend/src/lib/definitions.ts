@@ -5,9 +5,7 @@ export interface iGood {
   name: string;
   priceRU: number;
   priceCNY: number;
-
   stats: iStats;
-
   src: string;
 }
 
@@ -32,8 +30,8 @@ export interface iUser {
   id: string;
   fullName: string;
   phone: string;
-  address_id: number;
-
+  email: string;
+  addressId: number;
   pas?: string;
 }
 
@@ -55,7 +53,7 @@ export interface iShippingApi {
 
 export interface iOrder {
   id: number;
-  user_id: string;
+  userId: string;
   status: string;
   created: Date;
 }

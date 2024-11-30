@@ -24,9 +24,15 @@ const Input: React.FC<iInput> = ({
   label,
   required,
   pattern,
+  disabled,
 }) => {
   return (
-    <section className={clsx("flex gap-1 flex-col font-anonymous w-full")}>
+    <section
+      className={clsx(
+        "flex gap-1 flex-col font-anonymous w-full",
+        disabled ? "opacity-50" : "",
+      )}
+    >
       <div
         className={clsx(
           `flex items-center gap-3 p-3 rounded-xl border-2 border-solid  border-white-darker-1 h-[44px] w-full`,

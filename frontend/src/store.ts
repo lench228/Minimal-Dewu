@@ -4,6 +4,7 @@ import { CartSlice } from "./components/cart/cart-slice";
 import { CounterSlice } from "./components/counter/counter.slice";
 import { OrderErrorsSlice } from "./components/order/order-errors.slice";
 import { ShippingSlice } from "./components/shippings/ship.slice";
+import { AuthSlice } from "./components/layout/auth.slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [CounterSlice.name]: CounterSlice.reducer,
     [OrderErrorsSlice.name]: OrderErrorsSlice.reducer,
     [ShippingSlice.name]: ShippingSlice.reducer,
+    [AuthSlice.name]: AuthSlice.reducer,
   },
 });
 
