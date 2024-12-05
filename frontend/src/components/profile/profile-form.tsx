@@ -5,12 +5,14 @@ interface FormProps {
   children?: React.ReactNode;
   title: string;
   description: string;
+  onEditClick: () => void;
 }
 
 const FormContainer: React.FC<FormProps> = ({
   children,
   title,
   description,
+  onEditClick,
 }) => {
   return (
     <section
@@ -30,7 +32,7 @@ const FormContainer: React.FC<FormProps> = ({
             {description}
           </p>
         </div>
-        <Edit></Edit>
+        <Edit onClick={onEditClick}></Edit>
       </header>
 
       {children}

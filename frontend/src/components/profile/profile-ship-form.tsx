@@ -1,25 +1,70 @@
 import React, { useEffect } from "react";
 import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
-import { findErrors, selectErrors } from "../order/order-errors.slice";
+import {
+  findErrors,
+  resetErrors,
+  selectErrors,
+} from "../order/order-errors.slice";
 import { addressFetch } from "../../lib/actions/getAddress";
 import { selectAddress } from "../layout/auth.slice";
 import Error from "../ui/input/error";
+import { Button } from "../ui/button";
 interface Props {
-  disabled: boolean;
+  disabledEdit: boolean;
 }
 
-const ProfileShipForm: React.FC<Props> = ({ ...props }) => {
-  const dispatch = useDispatch();
+const ProfileShipForm = ({ disabledEdit }: Props) => {
   const address = useSelector(selectAddress);
+  const errors = useSelector(selectErrors);
+
+  const dispatch = useDispatch();
+
+  const [city, setCity] = React.useState(address?.city || "");
+  const [street, setStreet] = React.useState(address?.street || "");
+  const [flat, setFlat] = React.useState(address?.flat || "");
+  const [house, setHouse] = React.useState(address?.house || "");
+
+  useEffect(() => {
+    setCity(address?.city || "");
+    setStreet(address?.street || "");
+    setFlat(address?.flat || "");
+    setHouse(address?.house || "");
+
+    dispatch(resetErrors());
+  }, [disabledEdit]);
+
+  const checkValidity = () =>
+    !!Object.keys(errors).map((error) =>
+      error === "city" || "house" || "flat" || "street" ? errors.error : "",
+    ).length;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const field = e.target as HTMLInputElement;
-    return dispatch(
+    const { name, value } = e.target;
+    const isValid = e.target.checkValidity();
+    const validationMessage = e.target.validationMessage;
+
+    if (!disabledEdit) {
+      switch (name) {
+        case "city":
+          setCity(value);
+          break;
+        case "house":
+          setHouse(value);
+          break;
+        case "flat":
+          setFlat(value);
+          break;
+        case "street":
+          setStreet(value);
+          break;
+      }
+    }
+    dispatch(
       findErrors({
-        name: field.name,
-        isValid: field.checkValidity(),
-        validationMessage: field.validationMessage,
+        name,
+        isValid,
+        validationMessage,
       }),
     );
   };
@@ -27,55 +72,58 @@ const ProfileShipForm: React.FC<Props> = ({ ...props }) => {
   return (
     <>
       {address ? (
-        <form className={"w-2/3"}>
+        <form className={"w-2/3 flex flex-col items-center"}>
           <Input
-            error={""}
+            error={errors["city"]}
             name="city"
             label="Город"
             placeholder="Екатеринбург"
             type="text"
             onChange={onChange}
-            value={address.city}
+            value={city}
             required
-            disabled={props.disabled}
+            disabled={disabledEdit}
           />
           <Input
-            error={""}
+            error={errors["street"]}
             name="street"
             label="Улица"
             placeholder="Вайнера"
             type="text"
             onChange={onChange}
-            value={address.street}
+            value={street}
             required
-            disabled={props.disabled}
+            disabled={disabledEdit}
           />
           <div className="flex flex-row items-center justify-between gap-10 w-full">
             <Input
-              error={""}
+              error={errors["house"]}
               name="house"
               label="Дом"
               placeholder="1"
               type="number"
               width="w-full"
               onChange={onChange}
-              value={address.house}
+              value={house}
               required
-              disabled={props.disabled}
+              disabled={disabledEdit}
             />
             <Input
-              error={""}
+              error={errors["flat"]}
               name="flat"
               label="Квартира"
               placeholder="1"
               type="number"
               width="100%"
-              value={address.flat}
+              value={flat}
               onChange={onChange}
               required
-              disabled={props.disabled}
+              disabled={disabledEdit}
             />
           </div>
+          {!disabledEdit && (
+            <Button disabled={checkValidity()}>Сохранить изменения</Button>
+          )}
         </form>
       ) : (
         <Error text={"Ошибка"} />

@@ -15,6 +15,7 @@ export const OrderErrorsSlice = createSlice({
   initialState,
   selectors: {
     selectErrors: (store) => store.errors,
+    selectIsValid: (store) => store.errors,
   },
   reducers: {
     findErrors: (
@@ -34,8 +35,11 @@ export const OrderErrorsSlice = createSlice({
         }
       }
     },
+    resetErrors: (state) => {
+      state.errors = {};
+    },
   },
 });
 
-export const { findErrors } = OrderErrorsSlice.actions;
+export const { findErrors, resetErrors } = OrderErrorsSlice.actions;
 export const { selectErrors } = OrderErrorsSlice.selectors;

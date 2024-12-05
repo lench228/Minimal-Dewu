@@ -1,31 +1,71 @@
 import React, { useEffect } from "react";
 import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
-import { findErrors, selectErrors } from "../order/order-errors.slice";
+import {
+  findErrors,
+  resetErrors,
+  selectErrors,
+} from "../order/order-errors.slice";
 import { addressFetch } from "../../lib/actions/getAddress";
 import { selectUser } from "../layout/auth.slice";
+import { Button } from "../ui/button";
 
 interface Props {
-  disabled: boolean;
+  disabledEdit: boolean;
 }
-const ProfileUserForm: React.FC<Props> = ({ ...props }) => {
+
+const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
   const errors = useSelector(selectErrors);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  const [name, setName] = React.useState(user?.fullName || "");
+  const [phone, setPhone] = React.useState(user?.phone || "");
+  const [email, setEmail] = React.useState(user?.email || "");
+
+  useEffect(() => {
+    setName(user?.fullName || "");
+    setPhone(user?.phone || "");
+    setEmail(user?.email || "");
+
+    dispatch(resetErrors());
+  }, [disabledEdit]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const field = e.target as HTMLInputElement;
-    return dispatch(
+    const { name, value } = e.target;
+    const isValid = e.target.checkValidity();
+    const validationMessage = e.target.validationMessage;
+
+    if (!disabledEdit) {
+      switch (name) {
+        case "email":
+          setEmail(value);
+          break;
+        case "phone":
+          setPhone(value);
+          break;
+        case "name":
+          setName(value);
+          break;
+      }
+    }
+
+    dispatch(
       findErrors({
-        name: field.name,
-        isValid: field.checkValidity(),
-        validationMessage: field.validationMessage,
+        name,
+        isValid,
+        validationMessage,
       }),
     );
   };
 
+  const checkValidity = () =>
+    !!Object.keys(errors).map((error) =>
+      error === "email" || "name" || "phone" ? errors.error : "",
+    ).length;
+
   return (
-    <form className={"w-2/3"}>
+    <form className="w-2/3 flex flex-col items-center">
       <Input
         error={errors.name}
         name="name"
@@ -33,8 +73,8 @@ const ProfileUserForm: React.FC<Props> = ({ ...props }) => {
         placeholder="Пример Примеров"
         onChange={onChange}
         required
-        value={user?.fullName}
-        disabled={props.disabled}
+        value={name}
+        disabled={disabledEdit}
       />
       <Input
         error={errors.phone}
@@ -44,10 +84,9 @@ const ProfileUserForm: React.FC<Props> = ({ ...props }) => {
         type="tel"
         onChange={onChange}
         required
-        value={user?.phone}
-        disabled={props.disabled}
+        value={phone}
+        disabled={disabledEdit}
       />
-
       <Input
         error={errors.email}
         name="email"
@@ -56,9 +95,12 @@ const ProfileUserForm: React.FC<Props> = ({ ...props }) => {
         type="email"
         onChange={onChange}
         required
-        value={user?.email}
-        disabled={props.disabled}
+        value={email}
+        disabled={disabledEdit}
       />
+      {!disabledEdit && (
+        <Button disabled={checkValidity()}>Сохранить изменения</Button>
+      )}
     </form>
   );
 };

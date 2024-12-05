@@ -8,7 +8,11 @@ import ProfileShipForm from "./profile-ship-form";
 
 type Props = {};
 export const Profile = (props: any) => {
+  const [disabledShip, setDisabledShip] = React.useState(true);
+  const [disabledUser, setDisabledUser] = React.useState(true);
+
   const user = useSelector(selectUser);
+
   return (
     <div
       className={
@@ -31,11 +35,16 @@ export const Profile = (props: any) => {
           <FormContainer
             title={"Личные данные"}
             description={"Имя, телефон, почта"}
+            onEditClick={() => setDisabledUser(!disabledUser)}
           >
-            <ProfileUserForm disabled={true}></ProfileUserForm>
+            <ProfileUserForm disabledEdit={disabledUser}></ProfileUserForm>
           </FormContainer>
-          <FormContainer title={"Данные доставки"} description={"Адрес"}>
-            <ProfileShipForm disabled={true} />
+          <FormContainer
+            title={"Данные доставки"}
+            description={"Адрес"}
+            onEditClick={() => setDisabledShip(!disabledShip)}
+          >
+            <ProfileShipForm disabledEdit={disabledShip} />
           </FormContainer>
         </section>
       )}
