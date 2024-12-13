@@ -37,9 +37,9 @@ const Layout: React.FC = () => {
   }, [location.pathname, isAuthenticated, searchParams, setSearchParams]);
 
   return (
-    <div className="h-full flex bg-[#2b2b2b]">
+    <div className="h-full  flex justify-center sm:flex-row flex-col-reverse bg-[#2b2b2b]">
       <NavBar />
-      <main className="w-full ">
+      <main className="w-full h-full mt-auto flex sm:mt-0">
         <Outlet />
       </main>
       {activePopup && (

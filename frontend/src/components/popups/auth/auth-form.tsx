@@ -46,7 +46,7 @@ export const AuthForm = (props: any) => {
 
   return (
     <form
-      className={`rounded-xl p-10 flex gap-20 flex-col w-1/2 justify-center items-center bg-black-light border-2 border-black-light-2`}
+      className={`rounded-xl p-10 flex  gap-20 flex-col sm:w-1/2 sm:h-5/6 justify-center items-center bg-black-light border-2 border-black-light-2`}
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <h1 className={`text-3xl text-white-darker-1 font-anonymous`}>

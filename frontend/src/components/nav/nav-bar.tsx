@@ -9,12 +9,18 @@ const NavBar = () => {
   const location = useLocation();
 
   return (
-    <nav className="w-24 bg-black text-white flex-grow-1 px-2 py-5">
-      <ul className="flex flex-col items-center gap-16">
+    <nav className="sm:w-24 fixed left-0 bottom-0 w-full min-h-20 mt-auto sm:h-full bg-black text-white flex-grow-1 px-2 py-5">
+      <ul className="flex sm:flex-col items-center sm:justify-start justify-center gap-4 sm:gap-16">
         <li>
-          <NavLink to="/">
-            <Logo />
-          </NavLink>
+          <NavIco
+            to="/"
+            src="/icons/nav-user.svg"
+            alt="home"
+            isActive={location.pathname === "/"}
+            isLogo={true}
+          >
+            <Logo isActive={location.pathname === "/"} />
+          </NavIco>
         </li>
         <li>
           <NavIco

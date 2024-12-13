@@ -16,22 +16,22 @@ export const Profile = (props: any) => {
   return (
     <div
       className={
-        "font-anonymous  text-white-darker-1 m-10 h-full flex items-center justify-center"
+        "font-anonymous overflow-y-scroll text-white-darker-1 m-2  h-5/6 flex items-center justify-center sm:m-auto"
       }
     >
-      <section
-        className={
-          "flex flex-col gap-2 border-black-light-2  h-5/6 p-2 m-2 w-2/6 border-[1px] rounded-xl bg-black-light"
-        }
-      >
-        <h1 className={" font-bold text-3xl pb-2 border-b-[1px]"}>
-          Привет, <br />
-          <span>{user?.fullName}</span>
-        </h1>
-        <p className={"opacity-20 text-2xl"}>Тут будет больше возможностей</p>
-      </section>
+      {/*<section*/}
+      {/*  className={*/}
+      {/*    "flex flex-col gap-2 border-black-light-2  h-5/6 p-2 m-2 w-2/6 border-[1px] rounded-xl bg-black-light"*/}
+      {/*  }*/}
+      {/*>*/}
+      {/*  <h1 className={" font-bold text-3xl pb-2 border-b-[1px]"}>*/}
+      {/*    Привет, <br />*/}
+      {/*    <span>{user?.fullName}</span>*/}
+      {/*  </h1>*/}
+      {/*  <p className={"opacity-20 text-2xl"}>Тут будет больше возможностей</p>*/}
+      {/*</section>*/}
       {user && (
-        <section>
+        <section className={"flex gap-6 flex-col "}>
           <FormContainer
             title={"Личные данные"}
             description={"Имя, телефон, почта"}

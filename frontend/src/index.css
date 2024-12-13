@@ -5,6 +5,7 @@
 body{
   overflow-y: hidden;
 }
+
 .nav-icon:hover path {
   fill: #000;
 }

@@ -5,7 +5,7 @@ import Angle from "../../assets/icons/angle";
 import Cart from "../cart/cart";
 import ShipGood from "./ship-good";
 import ShipFooter from "./ship-footer";
-interface iShipItem extends iShipping {}
+export interface iShipItem extends iShipping {}
 
 const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
   const handleArrowClick = () => {
@@ -17,10 +17,10 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
   return (
     <li
       className={
-        "border-[1px] border-black-light-2 rounded-xl w-full px-12 py-8"
+        "border-[1px]  border-black-light-2 rounded-xl w-full px-4 sm:px-12 py-8"
       }
     >
-      <header className={"text-2xl flex justify-between "}>
+      <header className={"text-2xl flex justify-between"}>
         <div>
           <h2>
             Заказ №{props.id} от <br />
@@ -31,7 +31,7 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
         <Angle onClick={() => handleArrowClick()} isOpen={isOpen}></Angle>
       </header>
       {isOpen && (
-        <div>
+        <div className={""}>
           <ul className={"border-white-darker-2 border-b-[1px] py-10"}>
             {props.goods &&
               props.goods.map((item) => {

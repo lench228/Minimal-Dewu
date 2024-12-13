@@ -51,7 +51,7 @@ const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
   return (
     <form
       className={clsx(
-        "flex flex-col items-center justify-center h-full m-auto",
+        "flex flex-col items-center h-20 justify-center sm:h-full m-auto",
         formWidth,
       )}
       onSubmit={(e) => handleFormSubmit(e)}

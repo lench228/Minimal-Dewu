@@ -13,9 +13,9 @@ import { useSearchParams } from "react-router-dom";
 import ShipItem from "./ship-item";
 
 export const TypesTexts = {
-  current: "Текущие заказы",
-  ended: "Завершенные заказы",
-  canceled: "Отмененные заказы",
+  current: "Текущие",
+  ended: "Завершенные",
+  canceled: "Отмененные",
 };
 
 const Ship = () => {
@@ -39,11 +39,11 @@ const Ship = () => {
   }, []);
 
   return (
-    <section className="flex overflow-y-hidden h-full items-center justify-center flex-col border-[1px] border-black-light-2 mx-16 my-16 pb-10 bg-black-light text-white font-anonymous rounded-xl">
+    <section className="h-full flex-col-reverse sm:flex-col  flex overflow-y-scroll sm:overflow-y-hidden  w-full  mx-auto justify-end   items-start sm:justify-start border-[1px] border-black-light-2 sm:mx-16 sm:my-16  pb-10 bg-black-light text-white font-anonymous rounded-xl">
       <ShipNav></ShipNav>
       <ul
         className={
-          "bg-black-light overflow-y-scroll h-5/6 w-full px-20 flex items-center flex-col gap-6 border-b-[1px] border-white-darker-2 p-10"
+          "overflow-y-scroll bg-black-light w-full p-4 sm:px-20 flex items-center flex-col gap-6  sm:p-10"
         }
       >
         {items.map((item) => {

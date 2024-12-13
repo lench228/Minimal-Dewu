@@ -30,12 +30,14 @@ export const GoodPopup = ({ ...props }: Props) => {
   return props.good ? (
     <form
       className={
-        "flex w-2/5 flex-col p-20 gap-4 justify-center items-center m-auto bg-black-light border-2 border-black-light-2 rounded-xl text-white-darker-1 font-anonymous"
+        "flex w-5/6 sm:w-2/5 flex-col p-[4%] gap-4 justify-center items-center m-auto bg-black-light border-2 border-black-light-2 rounded-xl text-white-darker-1 font-anonymous"
       }
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <header>
-        <h2 className={"text-4xl text-center font-bold"}>{props.good.name}</h2>
+        <h2 className={"sm:text-4xl text-3xl text-center font-bold"}>
+          {props.good.name}
+        </h2>
         <h3 className={"text-xl text-center font-bold"}>
           {props.good.priceCNY}¥
         </h3>
@@ -44,13 +46,13 @@ export const GoodPopup = ({ ...props }: Props) => {
         <img
           src={props.good.src}
           alt={props.good.name}
-          height={380}
-          width={380}
+          height={window.screen.width > 680 ? 380 : 160}
+          width={window.screen.width > 680 ? 380 : 140}
           className={"rounded-xl"}
         />
         <div>
           <svg
-            width="608"
+            width="100%"
             height="2"
             viewBox="0 0 608 2"
             fill="none"
@@ -65,7 +67,9 @@ export const GoodPopup = ({ ...props }: Props) => {
               stroke="#D5D5D5"
             />
           </svg>
-          <ul className={"flex justify-center gap-3 text-2xl font-bold"}>
+          <ul
+            className={"flex justify-center gap-3 text-xl sm:tex-2xl font-bold"}
+          >
             {Object.entries(props.good.stats).map(([key, value]) => {
               return (
                 <li key={key} className={""}>

@@ -17,7 +17,7 @@ const FormContainer: React.FC<FormProps> = ({
   return (
     <section
       className={
-        "p-4 flex items-center flex-col gap-4 border-black-light-2 border-[1px] bg-black-light rounded-xl"
+        "p-4  flex items-center flex-col gap-4 border-black-light-2 border-[1px] bg-black-light rounded-xl "
       }
     >
       <header className={"flex justify-start w-full gap-4 px-2 items-center "}>

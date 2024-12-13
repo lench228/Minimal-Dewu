@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import OrderForm from "../order/order-form";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 const Cart = () => {
   const [isReadyToOrder, setIsReadyToOrder] = useState(false);
@@ -27,63 +28,73 @@ const Cart = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-full gap-8 p-10">
-      {!isReadyToOrder ? (
-        <Home formWidth={"w-1/3"}></Home>
-      ) : (
-        <OrderForm ref={orderFormRef}></OrderForm>
+    <section
+      className={clsx(
+        "overflow-y-scroll h-full flex items-center flex-col-reverse sm:w-full  sm:mt-0 sm:flex-row sm:items-center sm:justify-center gap-8 sm:p-10",
       )}
-      <form
-        className={
-          "border-black-light-2 border-2 rounded-xl w-2/5 text-white-darker-1 px-10 py-2 justify-center bg-black-light"
-        }
-      >
-        <h2 className={"text-4xl font-anonymous font-bold text-center"}>
-          Корзина
-        </h2>
-        {goods.length ? (
-          <main>
-            <ul className="">
-              {goods.map((good) => (
-                <CartItem key={good.id} good={good} />
-              ))}
-            </ul>
-            <footer className={"flex flex-col items-center gap-4"}>
-              <CartTotal></CartTotal>
-              {!isReadyToOrder ? (
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsReadyToOrder(true);
-                  }}
-                >
-                  <p>Оформить</p>
-                </Button>
-              ) : (
-                <>
+    >
+      {isReadyToOrder ? (
+        <OrderForm ref={orderFormRef}></OrderForm>
+      ) : (
+        <Home formWidth={window.screen.width > 680 ? "w-1/3" : "w-5/6"}></Home>
+      )}
+      {(!isReadyToOrder || window.screen.width > 680) && (
+        <form
+          className={
+            "w-5/6 flex items-center flex-col min-h-800 max-h-[600px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-2/5 text-white-darker-1 sm:px-10 py-2 justify-center bg-black-light"
+          }
+        >
+          <h2
+            className={
+              "sm:text-4xl text-2xl font-anonymous font-bold text-center mb-auto"
+            }
+          >
+            Корзина
+          </h2>
+          {goods.length ? (
+            <main className={"mt-auto overflow-y-scroll"}>
+              <ul className="">
+                {goods.map((good) => (
+                  <CartItem key={good.id} good={good} />
+                ))}
+              </ul>
+              <footer className={"flex  flex-col items-center gap-4"}>
+                <CartTotal></CartTotal>
+                {!isReadyToOrder ? (
                   <Button
                     onClick={(e) => {
-                      handleOrderSubmit(e);
+                      e.preventDefault();
+                      setIsReadyToOrder(true);
                     }}
                   >
-                    <p>Заказать</p>
+                    <p>Оформить</p>
                   </Button>
-                  <a
-                    className={"font-anonymous underline font-normal italic"}
-                    onClick={() => setIsReadyToOrder(false)}
-                  >
-                    добавить товары
-                  </a>
-                </>
-              )}
-            </footer>
-          </main>
-        ) : (
-          <main className=" border-black-light-2 border-2 rounded-xl flex gap-4 items-center justify-center p-2">
-            Пусто
-          </main>
-        )}
-      </form>
+                ) : (
+                  <>
+                    <Button
+                      onClick={(e) => {
+                        handleOrderSubmit(e);
+                      }}
+                    >
+                      <p>Заказать</p>
+                    </Button>
+                    <a
+                      className={"font-anonymous underline font-normal italic"}
+                      onClick={() => setIsReadyToOrder(false)}
+                    >
+                      добавить товары
+                    </a>
+                  </>
+                )}
+              </footer>
+            </main>
+          ) : (
+            <main className="font-anonymous mb-auto border-black-light-2 border-2 rounded-xl flex gap-4 items-center justify-center p-2 w-5/6">
+              Пора закупиться
+            </main>
+          )}
+        </form>
+      )}
     </section>
   );
 };

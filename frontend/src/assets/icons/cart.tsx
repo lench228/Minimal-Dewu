@@ -23,7 +23,7 @@ const Cart: React.FC<iSvg> = ({ ...props }) => {
       </svg>
 
       <p
-        className={`text-xl font-bold ${!props.isActive ? "text-white-darker-1" : "text-black-light-2"} font-anonymous`}
+        className={`$text-xl font-bold ${!props.isActive ? "text-white-darker-1" : "text-black-light-2"} font-anonymous`}
       >
         {goodsCount}
       </p>
