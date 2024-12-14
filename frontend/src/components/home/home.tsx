@@ -23,7 +23,9 @@ interface iHomePage {
   formWidth?: string;
 }
 
-const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
+const HomePage: React.FC<iHomePage> = ({
+  formWidth = window.screen.width <= 680 ? "w-[90%]" : "w-2/3",
+}) => {
   const dispatch = useDispatch();
   const url = useSelector(selectUrl);
   const error = useSelector(selectError);
@@ -51,7 +53,7 @@ const HomePage: React.FC<iHomePage> = ({ formWidth = "w-[70%]" }) => {
   return (
     <form
       className={clsx(
-        "flex flex-col items-center h-20 justify-center sm:h-full m-auto",
+        "flex flex-col items-center h-20 justify-center sm:h-full m-auto ",
         formWidth,
       )}
       onSubmit={(e) => handleFormSubmit(e)}

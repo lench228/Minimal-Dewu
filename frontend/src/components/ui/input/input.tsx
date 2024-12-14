@@ -40,7 +40,7 @@ const Input: React.FC<iInput> = ({
       >
         {startIcon && startIcon}
         <input
-          className={`bg-[transparent] w-full text-2xl outline-none text-white-darker-1`}
+          className={`bg-[transparent] w-full text-lg sm:text-2xl outline-none text-white-darker-1`}
           type={type ? type : "text"}
           placeholder={placeholder}
           value={value}

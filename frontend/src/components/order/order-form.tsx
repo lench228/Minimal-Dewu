@@ -57,10 +57,10 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
       noValidate
       ref={ref}
       onSubmit={onSubmit}
-      className="mb-auto p-5 font-anonymous text-white-darker-1 bg-black-light-2 bg-opacity-40 border-1 border-black-light-2 w-[90%] sm:w-2/3 sm:p-10 rounded-xl flex items-center flex-col gap-2 sm:gap-6"
+      className="mb-auto p-5 font-anonymous text-white-darker-1 bg-black-light-2 bg-opacity-40 border-1 border-black-light-2 w-[90%] sm:w-2/3 sm:p-14 sm:py-10 rounded-xl flex items-center flex-col gap-2 sm:gap-6"
     >
       <h2 className="text-3xl font-bold text-center">Заказ</h2>
-      <fieldset className="flex flex-col gap-3">
+      <fieldset className="flex flex-col gap-3 w-full">
         <h3 className="text-2xl font-bold mb-3">Личные данные</h3>
         <Input
           error={errors.name}
@@ -90,7 +90,7 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
           required
         />
       </fieldset>
-      <fieldset className="flex flex-col gap-3">
+      <fieldset className="flex flex-col gap-3 w-full">
         <h3 className="text-2xl font-bold mb-3">Доставка</h3>
         <Input
           error={errors.city}

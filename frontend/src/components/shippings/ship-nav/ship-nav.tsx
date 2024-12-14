@@ -15,7 +15,7 @@ const ShipNav: React.FC<iShipNav> = () => {
   return (
     <div
       className={
-        " sm:m-10 mt-auto mb-10 flex flex-col sm:flex-row items-end sm:items-start sm:justify-center gap-6 sm:gap-0 sm:px-20 p-5 sm:py-16 w-full sm:text-2xl text-sm"
+        " sm:m-0 mt-auto mb-10 flex flex-col sm:flex-row items-end sm:items-start sm:justify-center gap-2 sm:gap-12 sm:px-10 p-5 sm:py-16 w-full sm:text-2xl text-sm"
       }
     >
       <ShipNavPart

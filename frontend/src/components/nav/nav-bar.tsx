@@ -9,7 +9,7 @@ const NavBar = () => {
   const location = useLocation();
 
   return (
-    <nav className="sm:w-24 fixed left-0 bottom-0 w-full min-h-20 mt-auto sm:h-full bg-black text-white flex-grow-1 px-2 py-5">
+    <nav className="sm:w-24 sticky left-0 bottom-0 w-full min-h-20 mt-auto sm:h-full bg-black text-white flex-grow-1 px-2 py-5">
       <ul className="flex sm:flex-col items-center sm:justify-start justify-center gap-4 sm:gap-16">
         <li>
           <NavIco

@@ -10,8 +10,11 @@ interface ShipGoodProps {
 
 const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
   return (
-    <li className={"flex gap-2 p-2 justify-center flex-col"} key={good.id}>
-      <div className={"order-last"}>
+    <li
+      className={"flex gap-2 p-2 justify-center sm:flex-row flex-col"}
+      key={good.id}
+    >
+      <div className={"order-last sm:order-first"}>
         <img
           src={good.src}
           width={163}

@@ -36,12 +36,14 @@ const Cart = () => {
       {isReadyToOrder ? (
         <OrderForm ref={orderFormRef}></OrderForm>
       ) : (
-        <Home formWidth={window.screen.width > 680 ? "w-1/3" : "w-5/6"}></Home>
+        <Home
+          formWidth={window.screen.width > 680 ? "w-1/3" : "w-[90%]"}
+        ></Home>
       )}
       {(!isReadyToOrder || window.screen.width > 680) && (
         <form
           className={
-            "w-5/6 flex items-center flex-col min-h-800 max-h-[600px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-2/5 text-white-darker-1 sm:px-10 py-2 justify-center bg-black-light"
+            "w-5/6 flex items-center flex-col min-h-800 min-h-[500px] max-h-[600px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-2/5 text-white-darker-1 sm:px-10 py-2 justify-center bg-black-light"
           }
         >
           <h2
