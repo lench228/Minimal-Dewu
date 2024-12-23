@@ -22,7 +22,15 @@ const App: React.FC = () => {
           <Route
             path="*"
             element={
-              <div className="flex justify-center text-9xl">Not Found</div>
+              <div className="flex justify-center items-center  flex-col">
+                <img
+                  src={"illustrations/error-404.png "}
+                  className={"w-1/2 "}
+                />
+                <p className={"text-3xl font-anonymous text-white-darker-2"}>
+                  Not Found Page
+                </p>
+              </div>
             }
           />
         </Route>

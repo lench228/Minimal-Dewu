@@ -22,7 +22,9 @@ interface CartItemProps {
 const CartItem: React.FC<CartItemProps> = ({ good }) => {
   return (
     <li
-      className={"flex gap-2 border-b-[1px] p-2 border-white-darker-1"}
+      className={
+        "flex appearance-auto gap-2 border-b-[1px] p-2 border-white-darker-1"
+      }
       key={good.id}
     >
       <div>

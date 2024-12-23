@@ -9,6 +9,7 @@ interface iInput extends React.InputHTMLAttributes<HTMLInputElement> {
   error: string;
   label?: string;
   name: string;
+  isFixed?: boolean;
 }
 
 const Input: React.FC<iInput> = ({
@@ -25,6 +26,7 @@ const Input: React.FC<iInput> = ({
   required,
   pattern,
   disabled,
+  isFixed,
 }) => {
   return (
     <section
@@ -51,7 +53,7 @@ const Input: React.FC<iInput> = ({
         />
         {endIcon && endIcon}
       </div>
-      {error ? <ErrorMessage text={error} /> : null}
+      {error ? <ErrorMessage isFixed={isFixed} text={error} /> : null}
       {!error && label ? <p className={"pl-3 text-xl"}>{label} </p> : null}
     </section>
   );

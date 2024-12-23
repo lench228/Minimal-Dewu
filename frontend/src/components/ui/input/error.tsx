@@ -1,10 +1,28 @@
+import React, { useEffect, useState } from "react";
+import clsx from "clsx";
+
 interface iError {
   text: string;
+  isFixed?: boolean;
 }
 
-const ErrorMessage: React.FC<iError> = ({ text }) => {
+const ErrorMessage: React.FC<iError> = ({ text, isFixed }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsVisible(true), 0); // Задержка перед началом анимации
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
-    <article className="flex gap-2 flex-row items-center pl-10">
+    <article
+      className={clsx(
+        "flex gap-2 flex-row items-center pl-10  transform transition-opacity duration-500 ease-in-out",
+
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
+        isFixed ? "fixed left-1/2 bottom-10" : "",
+      )}
+    >
       <svg
         width="24"
         height="24"
@@ -22,7 +40,7 @@ const ErrorMessage: React.FC<iError> = ({ text }) => {
         />
       </svg>
 
-      <p className="text-error font-anonymous text-base underline">{text}</p>
+      <p className="text-error font-anonymous text-xl underline">{text}</p>
     </article>
   );
 };

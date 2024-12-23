@@ -48,13 +48,13 @@ const Cart = () => {
         >
           <h2
             className={
-              "sm:text-4xl text-2xl font-anonymous font-bold text-center mb-auto"
+              "sm:text-4xl text-2xl font-anonymous font-bold text-center mb-6"
             }
           >
             Корзина
           </h2>
           {goods.length ? (
-            <main className={"mt-auto overflow-y-scroll"}>
+            <main className={"overflow-y-scroll"}>
               <ul className="">
                 {goods.map((good) => (
                   <CartItem key={good.id} good={good} />
@@ -91,8 +91,11 @@ const Cart = () => {
               </footer>
             </main>
           ) : (
-            <main className="font-anonymous mb-auto border-black-light-2 border-2 rounded-xl flex gap-4 items-center justify-center p-2 w-5/6">
-              Пора закупиться
+            <main className={"flex items-center flex-col justify-center"}>
+              <img src={"illustrations/empty-cart.png"} className={""} />
+              <h2 className={"text-2xl font-anonymous mb-12"}>
+                Корзина пуста =(
+              </h2>
             </main>
           )}
         </form>
