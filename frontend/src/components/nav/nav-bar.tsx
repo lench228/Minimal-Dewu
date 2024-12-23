@@ -27,6 +27,7 @@ const NavBar = () => {
             src="/icons/nav-user.svg"
             alt="profile"
             to="/profile"
+            options={location.state}
             isActive={location.pathname === "/profile"}
           >
             <User isActive={location.pathname === "/profile"} />

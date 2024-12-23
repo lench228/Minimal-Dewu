@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../store";
+import type { RootState } from "../../services/store";
 import error from "../ui/input/error";
 import { iGood } from "../../lib/definitions";
 

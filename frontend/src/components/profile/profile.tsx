@@ -30,24 +30,22 @@ export const Profile = (props: any) => {
       {/*  </h1>*/}
       {/*  <p className={"opacity-20 text-2xl"}>Тут будет больше возможностей</p>*/}
       {/*</section>*/}
-      {user && (
-        <section className={"flex gap-6 flex-col "}>
-          <FormContainer
-            title={"Личные данные"}
-            description={"Имя, телефон, почта"}
-            onEditClick={() => setDisabledUser(!disabledUser)}
-          >
-            <ProfileUserForm disabledEdit={disabledUser}></ProfileUserForm>
-          </FormContainer>
-          <FormContainer
-            title={"Данные доставки"}
-            description={"Адрес"}
-            onEditClick={() => setDisabledShip(!disabledShip)}
-          >
-            <ProfileShipForm disabledEdit={disabledShip} />
-          </FormContainer>
-        </section>
-      )}
+      <section className={"flex gap-6 flex-col "}>
+        <FormContainer
+          title={"Личные данные"}
+          description={"Имя, телефон, почта"}
+          onEditClick={() => setDisabledUser(!disabledUser)}
+        >
+          <ProfileUserForm disabledEdit={disabledUser}></ProfileUserForm>
+        </FormContainer>
+        <FormContainer
+          title={"Данные доставки"}
+          description={"Адрес"}
+          onEditClick={() => setDisabledShip(!disabledShip)}
+        >
+          <ProfileShipForm disabledEdit={disabledShip} />
+        </FormContainer>
+      </section>
     </div>
   );
 };

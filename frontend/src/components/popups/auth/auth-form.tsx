@@ -6,7 +6,7 @@ import { Email } from "../../../assets/icons/email";
 import { ShowPas } from "../../../assets/icons/show-pas";
 import { Pas } from "../../../assets/icons/pas";
 import { Button } from "../../ui/button";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAddress, setAuth, setUser } from "../../layout/auth.slice";
 import { setActivePopup } from "../../home/home-slice";
@@ -19,6 +19,8 @@ export const AuthForm = (props: any) => {
   const [isHidePas, setHidePas] = React.useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
+
+  const nav = useNavigate();
 
   function handleClick() {
     const newParams = new URLSearchParams(searchParams);
@@ -38,7 +40,7 @@ export const AuthForm = (props: any) => {
       dispatch(setUser(user));
       const address = await addressFetch("");
       dispatch(setAddress(address));
-      setSearchParams({});
+      nav("/profile");
     } catch (e) {
       console.log(e);
     }
@@ -46,7 +48,7 @@ export const AuthForm = (props: any) => {
 
   return (
     <form
-      className={`rounded-xl p-10 flex  gap-20 flex-col sm:w-1/2 sm:h-5/6 justify-center items-center bg-black-light border-2 border-black-light-2`}
+      className={`rounded-xl p-10 flex  gap-20 flex-col sm:w-full sm:h-5/6 justify-center items-center bg-black-light border-2 border-black-light-2`}
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <h1 className={`text-3xl text-white-darker-1 font-anonymous`}>

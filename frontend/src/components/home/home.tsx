@@ -16,6 +16,7 @@ import React, { FormEvent, useRef, useState } from "react";
 import Loading from "../../assets/icons/loading";
 import clsx from "clsx";
 import { Button } from "../ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface iHomePage {
   formWidth?: string;
@@ -29,11 +30,12 @@ const HomePage: React.FC<iHomePage> = ({
   const error = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
   const formRef = useRef<HTMLFormElement>(null);
+  const nav = useNavigate();
 
   const handleInput = (link: string) => {
     dispatch(addUrlAndValidate(link));
   };
-
+  const location = useLocation();
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -42,7 +44,7 @@ const HomePage: React.FC<iHomePage> = ({
       getGood(url)
         .then((res) => {
           dispatch(setGood(res));
-          dispatch(setActivePopup("good"));
+          nav(`/goods/${res.id}`, { state: { background: location } });
         })
 
         .finally(() => {

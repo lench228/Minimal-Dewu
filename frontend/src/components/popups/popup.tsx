@@ -13,9 +13,8 @@ export const Popup: React.FC<{
   const nav = useNavigate();
 
   const handleClickOutside = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    console.log(e.target, e.currentTarget);
     if (e.target === e.currentTarget) {
-      dispatch(setActivePopup(""));
+      nav(-1);
     }
   };
   return (

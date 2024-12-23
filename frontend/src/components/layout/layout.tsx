@@ -42,15 +42,6 @@ const Layout: React.FC = () => {
       <main className="w-full h-full mt-auto flex sm:mt-0">
         <Outlet />
       </main>
-      {activePopup && (
-        <Popup>
-          {activePopup === "login" ? (
-            <AuthPopup />
-          ) : (
-            <GoodPopup good={good}></GoodPopup>
-          )}
-        </Popup>
-      )}
     </div>
   );
 };

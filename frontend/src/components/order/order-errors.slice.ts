@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../../store";
+import { RootState } from "../../services/store";
 
 interface OrderErrorsState {
   errors: { [key: string]: string };

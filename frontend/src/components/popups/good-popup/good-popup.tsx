@@ -8,26 +8,22 @@ import { addGood, selectGoods } from "../../cart/cart-slice";
 import { useNavigate } from "react-router-dom";
 import { addCounter } from "../../counter/counter.slice";
 
-type Props = {
-  good: iGood | null;
-};
-
-export const GoodPopup = ({ ...props }: Props) => {
+export const GoodPopup = () => {
   const nav = useNavigate();
+  const good = useSelector(selectGood);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (props.good) {
-      dispatch(addGood({ ...props.good, count: 1 }));
-      dispatch(addCounter(props.good.id));
+    if (good) {
+      dispatch(addGood({ ...good, count: 1 }));
+      dispatch(addCounter(good.id));
     }
-    dispatch(setActivePopup(""));
     nav("/cart");
   };
 
   const dispatch = useDispatch();
 
-  return props.good ? (
+  return good ? (
     <form
       className={
         "flex w-5/6 sm:w-2/5 flex-col p-[4%] gap-4 justify-center items-center m-auto bg-black-light border-2 border-black-light-2 rounded-xl text-white-darker-1 font-anonymous"
@@ -36,16 +32,14 @@ export const GoodPopup = ({ ...props }: Props) => {
     >
       <header>
         <h2 className={"sm:text-4xl text-3xl text-center font-bold"}>
-          {props.good.name}
+          {good.name}
         </h2>
-        <h3 className={"text-xl text-center font-bold"}>
-          {props.good.priceCNY}¥
-        </h3>
+        <h3 className={"text-xl text-center font-bold"}>{good.priceCNY}¥</h3>
       </header>
       <main className={"max-w-screen-sm flex flex-col items-center gap-3"}>
         <img
-          src={props.good.src}
-          alt={props.good.name}
+          src={good.src}
+          alt={good.name}
           height={window.screen.width > 680 ? 380 : 160}
           width={window.screen.width > 680 ? 380 : 140}
           className={"rounded-xl"}
@@ -70,7 +64,7 @@ export const GoodPopup = ({ ...props }: Props) => {
           <ul
             className={"flex justify-center gap-3 text-xl sm:tex-2xl font-bold"}
           >
-            {Object.entries(props.good.stats).map(([key, value]) => {
+            {Object.entries(good.stats).map(([key, value]) => {
               return (
                 <li key={key} className={""}>
                   <span>

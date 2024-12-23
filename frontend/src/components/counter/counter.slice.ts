@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addGood, CartSlice } from "../cart/cart-slice";
-import { RootState } from "../../store";
+import { RootState } from "../../services/store";
 import { useDispatch } from "react-redux";
 
 interface Counter {
