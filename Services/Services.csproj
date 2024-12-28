@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
       <PackageReference Include="Microsoft.Playwright" Version="1.48.0" />
+      <PackageReference Include="OpenAI" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup>

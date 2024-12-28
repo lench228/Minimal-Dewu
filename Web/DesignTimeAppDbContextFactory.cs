@@ -9,7 +9,7 @@ public class DesignTimeAppDbContextFactory : IDesignTimeDbContextFactory<AppDbCo
     public AppDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseNpgsql("sample connection string")
+            .UseNpgsql("Server=localhost;Port=5432;Database=dewudb;UserId=postgres;Password=Nf!1020151450934;Pooling=true;")
             .Options;
 
         return new AppDbContext(options);

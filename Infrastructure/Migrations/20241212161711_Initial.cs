@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.EfCore.MIgrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -52,6 +52,19 @@ namespace Infrastructure.EfCore.MIgrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GlobalVars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false, defaultValue: 1),
+                    CaptchaBlocked = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GlobalVars", x => x.Id);
+                    table.CheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Proxies",
                 columns: table => new
                 {
@@ -60,7 +73,7 @@ namespace Infrastructure.EfCore.MIgrations
                     Url = table.Column<string>(type: "text", nullable: false),
                     Username = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
-                    IsAvailable = table.Column<bool>(type: "boolean", nullable: false)
+                    CaptchaBlocked = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -257,6 +270,9 @@ namespace Infrastructure.EfCore.MIgrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "GlobalVars");
 
             migrationBuilder.DropTable(
                 name: "Proxies");

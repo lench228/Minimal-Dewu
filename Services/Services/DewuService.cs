@@ -1,30 +1,48 @@
-﻿using Domain.Abstractions;
+﻿using System.Threading.Channels;
+using Domain.Abstractions;
+using Infrastructure.EfCore;
+using Infrastructure.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Services.Abstractions;
 using Services.Abstractions.Internal;
 using Services.Helpers.ResponseBuilder;
+using Services.Models.Captcha;
 using Services.Models.Products;
 using Services.Models.Products.Internal;
 
 namespace Services.Services;
 
 internal class DewuService(
+    AppDbContext db,
     IProxyUtils proxyUtils,
     IPlaywrightUtilsFactory playwrightUtilsFactory,
-    ILogger<DewuService> logger) : IDewuService
+    ILogger<DewuService> logger,
+    Channel<CaptchaRequest> channel) : IDewuService
 {
     public async Task<IApiResponse> GetProductInfoByUrlAsync(string url)
     {
+        var gv = await db.GetGlobalVarsAsync(true);
         using var playwrightUtils = await playwrightUtilsFactory.CreateAsync();
-        logger.LogInformation("Trying to get product info without proxy: {Url}", url);
-        var productModel = await TryGetProductModel(playwrightUtils, url);
+
+        ProductModel? productModel = null;
+        if (!gv.CaptchaBlocked)
+        {
+            logger.LogInformation("Trying to get product info without proxy: {Url}", url);
+            productModel = await TryGetProductModel(playwrightUtils, url);
+            if (productModel?.Code != 200)
+            {
+                gv.CaptchaBlocked = true;
+                await db.SaveChangesAsync();
+                await channel.Writer.WriteAsync(new CaptchaRequest(url));
+            }
+        }
+        
         if (productModel?.Code != 200)
         {
-            // TODO: тут нужно будет отправлять запрос на восстановление основы в Channel + ставить в глобал хранилище, что основа в бане
-            var proxies = await proxyUtils.GetAvailableProxiesAsync();
+            var proxies = await proxyUtils.GetEnabledProxiesAsync();
             if (proxies.Count == 0)
-                return ResponseBuilder.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
+                return ResponseFactory.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
             
             foreach (var proxy in proxies)
             {
@@ -33,16 +51,17 @@ internal class DewuService(
                 if (productModel?.Code == 200)
                     break;
                 await proxyUtils.DisableProxy(proxy);
-                // TODO: тут нужно будет отправлять запрос на восстановление прокси в Channel
+                await channel.Writer.WriteAsync(new CaptchaRequest(url, proxy));
             }
         }
 
         if (productModel?.Code == 200)
-            return ResponseBuilder.Json<ProductResponseDto>(o => o.Success()
-                .Model(new ProductResponseDto(productModel)));
+            return ResponseFactory.Json<ProductResponseDto>(o =>
+                o.Success().Model(new ProductResponseDto(productModel)));
         
         logger.LogError("Couldn't get product info by url: {Url}", url);
-        return ResponseBuilder.Json<ProductResponseDto>(o => o.Error(500, "Couldn't get product info"));
+        return ResponseFactory.Json<ProductResponseDto>(o =>
+            o.Error(500, "Couldn't get product info"));
     }
 
     private async Task<ProductModel?> TryGetProductModel(

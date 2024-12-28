@@ -1,4 +1,6 @@
 ﻿using Domain.Abstractions;
+using Domain.Entities;
+using Infrastructure.EfCore;
 using Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,5 +20,18 @@ public static class EntitiesExtensions
             throw new EntityNotFoundException($"Entity of type '{typeof(TEntity).FullName}' with Id '{id}' not found.");
 
         return entity;
+    }
+
+    public static async Task<GlobalVars> GetGlobalVarsAsync(this AppDbContext db, bool track = false)
+    {
+        var gv = await db.GlobalVars.FirstOrDefaultAsync();
+        if (gv is not null)
+            return gv;
+        
+        gv = new GlobalVars();
+        await db.GlobalVars.AddAsync(gv);
+        await db.SaveChangesAsync();
+
+        return gv;
     }
 }
