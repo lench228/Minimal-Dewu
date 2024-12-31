@@ -11,7 +11,7 @@ interface CartItemControlsProps {
 const CartItemControls: React.FC<CartItemControlsProps> = ({ ...props }) => {
   const dispatch = useDispatch();
   return (
-    <div className={"flex justify-between pt-2"}>
+    <div className={"flex justify-between pt-2 mb-16"}>
       <Counter id={props.id}></Counter>
       <DeleteButton
         onClick={() => {

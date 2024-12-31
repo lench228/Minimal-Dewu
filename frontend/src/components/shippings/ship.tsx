@@ -39,7 +39,7 @@ const Ship = () => {
   }, []);
 
   return (
-    <section className="h-full flex-col-reverse sm:flex-col  flex overflow-y-scroll sm:overflow-y-hidden  w-full  mx-auto justify-end   items-start sm:justify-start border-[1px] border-black-light-2 sm:mx-16 sm:my-16  pb-10 bg-black-light text-white font-anonymous rounded-xl">
+    <section className="h-full flex-col-reverse sm:flex-col  flex overflow-y-scroll sm:overflow-y-hidden  w-full  mx-auto justify-end   items-start sm:justify-start border-[1px] border-black-light-2 sm:mx-16 sm:my-16  pb-10 bg-black-light text-white font-roboto rounded-xl">
       <ShipNav></ShipNav>
       <ul
         className={

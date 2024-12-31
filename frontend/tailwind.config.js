@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}", // указываем, где находятся ваши файлы компонентов
-    "./public/index.html",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx}", "./public/index.html"],
   theme: {
     colors: {
       black: "#101010",
@@ -17,8 +14,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        anonymous: ["Anonymous Pro", "monospace"],
-        roboto: ["Roboto", "sans-serif"],
+        oldMainFont: ["Anonymous Pro", "monospace"],
+        main: ["Roboto", "sans-serif"],
+        title: ["Rubik", "serif"],
       },
       animation: {
         "spin-load": "spin .4s linear infinite",

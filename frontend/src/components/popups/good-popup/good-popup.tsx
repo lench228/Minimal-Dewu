@@ -26,15 +26,15 @@ export const GoodPopup = () => {
   return good ? (
     <form
       className={
-        "flex w-5/6 sm:w-2/5 flex-col p-[4%] gap-4 justify-center items-center m-auto bg-black-light border-2 border-black-light-2 rounded-xl text-white-darker-1 font-anonymous"
+        "flex w-5/6 sm:w-3/5 flex-col p-[4%] gap-4 justify-center items-center m-auto bg-black-light border-2 border-black-light-2 rounded-xl text-white-darker-1 font-main"
       }
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <header>
-        <h2 className={"sm:text-4xl text-3xl text-center font-bold"}>
+        <h2 className={"sm:text-4xl text-3xl text-center font-title font-bold"}>
           {good.name}
         </h2>
-        <h3 className={"text-xl text-center font-bold"}>{good.priceCNY}¥</h3>
+        <h3 className={"text-xl text-center mt-2 mb-2"}>{good.priceCNY}¥</h3>
       </header>
       <main className={"max-w-screen-sm flex flex-col items-center gap-3"}>
         <img
@@ -47,7 +47,7 @@ export const GoodPopup = () => {
         <div>
           <svg
             width="100%"
-            height="2"
+            height="4"
             viewBox="0 0 608 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -58,11 +58,13 @@ export const GoodPopup = () => {
               y1="1.08496"
               x2="607.519"
               y2="1.08496"
-              stroke="#D5D5D5"
+              stroke="#fff"
             />
           </svg>
           <ul
-            className={"flex justify-center gap-3 text-xl sm:tex-2xl font-bold"}
+            className={
+              "flex justify-center gap-3 text-xl sm:text-2xl font-bold"
+            }
           >
             {Object.entries(good.stats).map(([key, value]) => {
               return (

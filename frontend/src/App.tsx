@@ -45,7 +45,7 @@ const App: React.FC = () => {
                   src={"illustrations/error-404.png "}
                   className={"w-1/2 "}
                 />
-                <p className={"text-3xl font-anonymous text-white-darker-2"}>
+                <p className={"text-3xl font-rubik text-white-darker-2"}>
                   Not Found Page
                 </p>
               </div>

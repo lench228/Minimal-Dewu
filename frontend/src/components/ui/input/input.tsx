@@ -31,7 +31,7 @@ const Input: React.FC<iInput> = ({
   return (
     <section
       className={clsx(
-        "flex gap-1 flex-col font-anonymous w-full",
+        "flex gap-1 flex-col font-roboto w-full",
         disabled ? "opacity-50" : "",
       )}
     >

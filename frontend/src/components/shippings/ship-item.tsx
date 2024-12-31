@@ -17,7 +17,7 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
   return (
     <li
       className={
-        "border-[1px]  border-black-light-2 rounded-xl w-full px-4 sm:px-12 py-8"
+        "border-[1px]  border-black-light-2 rounded-xl w-full px-4 sm:px-12 py-8 font-main"
       }
     >
       <header className={"text-2xl flex justify-between"}>

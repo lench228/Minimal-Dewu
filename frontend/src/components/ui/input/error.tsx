@@ -10,7 +10,7 @@ const ErrorMessage: React.FC<iError> = ({ text, isFixed }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsVisible(true), 0); // Задержка перед началом анимации
+    const timeout = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timeout);
   }, []);
 

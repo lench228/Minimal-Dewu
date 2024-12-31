@@ -30,7 +30,7 @@ const Cart = () => {
   return (
     <section
       className={clsx(
-        "overflow-y-scroll h-full flex items-center flex-col-reverse sm:w-full  sm:mt-0 sm:flex-row sm:items-center sm:justify-center gap-8 sm:p-10",
+        "overflow-y-scroll h-full flex items-center flex-col-reverse sm:w-full  sm:mt-0 sm:flex-row sm:items-center sm:justify-center gap-8 sm:p-10 ",
       )}
     >
       {isReadyToOrder ? (
@@ -43,19 +43,19 @@ const Cart = () => {
       {(!isReadyToOrder || window.screen.width > 680) && (
         <form
           className={
-            "w-5/6 flex items-center flex-col min-h-800 min-h-[500px] max-h-[600px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-2/5 text-white-darker-1 sm:px-10 py-2 justify-center bg-black-light"
+            "w-5/6 flex items-center flex-col min-h-800 min-h-[500px] max-h-[900px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-3/5 text-white-darker-1 sm:px-10 py-6 justify-center bg-black-light"
           }
         >
           <h2
             className={
-              "sm:text-4xl text-2xl font-anonymous font-bold text-center mb-6"
+              "sm:text-4xl text-2xl font-title font-bold text-center mb-6"
             }
           >
             Корзина
           </h2>
           {goods.length ? (
-            <main className={"overflow-y-scroll"}>
-              <ul className="">
+            <main className={"overflow-y-scroll w-full"}>
+              <ul className="w-full">
                 {goods.map((good) => (
                   <CartItem key={good.id} good={good} />
                 ))}
@@ -81,7 +81,7 @@ const Cart = () => {
                       <p>Заказать</p>
                     </Button>
                     <a
-                      className={"font-anonymous underline font-normal italic"}
+                      className={"font-main underline font-normal italic"}
                       onClick={() => setIsReadyToOrder(false)}
                     >
                       добавить товары
@@ -92,10 +92,11 @@ const Cart = () => {
             </main>
           ) : (
             <main className={"flex items-center flex-col justify-center"}>
-              <img src={"illustrations/empty-cart.png"} className={""} />
-              <h2 className={"text-2xl font-anonymous mb-12"}>
-                Корзина пуста =(
-              </h2>
+              <img
+                src={"illustrations/empty-cart.png"}
+                className={"h-1/2 w-1/2"}
+              />
+              <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>
             </main>
           )}
         </form>

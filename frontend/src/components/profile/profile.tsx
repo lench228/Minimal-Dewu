@@ -16,7 +16,7 @@ export const Profile = (props: any) => {
   return (
     <div
       className={
-        "font-anonymous overflow-y-scroll text-white-darker-1 m-2  h-5/6 flex items-center justify-center sm:m-auto"
+        "font-main overflow-y-scroll text-white-darker-1 m-2  h-5/6 flex items-center justify-center sm:m-auto"
       }
     >
       {/*<section*/}

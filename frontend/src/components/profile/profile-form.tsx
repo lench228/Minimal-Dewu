@@ -22,7 +22,7 @@ const FormContainer: React.FC<FormProps> = ({
     >
       <header className={"flex justify-start w-full gap-4 px-2 items-center "}>
         <div className={""}>
-          <h2 className={"text-2xl text-white"}>{title}</h2>
+          <h2 className={"text-2xl text-white font-title"}>{title}</h2>
           <p
             className={
               "text-sm text-white-darker-2 border-b-[1px] border-black-light-2"

@@ -3,7 +3,7 @@ import { iGood } from "./definitions";
 export const Goods: iGood[] = [
   {
     id: 0,
-    name: "cap",
+    name: "cap very cool cap",
     stats: {
       color: "orange",
     },
@@ -13,7 +13,7 @@ export const Goods: iGood[] = [
   },
   {
     id: 1,
-    name: "humster",
+    name: "humster click click 2 text",
     stats: {
       color: "orange",
     },
@@ -23,7 +23,7 @@ export const Goods: iGood[] = [
   },
   {
     id: 2,
-    name: "adidas штанцы",
+    name: "adidas штанцы luch asodwe",
     stats: {
       size: "US 12",
       color: "orange",

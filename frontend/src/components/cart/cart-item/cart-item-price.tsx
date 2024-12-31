@@ -25,7 +25,11 @@ const CartItemPrice: React.FC<CartItemProps> = ({ id, priceRU, priceCNY }) => {
   const counter = useSelector(selectCounterById(id));
 
   return (
-    <footer className={"flex items-center gap-1 justify-center mt-2"}>
+    <footer
+      className={
+        "flex items-center gap-1 justify-center mt-2 font-main text-xl self-center"
+      }
+    >
       {counter && priceCNY * counter.count}¥{arrow}
       {counter && priceRU * counter.count}₽
     </footer>
