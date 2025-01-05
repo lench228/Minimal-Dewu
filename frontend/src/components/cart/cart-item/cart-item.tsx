@@ -1,17 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { iGood } from "../../../lib/definitions";
-import Counter from "../../counter/counter";
-import DeleteButton from "../../../assets/icons/deleteButton";
-import counter from "../../counter/counter";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  add,
-  addCounter,
-  selectCounterById,
-  selectCounters,
-} from "../../counter/counter.slice";
-import { removeAllGood } from "../cart-slice";
-import CartTotal from "../cart-total";
+
 import CartItemControls from "./cart-item-controls";
 import CartItemPrice from "./cart-item-price";
 

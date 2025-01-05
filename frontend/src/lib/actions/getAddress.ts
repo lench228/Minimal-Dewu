@@ -1,6 +1,4 @@
-import { getRandomArrayElement } from "../../utils/utils";
-import { Goods } from "../goods";
-import { iAddress, iGood, iUser } from "../definitions";
+import { iAddress } from "../definitions";
 
 const getAddress = (url: string) => {
   return {

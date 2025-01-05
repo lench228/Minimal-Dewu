@@ -1,15 +1,9 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import ShipNav from "./ship-nav/ship-nav";
 import { getShipping } from "../../lib/actions/getShipping";
-import {
-  selectActive,
-  selectCurrent,
-  selectShippingByActiveType,
-  setShipping,
-} from "./ship.slice";
+import { selectShippingByActiveType, setShipping } from "./ship.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCounters } from "../counter/counter.slice";
-import { useSearchParams } from "react-router-dom";
+
 import ShipItem from "./ship-item";
 
 export const TypesTexts = {
@@ -20,7 +14,6 @@ export const TypesTexts = {
 
 const Ship = () => {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const items = useSelector(selectShippingByActiveType);
 
@@ -34,9 +27,9 @@ const Ship = () => {
       } finally {
       }
     };
-    setSearchParams({ active: "current" });
+
     fetchShipping();
-  }, []);
+  });
 
   return (
     <section className="h-full flex-col-reverse sm:flex-col  flex overflow-y-scroll sm:overflow-y-hidden  w-full  mx-auto justify-end   items-start sm:justify-start border-[1px] border-black-light-2 sm:mx-16 sm:my-16  pb-10 bg-black-light text-white font-roboto rounded-xl">

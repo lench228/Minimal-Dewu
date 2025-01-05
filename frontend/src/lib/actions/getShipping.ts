@@ -1,6 +1,5 @@
-import { getRandomArrayElement } from "../../utils/utils";
 import { Goods } from "../goods";
-import { iGood, iShipping, iShippingApi } from "../definitions";
+import { iShippingApi } from "../definitions";
 
 const shippings: iShippingApi = {
   current: [
