@@ -31,10 +31,12 @@ export const GoodPopup = () => {
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <header>
-        <h2 className={"sm:text-4xl text-3xl text-center font-title font-bold"}>
+        <h2 className={"sm:text-4xl text-xl text-center font-title font-bold"}>
           {good.name}
         </h2>
-        <h3 className={"text-xl text-center mt-2 mb-2"}>{good.priceCNY}¥</h3>
+        <h3 className={"sm:text-xl text-lg text-center mt-2 mb-2"}>
+          {good.priceCNY}¥
+        </h3>
       </header>
       <main className={"max-w-screen-sm flex flex-col items-center gap-3"}>
         <img
