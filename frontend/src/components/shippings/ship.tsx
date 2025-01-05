@@ -28,7 +28,9 @@ const Ship = () => {
       }
     };
 
-    fetchShipping();
+    fetchShipping().then((r) => {
+      console.log(r);
+    });
   });
 
   return (

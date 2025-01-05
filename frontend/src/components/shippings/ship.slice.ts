@@ -38,18 +38,9 @@ export const selectCurrent = (state: { shipping: ShippingState }) =>
   state.shipping.current;
 export const selectCanceled = (state: { shipping: ShippingState }) =>
   state.shipping.canceled;
-export const selectActive = (state: { shipping: ShippingState }) =>
-  state.shipping.active;
 
 export const selectShippingByActiveType = (state: {
   shipping: ShippingState;
 }) => state.shipping[state.shipping.active];
-export const selectAllShipping = (state: { shipping: ShippingState }) => ({
-  current: state.shipping.current,
-  ended: state.shipping.ended,
-  canceled: state.shipping.canceled,
-});
 
 export const { setShipping, setActive } = ShippingSlice.actions;
-
-export default ShippingSlice.reducer;

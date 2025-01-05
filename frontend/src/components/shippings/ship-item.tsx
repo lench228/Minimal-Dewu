@@ -1,11 +1,12 @@
 import React from "react";
-import { iGood, iShipping } from "../../lib/definitions";
+import { iShipping } from "../../lib/definitions";
 import dayjs from "dayjs";
 import Angle from "../../assets/icons/angle";
-import Cart from "../cart/cart";
+
 import ShipGood from "./ship-good";
 import ShipFooter from "./ship-footer";
-export interface iShipItem extends iShipping {}
+
+export type iShipItem = iShipping;
 
 const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
   const handleArrowClick = () => {

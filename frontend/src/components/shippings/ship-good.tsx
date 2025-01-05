@@ -1,6 +1,5 @@
 import React from "react";
-import CartItemPrice from "../cart/cart-item/cart-item-price";
-import CartItemControls from "../cart/cart-item/cart-item-controls";
+
 import { iGood } from "../../lib/definitions";
 
 interface ShipGoodProps {
