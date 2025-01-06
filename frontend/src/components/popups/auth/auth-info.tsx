@@ -18,8 +18,6 @@ const AuthInfoItem = ({ ...props }: iAuthInfoItem) => {
   );
 };
 
-type iAuthInfo = {};
-
 const items = [
   {
     text: "Lorem ipsum aslsaos sdjmvkmxcv odskofkdmvmkmv !!!!",
@@ -32,12 +30,12 @@ const items = [
   },
 ];
 
-export const AuthInfo = (props: any) => {
+export const AuthInfo = () => {
   return (
     <div className={`text-white-darker-1 w-full h-1/2`}>
       <h1 className={`font-anonymous text-2xl mb-5`}>Плюшки регистрации</h1>
       <ul className={`flex flex-col  gap-4`}>
-        {items.map((item, i) => {
+        {items.map((item) => {
           return (
             <li key={item.text}>
               <AuthInfoItem {...item}>

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { iAddress, iUser } from "../../lib/definitions";
-import { add } from "../counter/counter.slice";
 
 interface AuthState {
   isAuthenticated: boolean;

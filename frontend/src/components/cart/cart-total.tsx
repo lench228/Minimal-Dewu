@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectCount, selectTotal } from "./cart-slice";
-import { selectCounterById } from "../counter/counter.slice";
 
 const CartTotal = () => {
   const count = useSelector(selectCount);

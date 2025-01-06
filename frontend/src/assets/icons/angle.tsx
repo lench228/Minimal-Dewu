@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, useState } from "react";
+import React from "react";
 
 interface AngleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;

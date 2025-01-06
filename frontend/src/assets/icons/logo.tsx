@@ -1,6 +1,5 @@
 import { iSvg } from "../../utils/definitions-svg";
-import { isAction } from "@reduxjs/toolkit";
-
+import React from "react";
 const Logo = (props: iSvg) => {
   return (
     <svg

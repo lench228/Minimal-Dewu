@@ -1,4 +1,4 @@
-import { iAddress, iOrder, iShipping, iUser } from "./definitions";
+import { iOrder, iUser } from "./definitions";
 
 export const user: iUser = {
   id: "test1",

@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
 import HomePage from "./components/home/home";
 import Cart from "./components/cart/cart";
 import { AuthPopup } from "./components/popups/auth/auth-popup";
-import React, { useEffect } from "react";
+import React from "react";
 import { Profile } from "./components/profile/profile";
 import { Popup } from "./components/popups/popup";
 import Ship from "./components/shippings/ship";
@@ -44,6 +44,7 @@ const App: React.FC = () => {
                 <img
                   src={"illustrations/error-404.png "}
                   className={"w-1/2 "}
+                  alt={"404 ошибка"}
                 />
                 <p className={"text-3xl font-anonymous text-white-darker-2"}>
                   Not Found Page

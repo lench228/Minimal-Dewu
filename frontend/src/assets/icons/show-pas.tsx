@@ -7,7 +7,6 @@ type Props = {
 };
 export const ShowPas = ({ ...props }: Props) => {
   const handleClick = () => {
-    console.log(props.active);
     props.setActive(!props.active);
   };
   return (

@@ -1,20 +1,19 @@
 // @flow
 import * as React from "react";
-import { Switch } from "../../ui/switch";
+
 import Input from "../../ui/input/input";
 import { Email } from "../../../assets/icons/email";
 import { ShowPas } from "../../../assets/icons/show-pas";
 import { Pas } from "../../../assets/icons/pas";
 import { Button } from "../../ui/button";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAddress, setAuth, setUser } from "../../layout/auth.slice";
 import { setActivePopup } from "../../home/home-slice";
 import { authUser } from "../../../lib/actions/auth";
 import { addressFetch } from "../../../lib/actions/getAddress";
 
-type Props = {};
-export const AuthForm = (props: any) => {
+export const AuthForm = () => {
   const [email, setEmail] = React.useState("");
   const [isHidePas, setHidePas] = React.useState(true);
   const [searchParams, setSearchParams] = useSearchParams();

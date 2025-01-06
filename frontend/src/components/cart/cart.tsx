@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
@@ -7,12 +7,12 @@ import CartTotal from "./cart-total";
 import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import OrderForm from "../order/order-form";
-import { Link } from "react-router-dom";
+
 import clsx from "clsx";
 
 const Cart = () => {
   const [isReadyToOrder, setIsReadyToOrder] = useState(false);
-  const dispatch = useDispatch();
+
   const goods = useSelector(selectGoods);
 
   const orderFormRef = useRef<HTMLFormElement | null>(null);
@@ -92,10 +92,19 @@ const Cart = () => {
             </main>
           ) : (
             <main className={"flex items-center flex-col justify-center"}>
+<<<<<<< Updated upstream
               <img src={"illustrations/empty-cart.png"} className={""} />
               <h2 className={"text-2xl font-anonymous mb-12"}>
                 Корзина пуста =(
               </h2>
+=======
+              <img
+                src={"illustrations/empty-cart.png"}
+                className={"h-1/2 w-1/2"}
+                alt={"Грустный осьминог"}
+              />
+              <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>
+>>>>>>> Stashed changes
             </main>
           )}
         </form>

@@ -1,9 +1,9 @@
 import React from "react";
-interface iDeleteButton extends React.HTMLAttributes<HTMLButtonElement> {}
+type iDeleteButton = React.HTMLAttributes<HTMLButtonElement>;
 
-const DeleteButton: React.FC<iDeleteButton> = ({ onClick }) => {
+const DeleteButton: React.FC<iDeleteButton> = ({ ...props }) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={props.onClick}>
       <svg
         width="24"
         height="24"

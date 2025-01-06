@@ -1,9 +1,10 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Cart from "../../assets/icons/cart";
 import Logo from "../../assets/icons/logo";
 import Order from "../../assets/icons/order";
 import User from "../../assets/icons/user";
 import NavIco from "./nav-ico";
+import React from "react";
 
 const NavBar = () => {
   const location = useLocation();

@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import React from "react";
 import clsx from "clsx";
 
 interface iNavIco {

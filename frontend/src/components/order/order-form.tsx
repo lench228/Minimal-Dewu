@@ -1,12 +1,11 @@
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
 import { findErrors, selectErrors } from "./order-errors.slice";
 import { Button } from "../ui/button";
 import clsx from "clsx";
-interface iOrderForm {}
 
-const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
+const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
   const errors = useSelector(selectErrors);
   const dispatch = useDispatch();
 
@@ -144,5 +143,7 @@ const OrderForm = forwardRef<HTMLFormElement, iOrderForm>(({}, ref) => {
     </form>
   );
 });
+
+OrderForm.displayName = "OrderForm";
 
 export default OrderForm;

@@ -4,7 +4,6 @@ import {
   selectError,
   selectIsLoading,
   selectUrl,
-  setActivePopup,
   setGood,
   setLoading,
 } from "./home-slice";
@@ -12,7 +11,7 @@ import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
 import AddGood from "../popups/good-popup/add-good";
 import { getGood } from "../../lib/actions/getGood";
-import React, { FormEvent, useRef, useState } from "react";
+import React, { FormEvent, useRef } from "react";
 import Loading from "../../assets/icons/loading";
 import clsx from "clsx";
 import { Button } from "../ui/button";

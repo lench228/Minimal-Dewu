@@ -1,8 +1,7 @@
 // @flow
 import * as React from "react";
 
-type Props = {};
-export const Pas = (props: any) => {
+export const Pas = () => {
   return (
     <svg
       width="24"

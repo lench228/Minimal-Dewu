@@ -6,7 +6,7 @@ import {
   resetErrors,
   selectErrors,
 } from "../order/order-errors.slice";
-import { addressFetch } from "../../lib/actions/getAddress";
+
 import { selectUser } from "../layout/auth.slice";
 import { Button } from "../ui/button";
 

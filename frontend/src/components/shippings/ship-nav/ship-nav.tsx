@@ -9,9 +9,7 @@ import {
 } from "../ship.slice";
 import { useSelector } from "react-redux";
 
-interface iShipNav {}
-
-const ShipNav: React.FC<iShipNav> = () => {
+const ShipNav: React.FC = () => {
   return (
     <div
       className={
