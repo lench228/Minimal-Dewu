@@ -8,6 +8,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Services.Extensions;
 
+var exitCode = Microsoft.Playwright.Program.Main(["install", "--with-deps", "chromium"]);
+if (exitCode != 0)
+{
+    Console.WriteLine("Failed to install browsers");
+    Environment.Exit(exitCode);
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -80,5 +87,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToController("GetReactApp", "ReactIntegration");
 
 app.Run();

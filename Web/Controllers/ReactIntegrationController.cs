@@ -2,7 +2,7 @@
 
 namespace Web.Controllers;
 
-[Route("")]
+[ApiExplorerSettings(IgnoreApi = true)]
 public class ReactIntegrationController : Controller
 {
     public async Task<IActionResult> GetReactApp()

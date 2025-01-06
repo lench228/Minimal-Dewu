@@ -1,0 +1,33 @@
+﻿services:
+  web:
+    image: minimal-dewu:latest
+    container_name: minimal-dewu-web
+    restart: unless-stopped
+    environment:
+      JWT_SECRET_KEY: a3f5b9c68d2e4f17a6b8c9d1e2f3a4b5c6d7e8f9a1b2c3d4e5f6a7b8c9d0e1f2
+      JWT_REFRESH_LIFETIME_HOURS: 24
+      JWT_ACCESS_LIFETIME_SECONDS: 300
+      ConnectionStrings__DefaultConnection: Server=db;Port=5432;Database=dewudb;UserId=pguser;Password=password;Pooling=true;Timeout=300;CommandTimeout=300;
+      APPLY_MIGRATIONS: true
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - aspnet_data:/root/.aspnet/DataProtection-Keys
+    
+  db:
+    image: postgres:16-bookworm
+    container_name: minimal-dewu-db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: pguser
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
+  aspnet_data:

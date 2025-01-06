@@ -1,0 +1,12 @@
+﻿.idea
+Minimal-Dewu.sln.DotSettings.user
+.git
+.gitignore
+**/bin
+**/obj
+README.md.md
+**/node_modules
+/frontend
+.log
+.env
+**/dist
