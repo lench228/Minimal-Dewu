@@ -32,9 +32,10 @@ internal class DewuService(
             productModel = await TryGetProductModel(playwrightUtils, url);
             if (productModel?.Code != 200)
             {
-                gv.MainHostCaptchaBlocked = true;
-                await db.SaveChangesAsync();
-                await channel.Writer.WriteAsync(new CaptchaRequest(url));
+                // TODO: temp
+                // gv.MainHostCaptchaBlocked = true;
+                // await db.SaveChangesAsync();
+                // await channel.Writer.WriteAsync(new CaptchaRequest(url));
             }
         }
         
@@ -50,8 +51,9 @@ internal class DewuService(
                 productModel = await TryGetProductModel(playwrightUtils, url, proxy);
                 if (productModel?.Code == 200)
                     break;
-                await proxyUtils.DisableProxy(proxy);
-                await channel.Writer.WriteAsync(new CaptchaRequest(url, proxy));
+                // TODO: temp
+                // await proxyUtils.DisableProxy(proxy);
+                // await channel.Writer.WriteAsync(new CaptchaRequest(url, proxy));
             }
         }
 
