@@ -1,26 +1,30 @@
 // @flow
 import * as React from "react";
-import { Switch } from "../../ui/switch";
+
 import Input from "../../ui/input/input";
 import { Email } from "../../../assets/icons/email";
 import { ShowPas } from "../../../assets/icons/show-pas";
 import { Pas } from "../../../assets/icons/pas";
 import { Button } from "../../ui/button";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setAddress, setAuth, setUser } from "../../layout/auth.slice";
-import { setActivePopup } from "../../home/home-slice";
-import { authUser } from "../../../lib/actions/auth";
-import { addressFetch } from "../../../lib/actions/getAddress";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-type Props = {};
-export const AuthForm = (props: any) => {
+import { loginUserThunk, registerUserThunk } from "./model/authActions";
+import { AppDispatch } from "../../../services/store";
+import { selectIsLoading } from "./model/auth.slice";
+import Loading from "../../../assets/icons/loading";
+
+export const AuthForm = () => {
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [isHidePas, setHidePas] = React.useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const nav = useNavigate();
+
+  const loading = useSelector(selectIsLoading);
 
   function handleClick() {
     const newParams = new URLSearchParams(searchParams);
@@ -34,13 +38,11 @@ export const AuthForm = (props: any) => {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      dispatch(setAuth(true));
-      dispatch(setActivePopup(""));
-      const user = await authUser("");
-      dispatch(setUser(user));
-      const address = await addressFetch("");
-      dispatch(setAddress(address));
-      nav("/profile");
+      if (searchParams.get("open") === "login") {
+        dispatch(loginUserThunk({ email, password }));
+      } else {
+        dispatch(registerUserThunk({ email, password }));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -52,9 +54,10 @@ export const AuthForm = (props: any) => {
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <h1 className={`text-3xl text-white-darker-1 font-title`}>
-        Добро пожаловать
+        {searchParams.get("open") === "login"
+          ? "Добро пожаловать"
+          : "Регистрация"}
       </h1>
-      {/*<Switch>  ???  </Switch>*/}
       <div className={"flex flex-col gap-4"}>
         <Input
           startIcon={<Email />}
@@ -70,15 +73,20 @@ export const AuthForm = (props: any) => {
           endIcon={<ShowPas active={isHidePas} setActive={setHidePas} />}
           error={""}
           width={600}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           type={isHidePas ? "password" : "text"}
           placeholder={"Введите надежный пароль"}
-          name={"Email"}
+          name={"password"}
         />
       </div>
       <div className={"flex flex-col gap-4 w-5/6 items-center"}>
-        <Button type="submit">
-          {searchParams.get("open") === "login" ? "Войти" : "Регистрация"}
-        </Button>
+        {loading ? (
+          <Loading></Loading>
+        ) : (
+          <Button type="submit">отправить</Button>
+        )}
+
         <p
           onClick={() => {
             handleClick();

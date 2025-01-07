@@ -6,9 +6,9 @@ import {
   resetErrors,
   selectErrors,
 } from "../order/order-errors.slice";
-import { addressFetch } from "../../lib/actions/getAddress";
-import { selectUser } from "../layout/auth.slice";
+
 import { Button } from "../ui/button";
+import { selectUser } from "../popups/auth/model/auth.slice";
 
 interface Props {
   disabledEdit: boolean;

@@ -1,17 +1,13 @@
 // @flow
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../layout/auth.slice";
+
 import FormContainer from "./profile-form";
 import ProfileUserForm from "./profile-user-form";
 import ProfileShipForm from "./profile-ship-form";
 
-type Props = {};
-export const Profile = (props: any) => {
+export const Profile = () => {
   const [disabledShip, setDisabledShip] = React.useState(true);
   const [disabledUser, setDisabledUser] = React.useState(true);
-
-  const user = useSelector(selectUser);
 
   return (
     <div

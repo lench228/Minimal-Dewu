@@ -6,10 +6,10 @@ import {
   resetErrors,
   selectErrors,
 } from "../order/order-errors.slice";
-import { addressFetch } from "../../lib/actions/getAddress";
-import { selectAddress } from "../layout/auth.slice";
+
 import Error from "../ui/input/error";
 import { Button } from "../ui/button";
+import { selectAddress } from "../popups/auth/model/auth.slice";
 interface Props {
   disabledEdit: boolean;
 }

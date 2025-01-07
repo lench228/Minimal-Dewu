@@ -54,7 +54,7 @@ const App: React.FC = () => {
           <Route
             path="/login"
             element={
-              <Popup>
+              <Popup isReset={true}>
                 <AuthPopup />
               </Popup>
             }
