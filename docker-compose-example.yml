@@ -1,6 +1,6 @@
 ﻿services:
   web:
-    image: minimal-dewu:latest
+    image: envelope8years/minimal-dewu:latest
     container_name: minimal-dewu-web
     restart: unless-stopped
     environment:
@@ -27,6 +27,14 @@
       POSTGRES_USER: pguser
     volumes:
       - pg_data:/var/lib/postgresql/data
+  
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+    
 
 volumes:
   pg_data:
