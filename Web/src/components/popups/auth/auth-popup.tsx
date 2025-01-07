@@ -2,10 +2,20 @@
 import * as React from "react";
 import { AuthInfo } from "./auth-info";
 import { AuthForm } from "./auth-form";
-import { useNavigate, useNavigation, useSearchParams } from "react-router-dom";
-import { Dispatch, SetStateAction } from "react";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const AuthPopup: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set(
+      "open",
+      searchParams.get("open") === "login" ? "register" : "login",
+    );
+    setSearchParams(newParams);
+  }, []);
   return (
     <section
       className={

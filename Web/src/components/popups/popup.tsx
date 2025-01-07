@@ -1,20 +1,20 @@
 // @flow
 import * as React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setActivePopup } from "../home/home-slice";
+import { useNavigate } from "react-router-dom";
 
-type Props = {};
 export const Popup: React.FC<{
   children: React.ReactNode;
+  isReset?: boolean;
 }> = ({ ...props }) => {
-  const dispatch = useDispatch();
-
   const nav = useNavigate();
 
   const handleClickOutside = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (e.target === e.currentTarget) {
-      nav(-1);
+      if (props.isReset) {
+        nav("/");
+      } else {
+        nav(-1);
+      }
     }
   };
   return (

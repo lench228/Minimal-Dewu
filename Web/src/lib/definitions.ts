@@ -1,5 +1,3 @@
-import { ShippingTypes } from "../components/shippings/ship.slice";
-
 export interface iGood {
   id: number;
   name: string;

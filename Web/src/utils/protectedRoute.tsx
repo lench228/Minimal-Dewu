@@ -2,8 +2,9 @@ import { Navigate } from "react-router";
 import React from "react";
 
 import { useLocation } from "react-router-dom";
-import { selectAuth } from "../components/layout/auth.slice";
+
 import { useSelector } from "react-redux";
+import { selectAuth } from "../components/popups/auth/model/auth.slice";
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
