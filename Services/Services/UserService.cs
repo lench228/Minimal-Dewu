@@ -36,7 +36,7 @@ internal class UserService(UserManager<User> userManager,
         };
         var res = await userManager.CreateAsync(newUser, request.Password);
         if (!res.Succeeded)
-            return ApiResponseFactory.Json<Guid>(o => o.Error(500, string.Join('\n', res.Errors)));
+            return ApiResponseFactory.Json<Guid>(o => o.Error(400, string.Join('\n', res.Errors.Select(e => e.Description))));
         return ApiResponseFactory.Json<Guid>(o => o
             .Success()
             .Model(newUser.Id));
