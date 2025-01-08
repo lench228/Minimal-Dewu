@@ -88,6 +88,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors(o => o
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
+
 app.MapFallbackToController("GetReactApp", "ReactIntegration");
 
 app.Run();
