@@ -91,8 +91,7 @@ app.MapControllers();
 app.UseCors(o => o
     .AllowAnyOrigin()
     .AllowAnyMethod()
-    .AllowAnyHeader()
-    .AllowCredentials());
+    .AllowAnyHeader());
 
 app.MapFallbackToController("GetReactApp", "ReactIntegration");
 
