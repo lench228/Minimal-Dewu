@@ -1,4 +1,4 @@
-﻿namespace Services.Helpers.ResponseBuilder;
+﻿namespace Services.Helpers.ApiResponseBuilder;
 
 public interface IApiResponseBuilder<out TBuilder, out T> : IBuilder<T> where TBuilder: IBuilder<T>
 {

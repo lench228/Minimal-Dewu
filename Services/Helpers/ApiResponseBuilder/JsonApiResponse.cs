@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Models.Shared;
 
-namespace Services.Helpers.ResponseBuilder;
+namespace Services.Helpers.ApiResponseBuilder;
 
 public class JsonApiResponse<TModel> : IApiResponse
 {

@@ -1,4 +1,4 @@
-﻿namespace Services.Helpers.ResponseBuilder;
+﻿namespace Services.Helpers.ApiResponseBuilder;
 
 internal class JsonApiResponseModelBuilder<TModel> : IJsonApiResponseModelBuilder<TModel>
 {
