@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
 using Services.Helpers.ApiResponseBuilder;
 using Services.Models.Account;
+using Services.Models.Shared;
 
 namespace Web.Controllers;
 
@@ -12,12 +13,12 @@ namespace Web.Controllers;
 public class AccountController(IAccountService accountService) : ControllerBase
 {
     [HttpPatch]
-    [ProducesResponseType<JsonApiResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<JsonResponseDto>(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateUserAccountData([FromBody] UpdateAccountDataRequestDto request) =>
         (await accountService.UpdateUserAccountDataAsync(request)).ToActionResult();
     
     [HttpGet]
-    [ProducesResponseType<JsonApiResponse<AccountDataResponseDto>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<JsonResponseDto<AccountDataResponseDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetUserAccountData() =>
         (await accountService.GetUserAccountDataAsync()).ToActionResult();
 }

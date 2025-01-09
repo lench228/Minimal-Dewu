@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
+using Services.Models.Products;
+using Services.Models.Shared;
 
 namespace Web.Controllers;
 
@@ -11,6 +13,7 @@ namespace Web.Controllers;
 public class DewuController(IDewuService dewuService) : ControllerBase
 {
     [HttpGet]
+    [ProducesResponseType<JsonResponseDto<ProductResponseDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProductInfo([FromQuery, Url] string productUrl)
     {
         var response = await dewuService.GetProductInfoByUrlAsync(productUrl);
