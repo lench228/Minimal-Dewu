@@ -5,7 +5,6 @@ using System.Text;
 using Domain.Entities;
 using Infrastructure.EfCore;
 using Infrastructure.Extensions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstractions;
-using Services.Extensions;
 using Services.Helpers.ApiResponseBuilder;
 using Services.Models.Auth;
 
@@ -24,7 +22,7 @@ internal class UserService(UserManager<User> userManager,
     IConfiguration config,
     IHttpContextAccessor httpContextAccessor) : IUserService
 {
-    public async Task<JsonApiResponse<Guid?>> CreateUser(CreateUserRequestDto request)
+    public async Task<JsonApiResponse<Guid?>> CreateUserAsync(CreateUserRequestDto request)
     {
         var existingUser = await userManager.FindByEmailAsync(request.Email);
         if (existingUser is not null)
@@ -42,7 +40,7 @@ internal class UserService(UserManager<User> userManager,
             .Model(newUser.Id));
     }
 
-    public async Task<JsonApiResponse<LogInResponseDto>> LogInUser(LogInRequestDto request)
+    public async Task<JsonApiResponse<LogInResponseDto>> LogInUserAsync(LogInRequestDto request)
     {
         var user = await userManager.FindByEmailAsync(request.Email);
         if (user is null)
@@ -67,13 +65,19 @@ internal class UserService(UserManager<User> userManager,
             .Model(responseModel));
     }
 
-    public async Task<JsonApiResponse<RefreshResponseDto>> RefreshUserToken(RefreshRequestDto request)
+    public async Task<JsonApiResponse<RefreshResponseDto>> RefreshUserTokenAsync(RefreshRequestDto request)
     {
         var unauthorizedResponse = ApiResponseFactory.Json<RefreshResponseDto>(o => o.Error(401));
         
         var context = httpContextAccessor.HttpContext;
-        var token = context?.Request.Headers.Authorization.ToString()[JwtBearerDefaults.AuthenticationScheme.Length..].Trim();
-        if (string.IsNullOrWhiteSpace(token))
+        var authHeader = context?.Request.Headers.Authorization.ToString();
+        if (string.IsNullOrWhiteSpace(authHeader))
+            return unauthorizedResponse;
+        if (!authHeader.Contains(JwtBearerDefaults.AuthenticationScheme))
+            return unauthorizedResponse;
+        var token = authHeader[JwtBearerDefaults.AuthenticationScheme.Length..].Trim();
+        var handler = new JwtSecurityTokenHandler();
+        if (!handler.CanReadToken(token))
             return unauthorizedResponse;
         var principal = GetPrincipalFromExpiredToken(token);
         var id = principal.FindFirstValue(ClaimTypes.NameIdentifier);
