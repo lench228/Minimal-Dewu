@@ -83,18 +83,15 @@ app.UseSwaggerUI();
 
 app.UseStaticFiles();
 
-app.MapControllers();
-
 app.UseCors(o => o
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
 
+app.MapControllers();
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-
-
 
 app.MapFallbackToController("GetReactApp", "ReactIntegration");
 

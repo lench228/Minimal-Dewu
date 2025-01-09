@@ -11,7 +11,7 @@ namespace Services.Services.Internal;
 
 internal class PlaywrightUtils : IPlaywrightUtils
 {
-    private const string DetailsRequestUrl = "**/detailV3";
+    private const string DetailsRequestEnding = "product/detailV3";
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
@@ -39,7 +39,7 @@ internal class PlaywrightUtils : IPlaywrightUtils
     {
         await using var browser = await _playwright.Chromium.LaunchAsync(new ()
         {
-            Headless = true
+            Headless = false
         });
         
         var p = proxy is not null
@@ -148,8 +148,9 @@ internal class PlaywrightUtils : IPlaywrightUtils
         IResponse? detailsResponse;
         try
         {
-            detailsResponse = await page.WaitForNetworkResponseAsync(DetailsRequestUrl, pageAction,
-                o => o.Timeout = 30000);
+            detailsResponse = await page.WaitForNetworkResponseAsync(r => r.Url.EndsWith(DetailsRequestEnding) && r.Method == "POST", 
+                pageAction,
+                o => o.Timeout = 40000);
         }
         catch (TimeoutException)
         {

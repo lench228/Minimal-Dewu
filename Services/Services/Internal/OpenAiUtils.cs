@@ -8,7 +8,6 @@ using OpenAI;
 using OpenAI.Chat;
 using Services.Abstractions.Internal;
 using Services.Exceptions;
-using Services.Extensions;
 
 namespace Services.Services.Internal;
 
