@@ -1,6 +1,6 @@
 ﻿using Services.Exceptions;
 
-namespace Services.Helpers.ResponseBuilder;
+namespace Services.Helpers.ApiResponseBuilder;
 
 internal class JsonApiResponseBuilder<TModel> : IJsonApiResponseBuilder<TModel>
 {

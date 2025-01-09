@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Services.Abstractions;
 using Services.Abstractions.Internal;
-using Services.Helpers.ResponseBuilder;
+using Services.Helpers.ApiResponseBuilder;
 using Services.Models.Captcha;
 using Services.Models.Products;
 using Services.Models.Products.Internal;

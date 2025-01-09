@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstractions;
 using Services.Extensions;
-using Services.Helpers.ResponseBuilder;
+using Services.Helpers.ApiResponseBuilder;
 using Services.Models.Auth;
 
 namespace Services.Services;
@@ -24,18 +24,20 @@ internal class UserService(UserManager<User> userManager,
     IConfiguration config,
     IHttpContextAccessor httpContextAccessor) : IUserService
 {
-    public async Task<JsonApiResponse<Guid>> CreateUser(CreateUserRequestDto request)
+    public async Task<JsonApiResponse<Guid?>> CreateUser(CreateUserRequestDto request)
     {
         var existingUser = await userManager.FindByEmailAsync(request.Email);
         if (existingUser is not null)
-            return ApiResponseFactory.Json<Guid>(o => o.Error(409, "User already exists"));
+            return ApiResponseFactory.Json<Guid?>(o => o.Error(409, "User already exists"));
         var newUser = new User
         {
             UserName = Guid.NewGuid().ToString(),
             Email = request.Email
         };
-        await userManager.CreateAsync(newUser, request.Password);
-        return ApiResponseFactory.Json<Guid>(o => o
+        var res = await userManager.CreateAsync(newUser, request.Password);
+        if (!res.Succeeded)
+            return ApiResponseFactory.Json<Guid?>(o => o.Error(400, string.Join('\n', res.Errors.Select(e => e.Description))));
+        return ApiResponseFactory.Json<Guid?>(o => o
             .Success()
             .Model(newUser.Id));
     }

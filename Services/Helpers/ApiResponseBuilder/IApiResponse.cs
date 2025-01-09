@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Services.Helpers.ResponseBuilder;
+namespace Services.Helpers.ApiResponseBuilder;
 
 public interface IApiResponse
 {
