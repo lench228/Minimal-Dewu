@@ -1,12 +1,14 @@
-import { iAddress, iOrder, iShipping, iUser } from "./definitions";
+import { iOrder, iUser } from "./definitions";
 
 export const user: iUser = {
   id: "test1",
-  fullName: "Пример Примеров Бебровский",
-  phone: "8912482123",
+  userInfo: {
+    fullName: "Пример Примеров Бебровский",
+    phone: "8912482123",
+    email: "test@test.com",
+  },
   addressId: 1,
   pas: "1",
-  email: "test@test.com",
 };
 
 export const order: iOrder = {

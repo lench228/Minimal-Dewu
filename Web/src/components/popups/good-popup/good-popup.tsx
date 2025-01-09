@@ -1,12 +1,12 @@
 // @flow
 import * as React from "react";
-import { iGood, iStats } from "../../../lib/definitions";
 import { Button } from "../../ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGood, setActivePopup } from "../../home/home-slice";
-import { addGood, selectGoods } from "../../cart/cart-slice";
+
+import { addGood } from "../../cart/cart-slice";
 import { useNavigate } from "react-router-dom";
 import { addCounter } from "../../counter/counter.slice";
+import { selectGood } from "../../home/model/home-slice";
 
 export const GoodPopup = () => {
   const nav = useNavigate();

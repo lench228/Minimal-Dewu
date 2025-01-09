@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { HomeSlice } from "../components/home/home-slice";
 import { CartSlice } from "../components/cart/cart-slice";
 import { CounterSlice } from "../components/counter/counter.slice";
 import { OrderErrorsSlice } from "../components/order/order-errors.slice";
 import { ShippingSlice } from "../components/shippings/ship.slice";
 import { AuthSlice } from "../components/popups/auth/model/auth.slice";
+import { HomeSlice } from "../components/home/model/home-slice";
 
 export const store = configureStore({
   reducer: {

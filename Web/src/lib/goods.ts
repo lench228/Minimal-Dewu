@@ -4,19 +4,22 @@ export const Goods: iGood[] = [
   {
     id: 0,
     name: "cap very cool cap",
-    stats: {
-      color: "orange",
-    },
+
     priceRU: 124,
     priceCNY: 120,
     src: "/mock-images/cap.webp",
+    stats: {
+      atr: ["Цвет Оранжевый"],
+    },
   },
   {
     id: 1,
     name: "humster click click 2 text",
+
     stats: {
-      color: "orange",
+      atr: ["Цвет Оранжевый"],
     },
+
     priceRU: 1200,
     priceCNY: 124,
     src: "/mock-images/humster.webp",
@@ -25,8 +28,7 @@ export const Goods: iGood[] = [
     id: 2,
     name: "adidas штанцы luch asodwe",
     stats: {
-      size: "US 12",
-      color: "orange",
+      atr: ["Цвет Оранжевый", "Размер 12US"],
     },
     priceRU: 124,
     priceCNY: 999,
@@ -37,8 +39,7 @@ export const Goods: iGood[] = [
     name: "new balance 1906R",
 
     stats: {
-      color: "orange",
-      size: "US 30",
+      atr: ["Цвет Оранжевый", "Размер 30US"],
     },
     priceRU: 124,
     priceCNY: 1200,

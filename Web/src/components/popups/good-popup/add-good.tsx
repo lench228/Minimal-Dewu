@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
-import { selectIsLoading } from "../../home/home-slice";
+
+import React from "react";
+import { selectIsLoading } from "../../home/model/home-slice";
 
 const AddGood = () => {
   const isLoading = useSelector(selectIsLoading);
