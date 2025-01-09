@@ -5,26 +5,42 @@ using Services.Models.Shared;
 
 namespace Services.Helpers.ApiResponseBuilder;
 
-public class JsonApiResponse<TModel> : IApiResponse
+public class JsonApiResponse : IApiResponse
 {
-    private readonly JsonSerializerOptions _jsonSerializerOptions = new()
+    protected readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
     };
     
     public int StatusCode { get; set; }
-    public TModel? Model { get; set; }
     public string? Error { get; set; }
     
-    public IActionResult ToActionResult()
+    public virtual IActionResult ToActionResult()
+    {
+        return new JsonResult(new JsonResponseDto
+        {
+            Status = StatusCode,
+            Error = Error
+        }, JsonSerializerOptions)
+        {
+            StatusCode = StatusCode
+        };
+    }
+}
+
+public class JsonApiResponse<TModel> : JsonApiResponse
+{
+    public TModel? Model { get; set; }
+    
+    public override IActionResult ToActionResult()
     {
         return new JsonResult(new JsonResponseDto<TModel>
         {
             Status = StatusCode,
             Response = Model,
             Error = Error
-        }, _jsonSerializerOptions)
+        }, JsonSerializerOptions)
         {
             StatusCode = StatusCode
         };

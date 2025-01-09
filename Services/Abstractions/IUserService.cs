@@ -5,7 +5,7 @@ namespace Services.Abstractions;
 
 public interface IUserService
 {
-    Task<JsonApiResponse<Guid?>> CreateUser(CreateUserRequestDto request);
-    Task<JsonApiResponse<LogInResponseDto>> LogInUser(LogInRequestDto request);
-    Task<JsonApiResponse<RefreshResponseDto>> RefreshUserToken(RefreshRequestDto request);
+    Task<JsonApiResponse<Guid?>> CreateUserAsync(CreateUserRequestDto request);
+    Task<JsonApiResponse<LogInResponseDto>> LogInUserAsync(LogInRequestDto request);
+    Task<JsonApiResponse<RefreshResponseDto>> RefreshUserTokenAsync(RefreshRequestDto request);
 }

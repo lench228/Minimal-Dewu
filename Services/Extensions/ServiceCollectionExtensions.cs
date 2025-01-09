@@ -23,6 +23,8 @@ public static class ServiceCollectionExtensions
         services.AddHttpContextAccessor();
         
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IAccountService, AccountService>();
+        services.AddTransient<IUserIdAccessor, UserIdAccessor>();
         return services;
     }
 }

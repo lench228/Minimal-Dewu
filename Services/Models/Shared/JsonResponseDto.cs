@@ -1,8 +1,12 @@
 ﻿namespace Services.Models.Shared;
 
-public class JsonResponseDto<TResponse>
+public class JsonResponseDto
 {
     public int Status { get; set; }
-    public TResponse? Response { get; set; }
     public string? Error { get; set; }
+}
+
+public class JsonResponseDto<TResponse> : JsonResponseDto
+{
+    public TResponse? Response { get; set; }
 }

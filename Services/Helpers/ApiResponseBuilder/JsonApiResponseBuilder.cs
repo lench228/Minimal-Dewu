@@ -2,6 +2,39 @@
 
 namespace Services.Helpers.ApiResponseBuilder;
 
+internal class JsonApiResponseBuilder : IJsonApiResponseBuilder
+{
+    private int? _statusCode;
+    private string? _error;
+    
+    public void NoContent()
+    {
+        _statusCode = 204;
+    }
+
+    public void Success()
+    {
+        _statusCode = 200;
+    }
+
+    public void Error(int statusCode, string? message = null)
+    {
+        _statusCode = statusCode;
+        _error = message;
+    }
+
+    public JsonApiResponse Build()
+    {
+        if (_statusCode is null)
+            throw new ResponseBuilderException("Cannot build response without status code");
+        return new JsonApiResponse
+        {
+            StatusCode = _statusCode.Value,
+            Error = _error
+        };
+    }
+}
+
 internal class JsonApiResponseBuilder<TModel> : IJsonApiResponseBuilder<TModel>
 {
     private int? _statusCode;
