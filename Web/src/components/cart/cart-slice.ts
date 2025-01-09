@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { iCartGood, iGood } from "../../lib/definitions";
-import { store } from "../../services/store";
-import { getGood } from "../../lib/actions/getGood";
+import { iCartGood } from "../../lib/definitions";
 
 interface CartState {
   goods: iCartGood[];

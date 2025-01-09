@@ -12,9 +12,14 @@ export interface iCartGood extends iGood {
 }
 
 export interface iStats {
-  size?: string;
-  color?: string;
+  atr: string[];
 }
+
+export type TUserInfo = {
+  fullName: string;
+  phone: string;
+  email: string;
+};
 
 export interface iAddress {
   id: number;
@@ -26,10 +31,8 @@ export interface iAddress {
 
 export interface iUser {
   id: string;
-  fullName: string;
-  phone: string;
-  email: string;
   addressId: number;
+  userInfo: TUserInfo;
   pas?: string;
 }
 

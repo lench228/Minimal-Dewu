@@ -5,8 +5,7 @@ import clsx from "clsx";
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  handleLinkAdd?: (link: string) => void;
-  error: string;
+  error?: string;
   label?: string;
   name: string;
   isFixed?: boolean;
@@ -16,7 +15,6 @@ const Input: React.FC<iInput> = ({
   placeholder,
   startIcon,
   endIcon,
-  width,
   value,
   error,
   type,

@@ -19,14 +19,14 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const [name, setName] = React.useState(user?.fullName || "");
-  const [phone, setPhone] = React.useState(user?.phone || "");
-  const [email, setEmail] = React.useState(user?.email || "");
+  const [name, setName] = React.useState(user?.userInfo.fullName || "");
+  const [phone, setPhone] = React.useState(user?.userInfo.phone || "");
+  const [email, setEmail] = React.useState(user?.userInfo.email || "");
 
   useEffect(() => {
-    setName(user?.fullName || "");
-    setPhone(user?.phone || "");
-    setEmail(user?.email || "");
+    setName(user?.userInfo.fullName || "");
+    setPhone(user?.userInfo.phone || "");
+    setEmail(user?.userInfo.email || "");
 
     dispatch(resetErrors());
   }, [disabledEdit]);

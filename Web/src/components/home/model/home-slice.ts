@@ -1,24 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { iGood } from "../../lib/definitions";
+import { iGood } from "../../../lib/definitions";
+import { TPending } from "../../../services/types";
+import { getGoodThunk } from "./actions";
 
-interface HomeState {
+interface HomeState extends TPending {
   url: string;
-  error: string;
-  isLoading: boolean;
   activePopup: string;
   isPopupOpen: boolean;
-  good: iGood | null;
+  good?: iGood;
 }
 
 const initialState: HomeState = {
-  url: "https://www.dewu.com/product-detail.html?sourceName=pc&spuId=10023658&propertyValueId=377025767&skuId=661620314",
+  url: "",
   error: "",
   isLoading: false,
   activePopup: "",
   isPopupOpen: false,
-  good: null,
 };
 
 export const HomeSlice = createSlice({
@@ -34,8 +33,9 @@ export const HomeSlice = createSlice({
   reducers: {
     addUrlAndValidate: (state, action: PayloadAction<string>) => {
       const regex = "https://www.dewu.com/product-detail";
+      const regex2 = "https://dw4.co/";
       const url = action.payload;
-      if (!url || url.startsWith(regex)) {
+      if (!url || url.startsWith(regex) || url.startsWith(regex2)) {
         state.error = "";
       } else {
         state.error = "Неверная ссылка";
@@ -52,6 +52,21 @@ export const HomeSlice = createSlice({
       state.good = action.payload;
     },
   },
+
+  extraReducers: (builder) => {
+    builder.addCase(getGoodThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getGoodThunk.fulfilled, (state, action) => {
+      state.good = action.payload.response;
+      state.isLoading = false;
+      state.error = "";
+    });
+    builder.addCase(getGoodThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+  },
 });
 
 export const {
@@ -61,5 +76,6 @@ export const {
   selectActivePopup,
   selectGood,
 } = HomeSlice.selectors;
+
 export const { addUrlAndValidate, setLoading, setActivePopup, setGood } =
   HomeSlice.actions;

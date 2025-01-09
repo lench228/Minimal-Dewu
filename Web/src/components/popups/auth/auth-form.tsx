@@ -6,7 +6,7 @@ import { Email } from "../../../assets/icons/email";
 import { ShowPas } from "../../../assets/icons/show-pas";
 import { Pas } from "../../../assets/icons/pas";
 import { Button } from "../../ui/button";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { loginUserThunk, registerUserThunk } from "./model/authActions";
@@ -21,8 +21,6 @@ export const AuthForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch<AppDispatch>();
-
-  const nav = useNavigate();
 
   const loading = useSelector(selectIsLoading);
 

@@ -1,22 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addUrlAndValidate,
-  selectError,
-  selectIsLoading,
-  selectUrl,
-  setActivePopup,
-  setGood,
-  setLoading,
-} from "./home-slice";
+
 import Link from "../../assets/icons/link";
 import Input from "../ui/input/input";
 import AddGood from "../popups/good-popup/add-good";
-import { getGood } from "../../lib/actions/getGood";
-import React, { FormEvent, useRef, useState } from "react";
+
+import React, { FormEvent, useRef } from "react";
 import Loading from "../../assets/icons/loading";
 import clsx from "clsx";
 import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  addUrlAndValidate,
+  selectError,
+  selectGood,
+  selectIsLoading,
+  selectUrl,
+} from "./model/home-slice";
+import { AppDispatch } from "../../services/store";
+import { getGoodThunk } from "./model/actions";
 
 interface iHomePage {
   formWidth?: string;
@@ -25,10 +26,11 @@ interface iHomePage {
 const HomePage: React.FC<iHomePage> = ({
   formWidth = window.screen.width <= 680 ? "w-[90%]" : "w-2/3",
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const url = useSelector(selectUrl);
   const error = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
+  const good = useSelector(selectGood);
   const formRef = useRef<HTMLFormElement>(null);
   const nav = useNavigate();
 
@@ -36,21 +38,11 @@ const HomePage: React.FC<iHomePage> = ({
     dispatch(addUrlAndValidate(link));
   };
   const location = useLocation();
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    dispatch(setLoading(true));
-    setTimeout(() => {
-      getGood(url)
-        .then((res) => {
-          dispatch(setGood(res));
-          nav(`/goods/${res.id}`, { state: { background: location } });
-        })
-
-        .finally(() => {
-          dispatch(setLoading(false));
-        });
-    }, 400);
+    await dispatch(getGoodThunk(url));
+    nav(`/goods/${good?.id}`, { state: { background: location } });
   };
 
   const handleInsertClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -93,7 +85,6 @@ const HomePage: React.FC<iHomePage> = ({
         value={url}
         endIcon={!error && url ? <AddGood /> : null}
         error={error}
-        handleLinkAdd={() => getGood(url)}
         name="linkAdd"
         isFixed
       />
