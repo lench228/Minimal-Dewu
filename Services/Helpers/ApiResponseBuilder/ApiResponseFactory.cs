@@ -8,4 +8,11 @@ public static class ApiResponseFactory
         jsonResponseBuilderOptions.Invoke(builder);
         return builder.Build();
     }
+    
+    public static JsonApiResponse Json(Action<IJsonApiResponseBuilder> jsonResponseBuilderOptions)
+    {
+        var builder = new JsonApiResponseBuilder();
+        jsonResponseBuilderOptions.Invoke(builder);
+        return builder.Build();
+    }
 }
