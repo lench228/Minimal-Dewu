@@ -9,30 +9,35 @@ import {
 
 import Error from "../ui/input/error";
 import { Button } from "../ui/button";
-import { selectAddress } from "../popups/auth/model/auth.slice";
+import { selectUser } from "../popups/auth/model/auth.slice";
+import {
+  getUserDataThunk,
+  updateUserDataThunk,
+} from "../popups/auth/model/authActions";
+import { AppDispatch } from "../../services/store";
 interface Props {
   disabledEdit: boolean;
 }
 
 const ProfileShipForm = ({ disabledEdit }: Props) => {
-  const address = useSelector(selectAddress);
+  const address = useSelector(selectUser)?.address;
   const errors = useSelector(selectErrors);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [city, setCity] = React.useState(address?.city || "");
   const [street, setStreet] = React.useState(address?.street || "");
-  const [flat, setFlat] = React.useState(address?.flat || "");
-  const [house, setHouse] = React.useState(address?.house || "");
+  const [flat, setFlat] = React.useState(address?.apartment || "");
+  const [house, setHouse] = React.useState(address?.building || "");
 
   useEffect(() => {
     setCity(address?.city || "");
     setStreet(address?.street || "");
-    setFlat(address?.flat || "");
-    setHouse(address?.house || "");
+    setFlat(address?.apartment || "0");
+    setHouse(address?.building || "0");
 
     dispatch(resetErrors());
-  }, [disabledEdit]);
+  }, [disabledEdit, address]);
 
   const checkValidity = () =>
     !!Object.keys(errors).map((error) =>
@@ -69,10 +74,24 @@ const ProfileShipForm = ({ disabledEdit }: Props) => {
     );
   };
 
+  const handleFormSubmit = () => {
+    dispatch(
+      updateUserDataThunk({
+        addressData: {
+          city: city,
+          street: street,
+          apartment: flat,
+          building: house,
+        },
+      }),
+    );
+    dispatch(getUserDataThunk());
+  };
+
   return (
     <>
       {address ? (
-        <form className={"w-2/3 flex flex-col items-center"}>
+        <section className={"w-2/3 flex flex-col items-center"}>
           <Input
             error={errors["city"]}
             name="city"
@@ -122,9 +141,15 @@ const ProfileShipForm = ({ disabledEdit }: Props) => {
             />
           </div>
           {!disabledEdit && (
-            <Button disabled={checkValidity()}>Сохранить изменения</Button>
+            <Button
+              type={"submit"}
+              disabled={checkValidity()}
+              onClick={() => handleFormSubmit()}
+            >
+              Сохранить изменения
+            </Button>
           )}
-        </form>
+        </section>
       ) : (
         <Error text={"Ошибка"} />
       )}

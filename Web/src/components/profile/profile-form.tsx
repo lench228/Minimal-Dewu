@@ -1,5 +1,8 @@
-import React from "react";
+import React, { FormEvent, useEffect } from "react";
 import Edit from "../../assets/icons/edit";
+import { selectIsLoading } from "../popups/auth/model/auth.slice";
+import { useSelector } from "react-redux";
+import Loading from "../../assets/icons/loading";
 
 interface FormProps {
   children?: React.ReactNode;
@@ -14,8 +17,17 @@ const FormContainer: React.FC<FormProps> = ({
   description,
   onEditClick,
 }) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const isLoading = useSelector(selectIsLoading);
+
   return (
-    <section
+    <form
+      onSubmit={(e) => {
+        handleFormSubmit(e);
+      }}
       className={
         "p-4  flex items-center flex-col gap-4 border-black-light-2 border-[1px] bg-black-light rounded-xl "
       }
@@ -34,9 +46,8 @@ const FormContainer: React.FC<FormProps> = ({
         </div>
         <Edit onClick={onEditClick}></Edit>
       </header>
-
       {children}
-    </section>
+    </form>
   );
 };
 

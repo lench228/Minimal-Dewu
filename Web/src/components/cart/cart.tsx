@@ -7,12 +7,12 @@ import CartTotal from "./cart-total";
 import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import OrderForm from "../order/order-form";
-import { Link } from "react-router-dom";
+
 import clsx from "clsx";
 
 const Cart = () => {
   const [isReadyToOrder, setIsReadyToOrder] = useState(false);
-  const dispatch = useDispatch();
+
   const goods = useSelector(selectGoods);
 
   const orderFormRef = useRef<HTMLFormElement | null>(null);
@@ -93,7 +93,7 @@ const Cart = () => {
           ) : (
             <main className={"flex items-center flex-col justify-center"}>
               <img
-                src={"illustrations/empty-cart.png"}
+                src={"./dist/illustrations/empty-cart.png"}
                 className={"h-1/2 w-1/2"}
               />
               <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>

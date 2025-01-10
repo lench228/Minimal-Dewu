@@ -22,18 +22,15 @@ export type TUserInfo = {
 };
 
 export interface iAddress {
-  id: number;
   city: string;
   street: string;
-  house: number;
-  flat: number;
+  building: string;
+  apartment: string;
 }
 
 export interface iUser {
-  id: string;
-  addressId: number;
+  address: iAddress;
   userInfo: TUserInfo;
-  pas?: string;
 }
 
 export interface iShipping {

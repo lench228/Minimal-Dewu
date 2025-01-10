@@ -1,20 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { iAddress, iUser } from "../../../../lib/definitions";
-import { loginUserThunk, registerUserThunk } from "./authActions";
+import { iUser } from "../../../../lib/definitions";
+import {
+  getUserDataThunk,
+  loginUserThunk,
+  registerUserThunk,
+  updateUserDataThunk,
+} from "./authActions";
 import { TPending } from "../../../../services/types";
 
 interface AuthState extends TPending {
   isAuthenticated: boolean;
+  isAuthCheck: boolean;
   user: iUser | null;
-  address: iAddress | null;
+  isUserUpdated: boolean;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
-  address: null,
+  isAuthCheck: false,
   error: "",
   isLoading: false,
+  isUserUpdated: false,
 };
 
 export const AuthSlice = createSlice({
@@ -22,10 +29,11 @@ export const AuthSlice = createSlice({
   initialState,
   selectors: {
     selectAuth: (store) => store.isAuthenticated,
-    selectAddress: (store) => store.address,
+
     selectUser: (store) => store.user,
     selectIsLoading: (store) => store.isLoading,
     selectError: (store) => store.error,
+    selectIsAuthChecked: (store) => store.isAuthCheck,
   },
   reducers: {
     setAuth: (state, action: PayloadAction<boolean>) => {
@@ -33,9 +41,6 @@ export const AuthSlice = createSlice({
     },
     setUser: (state, action: PayloadAction<iUser>) => {
       state.user = action.payload;
-    },
-    setAddress: (state, action: PayloadAction<iAddress>) => {
-      state.address = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -51,7 +56,6 @@ export const AuthSlice = createSlice({
     builder.addCase(registerUserThunk.rejected, (state, action) => {
       state.isAuthenticated = false;
       state.isLoading = false;
-      console.log(action);
       state.error = action.error.message;
     });
 
@@ -67,7 +71,62 @@ export const AuthSlice = createSlice({
     builder.addCase(loginUserThunk.rejected, (state, action) => {
       state.isAuthenticated = false;
       state.isLoading = false;
-      console.log(action.payload);
+      state.error = action.error.message;
+    });
+    builder.addCase(getUserDataThunk.pending, (state) => {
+      state.isLoading = true;
+      state.isAuthCheck = false;
+      state.error = "";
+    });
+    builder.addCase(getUserDataThunk.fulfilled, (state, action) => {
+      if (action.payload.response) {
+        state.user = {
+          address: action.payload.response.addressData,
+          userInfo: action.payload.response.personalData,
+        };
+      }
+      state.isAuthenticated = true;
+
+      state.isAuthCheck = true;
+
+      state.error = "";
+      state.isLoading = false;
+    });
+    builder.addCase(getUserDataThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = false;
+      state.isLoading = false;
+
+      state.error = action.error.message;
+      state.isAuthCheck = true;
+    });
+
+    builder.addCase(updateUserDataThunk.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(updateUserDataThunk.fulfilled, (state, action) => {
+      if (
+        action.payload.response &&
+        action.payload.response.personalData &&
+        action.payload.response.addressData &&
+        state.user !== null
+      ) {
+        state.user = {
+          ...state.user,
+          userInfo: action.payload.response.personalData,
+          address: action.payload.response.addressData,
+        };
+      }
+      state.isAuthenticated = true;
+
+      state.error = "";
+      state.isLoading = false;
+    });
+    builder.addCase(updateUserDataThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = false;
+      state.isLoading = false;
       state.error = action.error.message;
     });
   },
@@ -75,10 +134,11 @@ export const AuthSlice = createSlice({
 
 export const {
   selectAuth,
-  selectAddress,
+
   selectUser,
   selectError,
   selectIsLoading,
+  selectIsAuthChecked,
 } = AuthSlice.selectors;
 
-export const { setAuth, setUser, setAddress } = AuthSlice.actions;
+export const { setAuth, setUser } = AuthSlice.actions;

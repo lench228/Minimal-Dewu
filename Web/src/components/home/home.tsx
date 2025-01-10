@@ -18,6 +18,7 @@ import {
 } from "./model/home-slice";
 import { AppDispatch } from "../../services/store";
 import { getGoodThunk } from "./model/actions";
+import * as trace_events from "node:trace_events";
 
 interface iHomePage {
   formWidth?: string;

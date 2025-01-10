@@ -38,8 +38,8 @@ const ShipFooter: React.FC<ShipFooterProps> = ({
           <div className="text-lg font-medium">
             <p>Место получения:</p>
             <p className="text-sm font-normal pl-4">
-              {`${address.city}, ${address.street}, д. ${address.house}$
-                  кв. ${address.flat}`}
+              {`${address.city}, ${address.street}, д. ${address.building}$
+                  кв. ${address.apartment}`}
             </p>
           </div>
         </div>

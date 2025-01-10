@@ -8,11 +8,10 @@ const shippings: iShippingApi = {
       created: "2024-11-20T00:00:00.000Z",
       due: "2024-11-30T00:00:00.000Z",
       address: {
-        id: 0,
         city: "New York",
         street: "5th Avenue",
-        house: 1,
-        flat: 2,
+        building: "1",
+        apartment: "2",
       },
       userData: {
         fullName: "Пример Примеров",
@@ -29,11 +28,10 @@ const shippings: iShippingApi = {
       created: "2024-11-20T00:00:00.000Z",
       due: "2024-11-30T00:00:00.000Z",
       address: {
-        id: 0,
         city: "New York",
         street: "5th Avenue",
-        house: 1,
-        flat: 2,
+        building: "1",
+        apartment: "2",
       },
       userData: {
         fullName: "Пример Примеров",
@@ -47,11 +45,10 @@ const shippings: iShippingApi = {
       created: "2024-11-20T00:00:00.000Z",
       due: "2024-11-30T00:00:00.000Z",
       address: {
-        id: 0,
         city: "New York",
         street: "5th Avenue",
-        house: 1,
-        flat: 2,
+        building: "0",
+        apartment: "2",
       },
       userData: {
         fullName: "Пример Примеров",
@@ -71,11 +68,10 @@ const shippings: iShippingApi = {
       due: "2024-10-15T00:00:00.000Z",
       total: 1000,
       address: {
-        id: 0,
         city: "New York",
         street: "5th Avenue",
-        house: 1,
-        flat: 2,
+        building: "1",
+        apartment: "8",
       },
       userData: {
         fullName: "Пример Примеров",

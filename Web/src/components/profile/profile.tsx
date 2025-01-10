@@ -4,11 +4,15 @@ import * as React from "react";
 import FormContainer from "./profile-form";
 import ProfileUserForm from "./profile-user-form";
 import ProfileShipForm from "./profile-ship-form";
+import Loading from "../../assets/icons/loading";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../popups/auth/model/auth.slice";
 
 export const Profile = () => {
   const [disabledShip, setDisabledShip] = React.useState(true);
   const [disabledUser, setDisabledUser] = React.useState(true);
 
+  const isLoading = useSelector(selectIsLoading);
   return (
     <div
       className={
@@ -32,14 +36,24 @@ export const Profile = () => {
           description={"Имя, телефон, почта"}
           onEditClick={() => setDisabledUser(!disabledUser)}
         >
-          <ProfileUserForm disabledEdit={disabledUser}></ProfileUserForm>
+          {" "}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <ProfileUserForm disabledEdit={disabledUser}></ProfileUserForm>
+          )}
         </FormContainer>
         <FormContainer
           title={"Данные доставки"}
           description={"Адрес"}
           onEditClick={() => setDisabledShip(!disabledShip)}
         >
-          <ProfileShipForm disabledEdit={disabledShip} />
+          {" "}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <ProfileShipForm disabledEdit={disabledShip}></ProfileShipForm>
+          )}
         </FormContainer>
       </section>
     </div>

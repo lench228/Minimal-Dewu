@@ -12,8 +12,13 @@ type TRefreshResponse = TServerResponse<{
   accessToken: string;
 }>;
 
-const checkResponse = <T>(res: Response): Promise<T> =>
-  res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkResponse = async <T>(res: Response): Promise<T> => {
+  if (!res.ok) {
+    const errorResponse = await res.json();
+    throw new Error(errorResponse.error);
+  }
+  return res.json();
+};
 
 export const fetchWithRefresh = async <T>(
   url: RequestInfo,
@@ -26,7 +31,6 @@ export const fetchWithRefresh = async <T>(
     }
     return await checkResponse<T>(res);
   } catch (err) {
-    console.log(err, 1);
     if ((err as { status: number }).status === 401) {
       const refreshData = await refreshToken();
 
@@ -46,7 +50,8 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
-    },
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
     body: JSON.stringify({
       RefreshToken: localStorage.getItem("refreshToken"),
     }),
@@ -56,10 +61,8 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
       if (refreshData.error || !refreshData.response) {
         return Promise.reject(refreshData);
       }
-      localStorage.setItem(
-        "refreshToken",
-        "Bearer " + refreshData.response.refreshToken,
-      );
+      console.log(refreshData.response);
+      localStorage.setItem("refreshToken", refreshData.response.refreshToken);
       localStorage.setItem(
         "accessToken",
         "Bearer " + refreshData.response.accessToken,
@@ -83,11 +86,7 @@ export const registerUser = (userData: TUserData) =>
     .then((res) => checkResponse<TRefreshResponse>(res))
     .then((userRes) => {
       if (userRes.response) {
-        console.log(userRes.response);
-        localStorage.setItem(
-          "refreshToken",
-          "Bearer " + userRes.response.refreshToken,
-        );
+        localStorage.setItem("refreshToken", userRes.response.refreshToken);
         localStorage.setItem(
           "accessToken",
           "Bearer " + userRes.response.accessToken,
@@ -106,11 +105,7 @@ export const loginUser = (userData: TUserData) =>
     .then((res) => checkResponse<TRefreshResponse>(res))
     .then((userRes) => {
       if (userRes.response) {
-        console.log(userRes.response);
-        localStorage.setItem(
-          "refreshToken",
-          "Bearer " + userRes.response.refreshToken,
-        );
+        localStorage.setItem("refreshToken", userRes.response.refreshToken);
         localStorage.setItem(
           "accessToken",
           "Bearer " + userRes.response.accessToken,
@@ -119,18 +114,43 @@ export const loginUser = (userData: TUserData) =>
       }
     });
 
-// Обновление данных пользователя
+// Данные пользователя
 
-export type TUpdateUserData = {
-  userData: TUserInfo | Omit<iAddress, "id">;
+export type TGetUserData = {
+  personalData: TUserInfo;
+  addressData: iAddress;
 };
 
-export type TUpdateUserDataResponse = TServerResponse<TUpdateUserData>;
+export type TUpdateUserData = {
+  personalData?: TUserInfo;
+  addressData?: iAddress;
+};
+
+export type TUpdateUserDataResponse = TServerResponse<Partial<TGetUserData>>;
+export type TGetUserDataResponse = TServerResponse<TGetUserData>;
+
+export const getUserData = () =>
+  fetch(`${api}/account`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
+  })
+    .then((res) => checkResponse<TGetUserDataResponse>(res))
+    .then((res) => {
+      console.log(res);
+      if (res.error) return Promise.reject(res);
+      return res;
+    });
 
 export const updateUserData = (newData: TUpdateUserData) =>
-  fetchWithRefresh<TUpdateUserDataResponse>("/idk", {
+  fetchWithRefresh<TUpdateUserDataResponse>(`${api}/account`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
     body: JSON.stringify(newData),
   }).then((res) => res);
 
