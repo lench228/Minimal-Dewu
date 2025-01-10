@@ -83,8 +83,20 @@ export const GoodPopup = () => {
       <Button onClick={(e) => {}}>Добавить в корзину</Button>
     </form>
   ) : (
-    <div>
-      <p>err</p>
+    <div className={"flex m-auto flex-col items-center"}>
+      <img
+        width={"600"}
+        height={"600"}
+        alt={"Товар не найден"}
+        src={"../dist/illustrations/error-404.png"}
+      />
+      <p
+        className={
+          "font-main font-bold text-3xl text-white-darker-1 align-middle"
+        }
+      >
+        Товар не найден, попробуйте позже
+      </p>
     </div>
   );
 };

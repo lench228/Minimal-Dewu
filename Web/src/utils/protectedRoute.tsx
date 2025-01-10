@@ -16,6 +16,7 @@ export const ProtectedRoute = ({
   children,
 }: ProtectedRouteProps) => {
   const isAuthenticated = useSelector(selectAuth);
+
   const location = useLocation();
 
   if (!onlyUnAuth && isAuthenticated) {

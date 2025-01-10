@@ -19,7 +19,7 @@ export const AuthPopup: React.FC = () => {
   return (
     <section
       className={
-        "flex sm:justify-center flex-col sm:flex-row w-3/5  sm:h-5/6 m-auto gap-10  font-roboto"
+        "flex sm:justify-center flex-col  sm:w-3/5 m-auto gap-10  font-roboto"
       }
     >
       {window.screen.width >= 680 && <AuthInfo></AuthInfo>}

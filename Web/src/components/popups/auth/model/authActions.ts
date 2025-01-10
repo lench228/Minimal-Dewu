@@ -1,5 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser, registerUser, TUserData } from "../../../../lib/api/api";
+import {
+  getUserData,
+  loginUser,
+  registerUser,
+  TGetUserData,
+  TUpdateUserData,
+  TUserData,
+  updateUserData,
+} from "../../../../lib/api/api";
 
 export const registerUserThunk = createAsyncThunk(
   "user/registerUser",
@@ -8,5 +16,14 @@ export const registerUserThunk = createAsyncThunk(
 
 export const loginUserThunk = createAsyncThunk(
   "user/loginUser",
-  async (data: TUserData) => loginUser(data),
+  async (userData: TUserData) => await loginUser(userData),
+);
+
+export const getUserDataThunk = createAsyncThunk(
+  "user/getUserData",
+  async () => await getUserData(),
+);
+export const updateUserDataThunk = createAsyncThunk(
+  "user/updateUserData",
+  async (data: TUpdateUserData) => await updateUserData(data),
 );

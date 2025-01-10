@@ -9,6 +9,12 @@ import {
 
 import { Button } from "../ui/button";
 import { selectUser } from "../popups/auth/model/auth.slice";
+import { updateUserData } from "../../lib/api/api";
+import { AppDispatch } from "../../services/store";
+import {
+  getUserDataThunk,
+  updateUserDataThunk,
+} from "../popups/auth/model/authActions";
 
 interface Props {
   disabledEdit: boolean;
@@ -16,7 +22,7 @@ interface Props {
 
 const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
   const errors = useSelector(selectErrors);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector(selectUser);
 
   const [name, setName] = React.useState(user?.userInfo.fullName || "");
@@ -58,6 +64,18 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
       }),
     );
   };
+  const handleFormSubmit = () => {
+    dispatch(
+      updateUserDataThunk({
+        personalData: {
+          phone: phone,
+          fullName: name,
+          email: email,
+        },
+      }),
+    );
+    dispatch(getUserDataThunk());
+  };
 
   const checkValidity = () =>
     !!Object.keys(errors).map((error) =>
@@ -65,7 +83,7 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
     ).length;
 
   return (
-    <form className="w-2/3 flex flex-col items-center">
+    <section className="w-2/3 flex flex-col items-center">
       <Input
         error={errors.name}
         name="name"
@@ -99,9 +117,15 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
         disabled={disabledEdit}
       />
       {!disabledEdit && (
-        <Button disabled={checkValidity()}>Сохранить изменения</Button>
+        <Button
+          type={"submit"}
+          onClick={() => handleFormSubmit()}
+          disabled={checkValidity()}
+        >
+          Сохранить изменения
+        </Button>
       )}
-    </form>
+    </section>
   );
 };
 

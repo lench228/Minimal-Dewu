@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
 import HomePage from "./components/home/home";
 import Cart from "./components/cart/cart";
@@ -10,10 +10,30 @@ import Ship from "./components/shippings/ship";
 import { GoodPopup } from "./components/popups/good-popup/good-popup";
 import { ProtectedRoute } from "./utils/protectedRoute";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsAuthChecked,
+  selectIsLoading,
+  selectUser,
+} from "./components/popups/auth/model/auth.slice";
+import { AppDispatch } from "./services/store";
+import { getUserDataThunk } from "./components/popups/auth/model/authActions";
+
 const App: React.FC = () => {
   const location = useLocation();
   const state = location.state as { background?: Location };
   const backgroundLocation = state?.background;
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
+  const isAuthChecked = useSelector(selectIsAuthChecked);
+  useEffect(() => {
+    if (!user && !isLoading && !isAuthChecked) {
+      dispatch(getUserDataThunk());
+    }
+  }, []);
 
   return (
     <>
@@ -42,7 +62,7 @@ const App: React.FC = () => {
             element={
               <div className="flex justify-center items-center  flex-col">
                 <img
-                  src={"illustrations/error-404.png "}
+                  src={"./dist/illustrations/error-404.png"}
                   className={"w-1/2 "}
                 />
                 <p className={"text-3xl font-rubik text-white-darker-2"}>
@@ -54,9 +74,11 @@ const App: React.FC = () => {
           <Route
             path="/login"
             element={
-              <Popup isReset={true}>
-                <AuthPopup />
-              </Popup>
+              <ProtectedRoute>
+                <Popup isReset={true}>
+                  <AuthPopup />
+                </Popup>
+              </ProtectedRoute>
             }
           />
         </Route>

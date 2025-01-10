@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import ShipNav from "./ship-nav/ship-nav";
-import { getShipping } from "../../lib/actions/getShipping";
+
 import { selectShippingByActiveType, setShipping } from "./ship.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ShipItem from "./ship-item";
+import { getShipping } from "../../lib/actions/getShipping";
 
 export const TypesTexts = {
   current: "Текущие",
