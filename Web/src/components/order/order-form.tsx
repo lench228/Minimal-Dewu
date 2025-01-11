@@ -1,15 +1,52 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import Input from "../ui/input/input";
 import { useDispatch, useSelector } from "react-redux";
 import { findErrors, selectErrors } from "./order-errors.slice";
 import { Button } from "../ui/button";
 import clsx from "clsx";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../services/store";
+import { postOrderThunk } from "../shippings/model/actions";
+import { clearStore, removeAllGood, selectGoods } from "../cart/cart-slice";
+import { selectUser } from "../popups/auth/model/auth.slice";
 
 const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
   const errors = useSelector(selectErrors);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  //@todo Вынести в слайс
+  const user = useSelector(selectUser);
+  console.log(user?.userInfo);
+
+  const [userData, setUserData] = useState({
+    phone: "",
+    fullName: "",
+  });
+
+  const [address, setAddress] = useState({
+    city: "",
+    street: "",
+    building: "",
+    apartment: "",
+  });
+
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (user?.userInfo) {
+      setUserData({
+        phone: user.userInfo.phone || "",
+        fullName: user.userInfo.fullName || "",
+      });
+    }
+    if (user?.address) {
+      setAddress({
+        city: user.address.city || "",
+        street: user.address.street || "",
+        building: user.address.building || "",
+        apartment: user.address.apartment || "",
+      });
+    }
+  }, [user]);
 
   const validateFields = () => {
     if (ref && "current" in ref && ref.current) {
@@ -30,10 +67,15 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
     return errors;
   };
 
+  const location = useLocation();
+  const goods = useSelector(selectGoods);
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateFields()) {
-      console.log("Форма успешно отправлена");
+      dispatch(postOrderThunk({ goods, userData, address }));
+      dispatch(clearStore());
+      nav(`/orderSuccess`, { state: { background: "/" } });
     } else {
       console.log("Есть ошибки:", errors);
     }
@@ -51,6 +93,7 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
   };
 
   useEffect(() => {}, [errors]);
+
   return (
     <form
       noValidate
@@ -66,8 +109,12 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
           name="name"
           label="ФИО"
           placeholder="Пример Примеров"
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            setUserData({ ...userData, fullName: e.target.value });
+          }}
           required
+          value={userData.fullName}
         />
         <Input
           error={errors.phone}
@@ -75,18 +122,12 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
           label="Телефон"
           placeholder="+7(999) 252 25-25"
           type="tel"
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            setUserData({ ...userData, phone: e.target.value });
+          }}
           required
-        />
-
-        <Input
-          error={errors.email}
-          name="email"
-          label="Почта"
-          placeholder="primer@mail.com"
-          type="email"
-          onChange={onChange}
-          required
+          value={userData.phone}
         />
       </fieldset>
       <fieldset className="flex flex-col gap-3 w-full">
@@ -97,8 +138,12 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
           label="Город"
           placeholder="Екатеринбург"
           type="text"
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            setAddress({ ...address, city: e.target.value });
+          }}
           required
+          value={address.city}
         />
         <Input
           error={errors.street}
@@ -106,10 +151,14 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
           label="Улица"
           placeholder="Вайнера"
           type="text"
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            setAddress({ ...address, street: e.target.value });
+          }}
           required
+          value={address.street}
         />
-        <div className="flex flex-row items-center justify-between gap-10 w-full">
+        <div className="flex flex-row items-center justify-between gap-1 w-full">
           <Input
             error={errors.house}
             name="house"
@@ -117,8 +166,12 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
             placeholder="1"
             type="number"
             width="w-full"
-            onChange={onChange}
+            onChange={(e) => {
+              onChange(e);
+              setAddress({ ...address, building: e.target.value });
+            }}
             required
+            value={address.building}
           />
           <Input
             error={errors.flat}
@@ -127,8 +180,12 @@ const OrderForm = forwardRef<HTMLFormElement>(({}, ref) => {
             placeholder="1"
             type="number"
             width="100%"
-            onChange={onChange}
+            onChange={(e) => {
+              onChange(e);
+              setAddress({ ...address, apartment: e.target.value });
+            }}
             required
+            value={address.apartment}
           />
         </div>
       </fieldset>

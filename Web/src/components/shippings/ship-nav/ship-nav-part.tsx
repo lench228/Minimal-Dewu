@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
-import { setActive, ShippingTypes } from "../ship.slice";
+import { setActive, ShippingTypes } from "../model/ship.slice";
 import { TypesTexts } from "../ship";
 import { useSearchParams } from "react-router-dom";
 

@@ -1,9 +1,10 @@
 import api from "./index";
 import {
   iAddress,
+  iApiGood,
   iCartGood,
   iGood,
-  iShippingApi,
+  TShippingApi,
   TUserInfo,
 } from "../definitions";
 import { Goods } from "../goods";
@@ -137,19 +138,16 @@ export type TUpdateUserDataResponse = TServerResponse<Partial<TGetUserData>>;
 export type TGetUserDataResponse = TServerResponse<TGetUserData>;
 
 export const getUserData = () =>
-  fetch(`${api}/account`, {
+  fetchWithRefresh<TGetUserDataResponse>(`${api}/account`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       authorization: localStorage.getItem("accessToken"),
     } as HeadersInit,
-  })
-    .then((res) => checkResponse<TGetUserDataResponse>(res))
-    .then((res) => {
-      console.log(res);
-      if (res.error) return Promise.reject(res);
-      return res;
-    });
+  }).then((res) => {
+    if (res.error) return Promise.reject(res);
+    return res;
+  });
 
 export const updateUserData = (newData: TUpdateUserData) =>
   fetchWithRefresh<TUpdateUserDataResponse>(`${api}/account`, {
@@ -161,8 +159,8 @@ export const updateUserData = (newData: TUpdateUserData) =>
     body: JSON.stringify(newData),
   }).then((res) => res);
 
-// // Получение товара по ссылке
-// type TProductResponse = TServerResponse<iGood>;\
+// Получение товара по ссылке
+type TProductResponse = TServerResponse<iGood>;
 
 export const getRandArrElem = <T>(arr: T[]) => {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -170,8 +168,9 @@ export const getRandArrElem = <T>(arr: T[]) => {
 
 export const getDewu = (url: string) => {
   const res = getRandArrElem<iGood>(Goods);
+  refreshToken();
   return Promise.resolve({ response: res });
-  // return fetchWithRefresh<TProductResponse>(`${api}/dewu?productUrl=${productUrl}`, {
+  // return fetchWithRefresh<TProductResponse>(`${api}/dewu?productUrl=${url}`, {
   //   method: "GET",
   //   headers: {
   //     "Content-Type": "application/json; charset=utf-8",
@@ -180,33 +179,35 @@ export const getDewu = (url: string) => {
   // });
 };
 // Создание заказа
-export type TOrderResponse = TServerResponse<{
-  orderNumber: string;
-}>;
+export type TOrderResponse = TServerResponse<undefined>;
 
 export type TOrderRequest = {
-  goods: { goodId: string; count: number }[];
-  userData: TUserInfo;
-  addressData: Omit<iAddress, "id">;
+  goods: { good: iApiGood; count: number }[];
+  userData: Omit<TUserInfo, "email">;
+  address: Omit<iAddress, "id">;
 };
 
-export const postOrder = (data: TOrderRequest) => {
-  fetchWithRefresh<TOrderResponse>(`${api}/idk`, {
+export const postOrder = (newData: TOrderRequest) =>
+  fetchWithRefresh<TOrderResponse>(`${api}/orders`, {
     method: "POST",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
+    body: JSON.stringify(newData),
   }).then((res) => res);
-};
 
 // Получение заказов
-export type TOrdersResponse = TServerResponse<iShippingApi>;
+export type TOrdersResponse = TServerResponse<TShippingApi>;
 
-export type TOrdersRequest = { userId: string };
-
-export const getOrders = (data: TOrdersRequest) => {
-  fetchWithRefresh<TOrdersResponse>(`${api}/idk`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify(data),
-  }).then((res) => res);
-};
+export const getOrders = () =>
+  fetchWithRefresh<TOrdersResponse>(`${api}/orders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
+  }).then((res) => {
+    if (res.error) return Promise.reject(res);
+    return res;
+  });

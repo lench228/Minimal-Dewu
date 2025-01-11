@@ -1,18 +1,23 @@
-export interface iGood {
+export interface iGood extends iApiGood {
   id: number;
-  name: string;
-  priceRU: number;
-  priceCNY: number;
-  stats: string[];
-  src: string;
+  priceRu: number;
 }
 
-export interface iCartGood extends iGood {
+export interface iApiGood {
+  title: string;
+  price: number;
+  imageUrl: string;
+  properties: iStats[];
+}
+
+export interface iCartGood {
   count: number;
+  good: iGood;
 }
 
 export interface iStats {
-  atr: string[];
+  name: string;
+  value: string;
 }
 
 export type TUserInfo = {
@@ -43,11 +48,11 @@ export interface iShipping {
   goods?: { good: iGood; count: number }[];
 }
 
-export interface iShippingApi {
+export type TShippingApi = {
   current: iShipping[];
   ended: iShipping[];
   canceled: iShipping[];
-}
+};
 
 export interface iOrder {
   id: number;

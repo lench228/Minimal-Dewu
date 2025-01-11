@@ -35,13 +35,13 @@ const Counter: React.FC<iCounter> = ({ id }) => {
         type="button"
         className="px-3 py-1 border-[1px] border-white-darker-2"
       >
-        {counter ? <p>{counter.count}</p> : <p>"Ошибка"</p>}
+        {counter ? <p>{counter.count}</p> : <p>Ошибка</p>}
       </button>
       <button
         type="button"
         onClick={() => {
           dispatch(add(id));
-          const good = goods.find((good) => good.id === id);
+          const good = goods.find((good) => good.good.id === id);
           if (good) {
             dispatch(addGood(good && good));
           }

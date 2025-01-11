@@ -73,7 +73,6 @@ export const AuthForm = () => {
     } else {
       dispatch(registerUserThunk({ email, password }));
     }
-    nav("/profile");
   };
 
   return (

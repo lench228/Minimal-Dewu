@@ -17,25 +17,21 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
     >
       <div className={"flex"}>
         <img
-          src={good.src}
+          src={good.imageUrl}
           width={252}
           className={"rounded-xl"}
-          alt={good.name}
+          alt={good.title}
         />
       </div>
       <main
         className={"flex flex-col gap-4 p-2 h-full justify-between mr-auto"}
       >
-        <h3 className={"font-title text-xl sm:text-3xl"}>{good.name}</h3>
+        <h3 className={"font-title text-xl sm:text-3xl"}>{good.title}</h3>
         <ul className={"text-[#838383] h-full"}>
-          {good.stats.map((value) => (
-            <li key={value}>
-              <span className={"uppercase text-xl"}>
-                {value.split(":")[0]}:{" "}
-              </span>{" "}
-              <span className={"underline text-2xl"}>
-                {value.split(":")[1]}
-              </span>
+          {good.properties.map((value) => (
+            <li key={value.name}>
+              <span className={"uppercase text-xl"}>{value.name}: </span>{" "}
+              <span className={"underline text-2xl"}>{value.value}</span>
             </li>
           ))}
         </ul>
@@ -47,7 +43,7 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
           {count}
         </p>
       </main>
-      <p className={"text-2xl ml-2 order-first"}>{good.priceRU} ₽</p>
+      <p className={"text-2xl ml-2 order-first"}>{good.price} ₽</p>
     </li>
   );
 };

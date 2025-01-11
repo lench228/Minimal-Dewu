@@ -1,12 +1,14 @@
 import React from "react";
 import ShipNavPart from "./ship-nav-part";
 
-import { selectCanceled, selectCurrent, selectEnded } from "../ship.slice";
+import {
+  selectCanceled,
+  selectCurrent,
+  selectEnded,
+} from "../model/ship.slice";
 import { useSelector } from "react-redux";
 
-interface iShipNav {}
-
-const ShipNav: React.FC<iShipNav> = () => {
+const ShipNav: React.FC = () => {
   return (
     <div
       className={
