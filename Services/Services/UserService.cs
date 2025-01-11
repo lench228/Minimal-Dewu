@@ -22,22 +22,34 @@ internal class UserService(UserManager<User> userManager,
     IConfiguration config,
     IHttpContextAccessor httpContextAccessor) : IUserService
 {
-    public async Task<JsonApiResponse<Guid?>> CreateUserAsync(CreateUserRequestDto request)
+    public async Task<JsonApiResponse<RegisterResponseDto>> CreateUserAsync(CreateUserRequestDto request)
     {
         var existingUser = await userManager.FindByEmailAsync(request.Email);
         if (existingUser is not null)
-            return ApiResponseFactory.Json<Guid?>(o => o.Error(409, "User already exists"));
+            return ApiResponseFactory.Json<RegisterResponseDto>(o => o.Error(409, "User already exists"));
+        
+        var refreshToken = GenerateGwtRefreshToken();
         var newUser = new User
         {
             UserName = Guid.NewGuid().ToString(),
-            Email = request.Email
+            Email = request.Email,
+            RefreshToken = refreshToken,
+            RefreshTokenExpirationDate = DateTimeOffset.UtcNow.Add(config.GetJwtRefreshTokenLifetime())
         };
+        
         var res = await userManager.CreateAsync(newUser, request.Password);
         if (!res.Succeeded)
-            return ApiResponseFactory.Json<Guid?>(o => o.Error(400, string.Join('\n', res.Errors.Select(e => e.Description))));
-        return ApiResponseFactory.Json<Guid?>(o => o
+            return ApiResponseFactory.Json<RegisterResponseDto>(o => o
+                .Error(400, string.Join('\n', res.Errors.Select(e => e.Description))));
+
+        var responseModel = new RegisterResponseDto
+        {
+            AccessToken = GenerateGwtAccessToken(newUser),
+            RefreshToken = refreshToken
+        };
+        return ApiResponseFactory.Json<RegisterResponseDto>(o => o
             .Success()
-            .Model(newUser.Id));
+            .Model(responseModel));
     }
 
     public async Task<JsonApiResponse<LogInResponseDto>> LogInUserAsync(LogInRequestDto request)

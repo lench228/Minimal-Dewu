@@ -10,7 +10,7 @@ namespace Web.Controllers;
 public class AuthController(IUserService userService) : ControllerBase
 {
     [HttpPost("register")]
-    [ProducesResponseType<JsonResponseDto<Guid?>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<JsonResponseDto<RegisterResponseDto>>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> Register([FromBody] CreateUserRequestDto request) =>
         (await userService.CreateUserAsync(request)).ToActionResult();
