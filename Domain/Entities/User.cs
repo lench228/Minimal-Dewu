@@ -10,4 +10,5 @@ public class User : IdentityUser<Guid>, IEntity<Guid>
     public Address Address { get; set; } = new();
     public PersonalData PersonalData { get; set; } = new();
     public List<Role> Roles { get; set; } = null!;
+    public List<Order> Orders { get; set; } = [];
 }

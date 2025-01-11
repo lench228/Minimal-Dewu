@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IAccountService, AccountService>();
         services.AddTransient<IUserIdAccessor, UserIdAccessor>();
+        services.AddTransient<IOrderService, OrderService>();
         return services;
     }
 }

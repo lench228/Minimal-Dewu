@@ -8,6 +8,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 {
     public DbSet<Proxy> Proxies { get; set; }
     public DbSet<GlobalVars> GlobalVars { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -23,5 +24,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
         
         builder.Entity<GlobalVars>()
             .ToTable(g => g.HasCheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1"));
+
+        builder.Entity<Order>()
+            .OwnsMany(o => o.Goods, b => b
+                .OwnsMany(p => p.Properties));
     }
 }

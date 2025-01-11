@@ -39,7 +39,7 @@ internal class PlaywrightUtils : IPlaywrightUtils
     {
         await using var browser = await _playwright.Chromium.LaunchAsync(new ()
         {
-            Headless = false
+            Headless = true
         });
         
         var p = proxy is not null
