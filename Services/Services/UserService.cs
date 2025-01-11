@@ -93,17 +93,17 @@ internal class UserService(UserManager<User> userManager,
             DateTimeOffset.UtcNow > user.RefreshTokenExpirationDate)
             return unauthorizedResponse;
         
-        // var refreshToken = GenerateGwtRefreshToken();
-        // user.RefreshToken = refreshToken;
-        // user.RefreshTokenExpirationDate = DateTimeOffset.UtcNow.Add(config.GetJwtRefreshTokenLifetime());
-        // await userManager.UpdateAsync(user);
+        var refreshToken = GenerateGwtRefreshToken();
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpirationDate = DateTimeOffset.UtcNow.Add(config.GetJwtRefreshTokenLifetime());
+        await userManager.UpdateAsync(user);
         
         return ApiResponseFactory.Json<RefreshResponseDto>(o => o
             .Success()
             .Model(new RefreshResponseDto
             {
                 AccessToken = GenerateGwtAccessToken(user),
-                RefreshToken = user.RefreshToken
+                RefreshToken = refreshToken
             }));
     }
 

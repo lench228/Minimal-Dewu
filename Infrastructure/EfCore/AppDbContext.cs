@@ -23,9 +23,5 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
         
         builder.Entity<GlobalVars>()
             .ToTable(g => g.HasCheckConstraint("CK_GlobalVars_Id", "\"Id\" = 1"));
-
-        builder.Entity<User>()
-            .OwnsMany(u => u.Cart, b => b
-                .OwnsMany(p => p.Properties));
     }
 }

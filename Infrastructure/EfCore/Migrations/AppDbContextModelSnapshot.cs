@@ -328,74 +328,8 @@ namespace Infrastructure.EfCore.Migrations
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsMany("Domain.Entities.Product", "Cart", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer");
-
-                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
-
-                            b1.Property<string>("ImageUrl")
-                                .HasColumnType("text");
-
-                            b1.Property<int>("Price")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Quantity")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("Title")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("UserId", "Id");
-
-                            b1.ToTable("Product");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-
-                            b1.OwnsMany("Domain.Entities.ProductProperty", "Properties", b2 =>
-                                {
-                                    b2.Property<Guid>("ProductUserId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<int>("ProductId")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<int>("Id")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("integer");
-
-                                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b2.Property<int>("Id"));
-
-                                    b2.Property<string>("Name")
-                                        .IsRequired()
-                                        .HasColumnType("text");
-
-                                    b2.Property<string>("Value")
-                                        .IsRequired()
-                                        .HasColumnType("text");
-
-                                    b2.HasKey("ProductUserId", "ProductId", "Id");
-
-                                    b2.ToTable("ProductProperty");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("ProductUserId", "ProductId");
-                                });
-
-                            b1.Navigation("Properties");
-                        });
-
                     b.Navigation("Address")
                         .IsRequired();
-
-                    b.Navigation("Cart");
 
                     b.Navigation("PersonalData")
                         .IsRequired();
