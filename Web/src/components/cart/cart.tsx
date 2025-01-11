@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Home from "../home/home";
 import { selectGoods } from "./cart-slice";
@@ -30,7 +30,7 @@ const Cart = () => {
   return (
     <section
       className={clsx(
-        "overflow-y-scroll h-full flex items-center flex-col-reverse sm:w-full  sm:mt-0 sm:flex-row sm:items-center sm:justify-center gap-8 sm:p-10 ",
+        "overflow-y-scroll  sm:h-full flex items-center flex-col-reverse w-full  sm:mt-0 sm:flex-row sm:items-center sm:justify-center gap-8 sm:p-10 ",
       )}
     >
       {isReadyToOrder ? (
@@ -43,7 +43,7 @@ const Cart = () => {
       {(!isReadyToOrder || window.screen.width > 680) && (
         <form
           className={
-            "w-5/6 flex items-center flex-col min-h-800 min-h-[500px] max-h-[900px] sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-3/5 text-white-darker-1 sm:px-10 py-6 justify-center bg-black-light"
+            "w-5/6 flex items-center flex-col h-5/6 sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-3/5 text-white-darker-1 sm:px-10 py-6 justify-center bg-black-light"
           }
         >
           <h2

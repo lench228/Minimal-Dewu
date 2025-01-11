@@ -92,12 +92,12 @@ export const AuthSlice = createSlice({
       state.error = "";
       state.isLoading = false;
     });
-    builder.addCase(getUserDataThunk.rejected, (state, action) => {
+    builder.addCase(getUserDataThunk.rejected, (state) => {
       state.isLoading = false;
       state.isAuthenticated = false;
       state.isLoading = false;
 
-      state.error = action.error.message;
+      state.error = "Войдите в аккаунт";
       state.isAuthCheck = true;
     });
 

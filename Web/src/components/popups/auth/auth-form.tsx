@@ -51,7 +51,7 @@ export const AuthForm = () => {
     let isValid = true;
 
     if (!validateEmail(email)) {
-      setEmailError("Please enter a valid email.");
+      setEmailError("Пожалуйста введите правильную почту");
       isValid = false;
     } else {
       setEmailError("");
@@ -59,7 +59,7 @@ export const AuthForm = () => {
 
     if (!validatePassword(password)) {
       setPasswordError(
-        "Password must be at least 6 characters, contain one uppercase letter, one digit, and one special character.",
+        "Пароль должен содержать 6 символов, в том числе буквы в разных регистрах и спец знак",
       );
       isValid = false;
     } else {

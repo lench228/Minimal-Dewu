@@ -3,46 +3,38 @@ import { iGood } from "./definitions";
 export const Goods: iGood[] = [
   {
     id: 0,
-    name: "cap very cool cap",
+    name: "adidas originals SUPERSTAR J",
 
-    priceRU: 124,
-    priceCNY: 120,
-    src: "/mock-images/cap.webp",
-    stats: {
-      atr: ["Цвет Оранжевый"],
-    },
+    priceRU: 5452,
+    priceCNY: 391,
+    src: "/dist/mock-images/superstar.webp",
+    stats: ["Цвет: черный", "Размер: 32US"],
   },
   {
     id: 1,
-    name: "humster click click 2 text",
+    name: "Cavalli Class",
 
-    stats: {
-      atr: ["Цвет Оранжевый"],
-    },
+    stats: ["Цвет: Белый", "Размер: 52"],
 
-    priceRU: 1200,
-    priceCNY: 124,
-    src: "/mock-images/humster.webp",
+    priceRU: 10291,
+    priceCNY: 949,
+    src: "/dist/mock-images/cavalli class.webp",
   },
   {
     id: 2,
-    name: "adidas штанцы luch asodwe",
-    stats: {
-      atr: ["Цвет Оранжевый", "Размер 12US"],
-    },
-    priceRU: 124,
-    priceCNY: 999,
-    src: "/mock-images/krytie-shtani.webp",
+    name: "adidas Dance FW24 DK PANT ",
+    stats: ["Цвет: черный", "Размер: XL"],
+    priceRU: 3292,
+    priceCNY: 299,
+    src: "/dist/mock-images/adidas dance.webp",
   },
   {
     id: 3,
     name: "new balance 1906R",
 
-    stats: {
-      atr: ["Цвет Оранжевый", "Размер 30US"],
-    },
-    priceRU: 124,
-    priceCNY: 1200,
-    src: "/mock-images/nb-1906R.webp",
+    stats: ["Цвет: серый", "Размер: 30US"],
+    priceRU: 1486,
+    priceCNY: 495,
+    src: "/dist/mock-images/nb-1906R.webp",
   },
 ];

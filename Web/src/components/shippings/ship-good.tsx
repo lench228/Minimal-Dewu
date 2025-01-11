@@ -15,7 +15,7 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
       }
       key={good.id}
     >
-      <div className={"order-last sm:order-first flex"}>
+      <div className={"flex"}>
         <img
           src={good.src}
           width={252}
@@ -28,10 +28,14 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
       >
         <h3 className={"font-title text-xl sm:text-3xl"}>{good.name}</h3>
         <ul className={"text-[#838383] h-full"}>
-          {Object.entries(good.stats).map(([key, value]) => (
+          {good.stats.map((value) => (
             <li key={value}>
-              <span className={"uppercase text-xl"}>{key}: </span>{" "}
-              <span className={"underline text-2xl"}>{value}</span>
+              <span className={"uppercase text-xl"}>
+                {value.split(":")[0]}:{" "}
+              </span>{" "}
+              <span className={"underline text-2xl"}>
+                {value.split(":")[1]}
+              </span>
             </li>
           ))}
         </ul>
@@ -43,7 +47,7 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
           {count}
         </p>
       </main>
-      <p className={"text-2xl ml-2 "}>{good.priceRU} $</p>
+      <p className={"text-2xl ml-2 order-first"}>{good.priceRU} ₽</p>
     </li>
   );
 };

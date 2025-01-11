@@ -65,18 +65,14 @@ export const GoodPopup = () => {
           </svg>
           <ul
             className={
-              "flex justify-center gap-3 text-xl sm:text-2xl font-bold"
+              "flex justify-center gap-12 text-xl sm:text-2xl font-bold"
             }
           >
-            {Object.entries(good.stats).map(([key, value]) => {
-              return (
-                <li key={key} className={""}>
-                  <span>
-                    {key}: {value}
-                  </span>
-                </li>
-              );
-            })}
+            {good.stats.map((value) => (
+              <li key={value} className={""}>
+                <span>{value}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </main>

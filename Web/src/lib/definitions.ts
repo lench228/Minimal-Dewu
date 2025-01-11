@@ -3,7 +3,7 @@ export interface iGood {
   name: string;
   priceRU: number;
   priceCNY: number;
-  stats: iStats;
+  stats: string[];
   src: string;
 }
 
