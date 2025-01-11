@@ -94,6 +94,28 @@ const App: React.FC = () => {
               </Popup>
             }
           />
+          <Route
+            path="/orderSuccess"
+            element={
+              <Popup>
+                <div className={"flex m-auto flex-col items-center"}>
+                  <img
+                    width={"600"}
+                    height={"600"}
+                    alt={"Успех"}
+                    src={"../dist/illustrations/order_final.png"}
+                  />
+                  <p
+                    className={
+                      "font-main font-bold text-3xl text-white-darker-1 align-middle"
+                    }
+                  >
+                    Заказ успешно совершен!
+                  </p>
+                </div>
+              </Popup>
+            }
+          />
         </Routes>
       )}
     </>

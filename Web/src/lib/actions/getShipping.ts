@@ -1,7 +1,7 @@
 import { Goods } from "../goods";
-import { iShippingApi } from "../definitions";
+import { TShippingApi } from "../definitions";
 
-const shippings: iShippingApi = {
+const shippings: TShippingApi = {
   current: [
     {
       id: 1,
@@ -87,4 +87,4 @@ const shippings: iShippingApi = {
 };
 
 export const getShipping = async () =>
-  await new Promise<iShippingApi>((resolve) => resolve(shippings));
+  await new Promise<TShippingApi>((resolve) => resolve(shippings));

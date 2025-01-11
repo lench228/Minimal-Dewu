@@ -29,7 +29,7 @@ const FormContainer: React.FC<FormProps> = ({
         handleFormSubmit(e);
       }}
       className={
-        "p-4 w-full flex items-center flex-col gap-4 border-black-light-2 border-[1px] bg-black-light rounded-xl overflow-y-scroll"
+        "p-4 w-full flex items-center flex-col gap-4 border-black-light-2 border-[1px] bg-black-light rounded-xl "
       }
     >
       <header className={"flex justify-start w-full gap-4 px-2 items-center "}>

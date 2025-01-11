@@ -3,7 +3,6 @@ import {
   getUserData,
   loginUser,
   registerUser,
-  TGetUserData,
   TUpdateUserData,
   TUserData,
   updateUserData,
@@ -11,7 +10,7 @@ import {
 
 export const registerUserThunk = createAsyncThunk(
   "user/registerUser",
-  async (data: TUserData) => registerUser(data),
+  async (data: TUserData) => await registerUser(data),
 );
 
 export const loginUserThunk = createAsyncThunk(

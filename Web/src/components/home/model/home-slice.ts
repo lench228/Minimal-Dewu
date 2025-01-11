@@ -59,6 +59,7 @@ export const HomeSlice = createSlice({
     });
     builder.addCase(getGoodThunk.fulfilled, (state, action) => {
       state.good = action.payload.response;
+      state.good.priceRu = action.payload.response.price * 13;
       state.isLoading = false;
       state.error = "";
     });

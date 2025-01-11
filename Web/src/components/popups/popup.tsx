@@ -23,7 +23,7 @@ export const Popup: React.FC<{
       onClick={(e) => {
         handleClickOutside(e);
       }}
-      className={`bg-black-light bg-opacity-70 w-full
+      className={`bg-black-light bg-opacity-90 w-full
          h-full fixed  flex
          top-0 left-0`}
     >

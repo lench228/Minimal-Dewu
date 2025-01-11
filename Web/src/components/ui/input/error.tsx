@@ -20,7 +20,8 @@ const ErrorMessage: React.FC<iError> = ({ text, isFixed }) => {
         "flex gap-2 flex-row items-center pl-10  transform transition-opacity duration-500 ease-in-out",
 
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
-        isFixed ? "fixed left-1/2 bottom-10" : "",
+        isFixed && "absolute left-1/2 bottom-10 pl-0 w-full mr-20",
+        isFixed && window.screen.width <= 425 && "left-1/4 bottom-1/4",
       )}
     >
       <svg

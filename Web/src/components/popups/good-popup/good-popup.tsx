@@ -15,7 +15,7 @@ export const GoodPopup = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (good) {
-      dispatch(addGood({ ...good, count: 1 }));
+      dispatch(addGood({ good, count: 1 }));
       dispatch(addCounter(good.id));
     }
     nav("/cart");
@@ -32,16 +32,16 @@ export const GoodPopup = () => {
     >
       <header>
         <h2 className={"sm:text-4xl text-xl text-center font-title font-bold"}>
-          {good.name}
+          {good.title}
         </h2>
         <h3 className={"sm:text-xl text-lg text-center mt-2 mb-2"}>
-          {good.priceCNY}¥
+          {good.priceRu}¥
         </h3>
       </header>
       <main className={"max-w-screen-sm flex flex-col items-center gap-3"}>
         <img
-          src={good.src}
-          alt={good.name}
+          src={good.imageUrl}
+          alt={good.title}
           height={window.screen.width > 680 ? 380 : 160}
           width={window.screen.width > 680 ? 380 : 140}
           className={"rounded-xl"}
@@ -68,9 +68,9 @@ export const GoodPopup = () => {
               "flex justify-center gap-12 text-xl sm:text-2xl font-bold"
             }
           >
-            {good.stats.map((value) => (
-              <li key={value} className={""}>
-                <span>{value}</span>
+            {good.properties.map((value) => (
+              <li key={value.name} className={""}>
+                <span>{value.name}</span>: <span>{value.value}</span>
               </li>
             ))}
           </ul>

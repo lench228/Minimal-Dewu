@@ -34,7 +34,7 @@ export const AuthInfo = () => {
   return (
     <div className={`text-white-darker-1 w-full h-1/2`}>
       <h1 className={`font-title text-2xl mb-5`}>Плюшки регистрации</h1>
-      <ul className={`flex flex-row  gap-4`}>
+      <ul className={`flex flex-col  gap-4`}>
         {items.map((item) => {
           return (
             <li key={item.text}>

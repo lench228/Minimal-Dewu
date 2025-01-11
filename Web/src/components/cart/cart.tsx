@@ -43,7 +43,7 @@ const Cart = () => {
       {(!isReadyToOrder || window.screen.width > 680) && (
         <form
           className={
-            "w-5/6 flex items-center flex-col h-5/6 sm:h-auto border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-3/5 text-white-darker-1 sm:px-10 py-6 justify-center bg-black-light"
+            "w-5/6 flex items-center flex-col h-5/6  border-black-light-2 mt-12 sm:m-0 border-2 rounded-xl sm:w-3/5 text-white-darker-1 sm:px-10 py-6 justify-center bg-black-light"
           }
         >
           <h2
@@ -57,7 +57,7 @@ const Cart = () => {
             <main className={"overflow-y-scroll w-full"}>
               <ul className="w-full">
                 {goods.map((good) => (
-                  <CartItem key={good.id} good={good} />
+                  <CartItem key={good.good.id} good={good.good} />
                 ))}
               </ul>
               <footer className={"flex  flex-col items-center gap-4"}>
@@ -91,7 +91,11 @@ const Cart = () => {
               </footer>
             </main>
           ) : (
-            <main className={"flex items-center flex-col justify-center"}>
+            <main
+              className={
+                "flex items-center flex-col justify-center w-3/4 h-full"
+              }
+            >
               <img
                 src={"./dist/illustrations/empty-cart.png"}
                 className={"h-1/2 w-1/2"}
