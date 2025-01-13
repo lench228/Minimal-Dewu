@@ -9,7 +9,7 @@ import {
 
 import { Button } from "../ui/button";
 import { selectUser } from "../popups/auth/model/auth.slice";
-import { updateUserData } from "../../lib/api/api";
+
 import { AppDispatch } from "../../services/store";
 import {
   getUserDataThunk,
@@ -19,6 +19,8 @@ import {
 interface Props {
   disabledEdit: boolean;
 }
+
+const phoneRegex = "^\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}$";
 
 const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
   const errors = useSelector(selectErrors);
@@ -99,6 +101,7 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
         name="phone"
         label="Телефон"
         placeholder="+7(999) 252 25-25"
+        pattern={phoneRegex}
         type="tel"
         onChange={onChange}
         required
@@ -106,7 +109,7 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
         disabled={disabledEdit}
       />
       <Input
-        error={errors.email}
+        error={errors.email ? "Введите корректный адрес электронной почты" : ""}
         name="email"
         label="Почта"
         placeholder="primer@mail.com"
