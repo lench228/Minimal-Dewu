@@ -17,6 +17,7 @@ export const Profile = () => {
   const isLoading = useSelector(selectIsLoading);
   return (
     <div
+      lang="notranslate"
       className={
         "overflow-y-scroll mt-10 mb-12 sm:mb-0 font-main  text-white-darker-1 flex sm:flex-row flex-col sm:items-center sm:justify-center  m-auto"
       }
@@ -41,7 +42,7 @@ export const Profile = () => {
                 )}
               </h1>
               <Button
-                className={"h-1/2 w-1/5"}
+                className={"h-1/2 w-1/4"}
                 onClick={() => {
                   localStorage.clear();
                   window.location.reload();

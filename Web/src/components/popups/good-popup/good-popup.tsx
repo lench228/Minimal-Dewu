@@ -35,7 +35,7 @@ export const GoodPopup = () => {
           {good.title}
         </h2>
         <h3 className={"sm:text-xl text-lg text-center mt-2 mb-2"}>
-          {good.priceRu}¥
+          {good.price}¥
         </h3>
       </header>
       <main className={"max-w-screen-sm flex flex-col items-center gap-3"}>

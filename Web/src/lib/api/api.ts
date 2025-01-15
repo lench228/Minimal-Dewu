@@ -167,16 +167,16 @@ export const getRandArrElem = <T>(arr: T[]) => {
 };
 
 export const getDewu = (url: string) => {
-  const res = getRandArrElem<iGood>(Goods);
-  refreshToken();
-  return Promise.resolve({ response: res });
-  // return fetchWithRefresh<TProductResponse>(`${api}/dewu?productUrl=${url}`, {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json; charset=utf-8",
-  //     authorization: localStorage.getItem("accessToken"),
-  //   } as HeadersInit,
-  // });
+  // const res = getRandArrElem<iGood>(Goods);
+  // refreshToken();
+  // return Promise.resolve({ response: res });
+  return fetchWithRefresh<TProductResponse>(`${api}/dewu?productUrl=${url}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      authorization: localStorage.getItem("accessToken"),
+    } as HeadersInit,
+  });
 };
 // Создание заказа
 export type TOrderResponse = TServerResponse<undefined>;

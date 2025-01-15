@@ -43,7 +43,7 @@ const ShipGood: React.FC<ShipGoodProps> = ({ count, good }) => {
           {count}
         </p>
       </main>
-      <p className={"text-2xl ml-2 order-first"}>{good.price} ₽</p>
+      <p className={"text-2xl ml-2 order-first"}>{good.priceRu} ₽</p>
     </li>
   );
 };
