@@ -52,7 +52,6 @@ export const AuthSlice = createSlice({
       state.isAuthenticated = true;
       state.error = "";
       state.isLoading = false;
-      window.location.reload();
     });
     builder.addCase(registerUserThunk.rejected, (state, action) => {
       state.isAuthenticated = false;
@@ -68,7 +67,6 @@ export const AuthSlice = createSlice({
       state.isAuthenticated = true;
       state.error = "";
       state.isLoading = false;
-      window.location.reload();
     });
     builder.addCase(loginUserThunk.rejected, (state, action) => {
       state.isAuthenticated = false;

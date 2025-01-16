@@ -7,10 +7,12 @@ import { addGood } from "../../cart/cart-slice";
 import { useNavigate } from "react-router-dom";
 import { addCounter } from "../../counter/counter.slice";
 import { selectGood } from "../../home/model/home-slice";
+import { selectError } from "../auth/model/auth.slice";
 
 export const GoodPopup = () => {
   const nav = useNavigate();
   const good = useSelector(selectGood);
+  const error = useSelector(selectError);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +25,9 @@ export const GoodPopup = () => {
 
   const dispatch = useDispatch();
 
+  if (error === "Войдите в аккаунт") {
+    nav("/login");
+  }
   return good ? (
     <form
       className={

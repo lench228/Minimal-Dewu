@@ -5,14 +5,26 @@ import FormContainer from "./profile-form";
 import ProfileUserForm from "./profile-user-form";
 import ProfileShipForm from "./profile-ship-form";
 import Loading from "../../assets/icons/loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoading, selectUser } from "../popups/auth/model/auth.slice";
 import { Button } from "../ui/button";
+import { useEffect } from "react";
+import { AppDispatch } from "../../services/store";
+import { getUserDataThunk } from "../popups/auth/model/authActions";
 
 export const Profile = () => {
   const [disabledShip, setDisabledShip] = React.useState(true);
   const [disabledUser, setDisabledUser] = React.useState(true);
+
   const userName = useSelector(selectUser)?.userInfo.fullName;
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (userName === undefined) {
+      dispatch(getUserDataThunk());
+    }
+  }, []);
 
   const isLoading = useSelector(selectIsLoading);
   return (
