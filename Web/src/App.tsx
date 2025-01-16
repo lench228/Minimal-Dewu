@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
-import HomePage from "./components/home/home";
+import Home from "./components/home/home";
 import Cart from "./components/cart/cart";
 import { AuthPopup } from "./components/popups/auth/auth-popup";
 import React, { useEffect } from "react";
@@ -18,6 +18,7 @@ import {
 } from "./components/popups/auth/model/auth.slice";
 import { AppDispatch } from "./services/store";
 import { getUserDataThunk } from "./components/popups/auth/model/authActions";
+import HomePage from "./components/home/homePage";
 
 const App: React.FC = () => {
   const location = useLocation();

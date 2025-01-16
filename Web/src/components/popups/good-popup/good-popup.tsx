@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { addCounter } from "../../counter/counter.slice";
 import { selectGood } from "../../home/model/home-slice";
 import { selectError } from "../auth/model/auth.slice";
+import { Navigate } from "react-router";
 
 export const GoodPopup = () => {
   const nav = useNavigate();
@@ -20,13 +21,13 @@ export const GoodPopup = () => {
       dispatch(addGood({ good, count: 1 }));
       dispatch(addCounter(good.id));
     }
+
     nav("/cart");
   };
 
   const dispatch = useDispatch();
-
   if (error === "Войдите в аккаунт") {
-    nav("/login");
+    return <Navigate replace to={"/login"} />;
   }
   return good ? (
     <form

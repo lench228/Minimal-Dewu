@@ -18,13 +18,12 @@ import {
 } from "./model/home-slice";
 import { AppDispatch } from "../../services/store";
 import { getGoodThunk } from "./model/actions";
-import * as trace_events from "node:trace_events";
 
 interface iHomePage {
   formWidth?: string;
 }
 
-const HomePage: React.FC<iHomePage> = ({
+const Home: React.FC<iHomePage> = ({
   formWidth = window.screen.width <= 680 ? "w-[90%]" : "w-2/3",
 }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -100,4 +99,4 @@ const HomePage: React.FC<iHomePage> = ({
   );
 };
 
-export default HomePage;
+export default Home;
