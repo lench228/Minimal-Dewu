@@ -27,7 +27,9 @@ const Ship = () => {
   return (
     items && (
       <section className="h-full flex-col-reverse sm:flex-col  flex overflow-y-scroll sm:overflow-y-hidden  w-full  mx-auto justify-end   items-start sm:justify-start border-[1px] border-black-light-2 sm:mx-16 sm:my-16  pb-10 bg-black-light text-white font-roboto rounded-xl">
+        <meta translate={"yes"} lang={"RU"} />
         <ShipNav></ShipNav>
+
         <ul
           className={
             "overflow-y-scroll bg-black-light w-full p-4 sm:px-20 flex items-center flex-col gap-6  sm:p-10"

@@ -42,11 +42,34 @@ export const ShippingSlice = createSlice({
     });
 
     builder.addCase(getOrdersThunk.fulfilled, (state, action) => {
-      console.log(action);
       if (action.payload.response) {
         state.canceled = action.payload.response.canceled;
+        state.canceled.map((item) => {
+          if (item.goods)
+            return item.goods.map((good) => {
+              return (good.good.priceRu = good.good.price * 13 * good.count);
+            });
+        });
         state.ended = action.payload.response.ended;
         state.current = action.payload.response.current;
+        state.current.map((item) => {
+          if (item.goods)
+            return item.goods.map((good) => {
+              good.good.properties.map((value) => {
+                if (value.name === "颜色") {
+                  value.name = "Цвет";
+                }
+                if (value.name === "尺码") {
+                  value.name = "Размер";
+                }
+              });
+              return (good.good.priceRu = good.good.price * 13 * good.count);
+            });
+        });
+
+        state.current.map((item) => {
+          item.total = item.total * 13;
+        });
       }
       state.isLoading = false;
     });

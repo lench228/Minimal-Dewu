@@ -43,7 +43,7 @@ const HomePage: React.FC<iHomePage> = ({
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(getGoodThunk(url));
-    nav(`/goods/${good?.id}`, { state: { background: location } });
+    nav(`/goods/${good?.price}`, { state: { background: location } });
   };
 
   const handleInsertClick = async (e: React.MouseEvent<HTMLButtonElement>) => {

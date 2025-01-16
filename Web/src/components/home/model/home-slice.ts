@@ -60,6 +60,14 @@ export const HomeSlice = createSlice({
     builder.addCase(getGoodThunk.fulfilled, (state, action) => {
       if (action.payload.response) {
         state.good = action.payload.response;
+        state.good.properties.map((value) => {
+          if (value.name === "颜色") {
+            value.name = "Цвет";
+          }
+          if (value.name === "尺码") {
+            value.name = "Размер";
+          }
+        });
         state.good.priceRu = action.payload.response.price * 13;
       }
 
