@@ -92,13 +92,11 @@ const Cart = () => {
             </main>
           ) : (
             <main
-              className={
-                "flex items-center flex-col justify-center w-3/4 h-full"
-              }
+              className={"flex items-center flex-col justify-center w-3/4 "}
             >
               <img
                 src={"./dist/illustrations/empty-cart-800.png"}
-                className={"h-1/2 w-1/2"}
+                className={"sm:w-1/2 sm:h-1/4"}
               />
               <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>
             </main>
