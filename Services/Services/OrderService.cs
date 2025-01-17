@@ -84,7 +84,7 @@ public class OrderService(IUserIdAccessor userIdAccessor, AppDbContext dbContext
                     FullName = o.UserPersonalData.FullName ?? string.Empty,
                     Phone = o.UserPersonalData.Phone ?? string.Empty
                 },
-                Total = o.Goods.Sum(g => g.Price),
+                Total = o.Goods.Sum(g => g.Price * g.Quantity),
                 Goods = o.Goods.Select(g => new OrderResponseGoodItemDto
                 {
                     Count = g.Quantity,
