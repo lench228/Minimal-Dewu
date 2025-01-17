@@ -1,4 +1,5 @@
-import { NavLink, useLocation } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import Cart from "../../assets/icons/cart";
 import Logo from "../../assets/icons/logo";
 import Order from "../../assets/icons/order";

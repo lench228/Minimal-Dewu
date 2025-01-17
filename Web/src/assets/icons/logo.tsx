@@ -1,5 +1,5 @@
 import { iSvg } from "../../utils/definitions-svg";
-import { isAction } from "@reduxjs/toolkit";
+import React from "react";
 
 const Logo = (props: iSvg) => {
   return (
@@ -9,6 +9,7 @@ const Logo = (props: iSvg) => {
       viewBox="0 0 80 80"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${!props.isActive ? "hover:bg-[#1d1d1d]" : "hover:bg-[#D5D5D5]"} rounded-xl`}
     >
       <path
         fillRule="evenodd"

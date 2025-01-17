@@ -97,7 +97,7 @@ const Cart = () => {
               }
             >
               <img
-                src={"./dist/illustrations/empty-cart.png"}
+                src={"./dist/illustrations/empty-cart-800.png"}
                 className={"h-1/2 w-1/2"}
               />
               <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>

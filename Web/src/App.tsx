@@ -63,7 +63,7 @@ const App: React.FC = () => {
             element={
               <div className="flex justify-center items-center  flex-col">
                 <img
-                  src={"./dist/illustrations/error-404.png"}
+                  src={"./dist/illustrations/error-404-800.png"}
                   className={"w-1/2 "}
                 />
                 <p className={"text-3xl font-rubik text-white-darker-2"}>
@@ -104,7 +104,7 @@ const App: React.FC = () => {
                     width={"600"}
                     height={"600"}
                     alt={"Успех"}
-                    src={"../dist/illustrations/order_final.png"}
+                    src={"../dist/illustrations/order-final-800.png"}
                   />
                   <p
                     className={
