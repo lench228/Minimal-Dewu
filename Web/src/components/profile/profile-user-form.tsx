@@ -75,8 +75,7 @@ const ProfileUserForm: React.FC<Props> = ({ disabledEdit }) => {
           email: email,
         },
       }),
-    );
-    dispatch(getUserDataThunk());
+    ).then(() => dispatch(getUserDataThunk()));
   };
 
   const checkValidity = () =>

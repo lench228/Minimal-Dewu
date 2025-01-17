@@ -20,6 +20,7 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
       className={
         "border-[1px]  border-black-light-2 rounded-xl w-full px-4 sm:px-12 py-8 font-main"
       }
+      key={props.id}
     >
       <header className={"text-2xl flex justify-between"}>
         <div>
@@ -38,7 +39,7 @@ const ShipItem: React.FC<iShipItem> = ({ ...props }) => {
               props.goods.map((item) => {
                 return (
                   <ShipGood
-                    key={item.good.id + "order"}
+                    key={item.good.priceRu + "order"}
                     good={item.good}
                     count={item.count}
                   />

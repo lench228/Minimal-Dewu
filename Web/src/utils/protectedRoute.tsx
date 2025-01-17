@@ -22,14 +22,12 @@ export const ProtectedRoute = ({
   const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
     if (!isLoading) {
-      console.log(isAuthenticated);
     }
   }, []);
 
   const location = useLocation();
 
   if (!onlyUnAuth && isAuthenticated) {
-    console.log(location.state?.from);
     return <Navigate replace to={location.state?.from || "/"} />;
   }
 

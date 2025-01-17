@@ -84,8 +84,7 @@ const ProfileShipForm = ({ disabledEdit }: Props) => {
           building: house,
         },
       }),
-    );
-    dispatch(getUserDataThunk());
+    ).then(() => dispatch(getUserDataThunk()));
   };
 
   return (
