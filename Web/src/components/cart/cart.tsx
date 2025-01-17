@@ -96,7 +96,7 @@ const Cart = () => {
             >
               <img
                 src={"./dist/illustrations/empty-cart-800.png"}
-                className={"sm:w-1/2 sm:h-1/4"}
+                className={"sm:w-1/2 h-1/4 sm:h-1/2"}
               />
               <h2 className={"text-2xl font-title mb-12"}>Корзина пуста =(</h2>
             </main>
