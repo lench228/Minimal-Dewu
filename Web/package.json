@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": "dist",
+  "homepage": "https://lench228.github.io/Minimal-Dewu/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
